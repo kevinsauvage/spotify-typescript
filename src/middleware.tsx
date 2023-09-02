@@ -29,6 +29,7 @@ const middleware = (request: NextRequest) => {
       (key) => spotifyConfig[key] && parameters.set(key, spotifyConfig[key]),
     );
     const url = `https://accounts.spotify.com/authorize?${parameters.toString()}`;
+    console.log('🚀 ~~~~  file: middleware.tsx:34 ~~~~  middleware ~~~~  url:', url);
     return NextResponse.redirect(encodeURI(url));
   }
 };
