@@ -23,15 +23,19 @@ const spotifyConfig: {
 const middleware = (request: NextRequest) => {
   const spotifyToken: RequestCookie | undefined = request.cookies.get('spotify_token');
 
-  console.log('🚀 ~~~~  file: middleware.tsx:8 ~~~~  spotifyRedirectUri:', spotifyRedirectUri);
   // We need the user shopify token to access the spotify API
   if (!spotifyToken?.value) {
     const parameters = new URLSearchParams();
     (Object.keys(spotifyConfig) as (keyof typeof spotifyConfig)[]).forEach(
       (key) => spotifyConfig[key] && parameters.set(key, spotifyConfig[key]),
     );
-    const url = `https://accounts.spotify.com/authorize?${parameters.toString()}`;
-    console.log('🚀 ~~~~  file: middleware.tsx:34 ~~~~  middleware ~~~~  url:', url);
+    const url = new URL(`https://accounts.spotify.com/authorize`);
+
+    parameters.forEach((value, key) => {
+      url.searchParams.append(key, value);
+    });
+    console.log('🚀 ~~~~  file: middleware.tsx:36 ~~~~  middleware ~~~~  url:', url);
+
     return NextResponse.redirect(url, { status: 302 });
   }
 };
