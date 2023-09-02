@@ -16,11 +16,11 @@ const Playlist: React.FC<{
 }> = ({ playlist }) => {
   const { name, images } = playlist;
 
-  const image = images?.at(1) || images?.at(0) || images?.pop();
+  const image = (images?.length && images?.at(1)) || images?.at(0) || images?.pop();
 
   return (
     <div className={styles.playlist}>
-      {image && <Image alt="Album cover" src={image?.url} width={200} height={200} />}
+      {image?.url && <Image alt="Album cover" src={image?.url} width={200} height={200} />}
       <div className={styles.left}>
         <p className={styles.name}>{name}</p>
       </div>

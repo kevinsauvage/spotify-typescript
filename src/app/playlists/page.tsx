@@ -7,7 +7,7 @@ export interface UserPlaylistInterface {
   items: [PlaylistInterface];
 }
 
-export default async function page() {
+const page: React.FC = async () => {
   const followedPlaylists: UserPlaylistInterface = await getEndpointMePlaylists();
 
   return (
@@ -23,4 +23,6 @@ export default async function page() {
       </ul>
     </div>
   );
-}
+};
+
+export default page;

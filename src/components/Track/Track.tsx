@@ -16,7 +16,7 @@ export interface TrackInterface {
 const Track: React.FC<{
   track: TrackInterface;
 }> = ({ track }) => {
-  const { name, artists, album, duration_ms: durationMs } = track;
+  const { name, artists, album, duration_ms: durationMs } = track || {};
   const { images } = album || {};
   const image = images?.pop();
 

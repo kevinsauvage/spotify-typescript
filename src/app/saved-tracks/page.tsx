@@ -7,7 +7,7 @@ interface UserSavedTracksInterface {
   items: [{ track: TrackInterface }];
 }
 
-export default async function page() {
+const page = async () => {
   const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(50);
 
   return (
@@ -21,4 +21,6 @@ export default async function page() {
       </ul>
     </div>
   );
-}
+};
+
+export default page;

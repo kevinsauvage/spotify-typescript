@@ -1,5 +1,4 @@
 import ProfilBanner from '@/components/ProfilBanner/ProfilBanner';
-import ProfilTops from '@/components/ProfilTops/ProfilTops';
 import {
   getEndpointMe,
   getEndpointTopArtists,
@@ -9,18 +8,19 @@ import {
 
 import styles from './page.module.scss';
 
-const getUserData = async () =>
-  Promise.all([getEndpointMe(), getEndpointTopArtists(), getEndpointTopTracks(), getStats()]);
-
-const Home = async () => {
-  const [userData, userTopArtists, userTopTracks, stats] = await getUserData();
+const page: React.FC = async () => {
+  const [userData, stats] = await Promise.all([
+    getEndpointMe(),
+    getEndpointTopArtists(),
+    getEndpointTopTracks(),
+    getStats(),
+  ]);
 
   return (
     <main className={styles.main}>
       <ProfilBanner userData={userData} stats={stats} />
-      <ProfilTops userTopArtists={userTopArtists} userTopTracks={userTopTracks} />
     </main>
   );
 };
 
-export default Home;
+export default page;

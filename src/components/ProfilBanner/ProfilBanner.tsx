@@ -1,4 +1,5 @@
-import { LiaUserCircleSolid } from 'react-icons/lia';
+
+import Person from '@/assets/icons/person';
 
 import ProfilStats, { StatInterface } from '../ProfilStats/ProfilStats';
 
@@ -16,7 +17,7 @@ interface ProfilBannerProperties {
 
 const ProfilBanner = ({ userData, stats }: ProfilBannerProperties) => (
   <div className={styles.banner}>
-    <LiaUserCircleSolid size={200} />
+    <Person />
     <h1>{userData?.display_name}</h1>
     <ProfilStats stats={stats} />
   </div>

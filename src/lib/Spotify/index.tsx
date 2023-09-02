@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 const enpointUserBaseUrl = 'https://api.spotify.com/v1/me';
 
@@ -14,15 +13,17 @@ const endpointFollowedArtists = `${enpointUserBaseUrl}/following?type=artist`;
 const fetchHelper = async (endpoint: string, options: object = {}) => {
   try {
     const cookieStore = cookies();
-    const spotifyToken = cookieStore.get('spotify_token');
 
-    if (!spotifyToken) {
-      console.error('spotify token missing');
-      redirect('/');
+    if (!cookieStore) {
+      return;
+    }
+
+    if (!cookieStore?.get('spotify_token')) {
+      return console.error('spotify token missing');
     }
 
     const response = await fetch(endpoint, {
-      headers: { Authorization: `Bearer ${spotifyToken?.value}` },
+      headers: { Authorization: `Bearer ${cookieStore?.get('spotify_token')?.value}` },
       method: 'GET',
       ...options,
     });
@@ -34,8 +35,9 @@ const fetchHelper = async (endpoint: string, options: object = {}) => {
     // TODO: handle error response
 
     console.error(response);
+    return response;
   } catch (error) {
-    console.error(error);
+    return error;
   }
 };
 

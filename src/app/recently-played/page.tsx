@@ -6,8 +6,7 @@ import styles from './page.module.scss';
 export interface RecentlyPlayedInterface {
   items: [{ track: TrackInterface }];
 }
-
-export default async function page() {
+const page: React.FC = async () => {
   const recentlyPlayed: RecentlyPlayedInterface = await getEndpointRecentTracks(50);
 
   return (
@@ -23,4 +22,6 @@ export default async function page() {
       </ul>
     </div>
   );
-}
+};
+
+export default page;
