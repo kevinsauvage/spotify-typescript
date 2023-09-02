@@ -1,4 +1,7 @@
+/* eslint-disable unicorn/prefer-module */
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: { domains: ['i.scdn.co', 'mosaic.scdn.co'] },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

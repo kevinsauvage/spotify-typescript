@@ -1,0 +1,12 @@
+.page {
+  .banner {
+    margin-bottom: 4rem;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 3rem;
+    width: 100%;
+  }
+}

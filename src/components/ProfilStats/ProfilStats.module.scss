@@ -1,0 +1,33 @@
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.title {
+  font-weight: 300;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.value {
+  color: aqua;
+  font-weight: 500;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,18 @@
+.filtersPeriod {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  .filtersPeriodItem {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.active {
+      border-bottom: 2px solid whitesmoke;
+      opacity: 1;
+    }
+  }
+}

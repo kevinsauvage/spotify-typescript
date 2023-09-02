@@ -1,0 +1,41 @@
+.track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  .left {
+    overflow: hidden;
+
+    .name {
+      margin-bottom: 0.4rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 0.5;
+
+      .artist {
+        white-space: nowrap;
+      }
+
+      .album {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .duration {
+    margin-left: auto;
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+}

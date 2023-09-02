@@ -1,3 +1,153 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/"
+  ],
+  "globals": {
+    "React": "writable"
+  },
+  "plugins": [
+    "simple-import-sort",
+    "react",
+    "@typescript-eslint",
+    "css-modules",
+    "sonarjs",
+    "sort-keys",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "prettier",
+    "next",
+    "plugin:jsx-a11y/recommended",
+    "plugin:css-modules/recommended",
+    "plugin:sonarjs/recommended",
+    "plugin:unicorn/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ],
+        "map": [
+          [
+            "@/",
+            "./src/"
+          ]
+        ]
+      }
+    }
+  },
+  "rules": {
+    "unicorn/no-array-reduce": 0,
+    "unicorn/no-array-for-each": 0,
+    "unicorn/filename-case": 0,
+    "unicorn/no-new-array": 0,
+    "sort-keys": 0,
+    "sort-keys/sort-keys-fix": 1,
+    "consistent-return": 0,
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          [
+            "^react"
+          ],
+          [
+            "^next"
+          ],
+          [
+            "^@/",
+            "^components(/.*|$)"
+          ],
+          [
+            "^\\u0000"
+          ],
+          [
+            "^\\.\\.(?!/?$)",
+            "^\\.\\./?$"
+          ],
+          [
+            "^\\.\\/(?=.*/)(?!/?$)",
+            "^\\.(?!/?$)",
+            "^\\.\\./?$"
+          ],
+          [
+            "^.+\\.?(css)$"
+          ]
+        ]
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/prop-types": 0,
+    "react/no-unused-prop-types": "error",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "default-param-last": 0,
+    "no-underscore-dangle": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "no-console": "off",
+    "no-param-reassign": "error",
+    "no-shadow": "error",
+    "no-empty-function": "error",
+    "prefer-const": "error",
+    "no-use-before-define": "error",
+    "no-multi-spaces": "error",
+    "import/extensions": 0,
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function"
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": [
+          "CustomInputLabel"
+        ],
+        "labelAttributes": [
+          "label"
+        ],
+        "controlComponents": [
+          "CustomInput"
+        ],
+        "depth": 3
+      }
+    ]
+  }
 }
