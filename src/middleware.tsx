@@ -26,10 +26,10 @@ const middleware = (request: NextRequest) => {
   if (!spotifyToken?.value) {
     const parameters = new URLSearchParams();
     (Object.keys(spotifyConfig) as (keyof typeof spotifyConfig)[]).forEach(
-      (key) => spotifyConfig[key] && parameters.set(key, spotifyConfig[key])
+      (key) => spotifyConfig[key] && parameters.set(key, spotifyConfig[key]),
     );
     const url = `https://accounts.spotify.com/authorize?${parameters.toString()}`;
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(encodeURI(url));
   }
 };
 
