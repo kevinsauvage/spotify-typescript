@@ -12,8 +12,10 @@
     "lint:css:fix": "stylelint --fix **/*.{scss,css}"
   },
   "dependencies": {
+    "chart.js": "^4.4.0",
     "next": "13.4.19",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {

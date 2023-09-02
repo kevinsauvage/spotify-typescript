@@ -4,4 +4,16 @@
   align-items: center;
   justify-content: center;
   padding-bottom: 8rem;
+
+  svg {
+    margin-bottom: 2rem;
+    border: 1rem solid whitesmoke;
+    border-radius: 50%;
+    font-size: 220px;
+    opacity: 0.9;
+
+    path {
+      stroke: whitesmoke;
+    }
+  }
 }

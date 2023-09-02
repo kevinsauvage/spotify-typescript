@@ -1,0 +1,85 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { TrackInterface } from '@/components/Track/Track';
+import { getAudioAnalysis, getTrack } from '@/lib/Spotify';
+import { getMinuteFromSeconds } from '@/utils/date';
+
+import styles from './page.module.scss';
+
+interface PageInterface {
+  params: { trackId: string };
+  searchParams: object;
+}
+
+const Page: React.FC<PageInterface> = async ({ params }) => {
+  const track: TrackInterface = await getTrack(params.trackId);
+  const audioAnalysis = await getAudioAnalysis(params.trackId);
+
+  const { name, artists, album, external_urls: externalUrls, popularity } = track || {};
+  const { images } = album || {};
+  const image = images?.at(0);
+
+  const trackAnalysis = audioAnalysis.track;
+
+  const tableData = [
+    { attribute: 'Duration', value: getMinuteFromSeconds(trackAnalysis.duration) },
+    { attribute: 'Popularity', value: `${popularity}%` },
+    { attribute: 'Tempo', value: trackAnalysis.tempo.toString().split('.')[0].toString() },
+    { attribute: 'Bars', value: audioAnalysis?.bars?.length },
+    { attribute: 'Beats', value: audioAnalysis?.beats?.length },
+    { attribute: 'Sections', value: audioAnalysis?.sections?.length },
+    { attribute: 'Segments', value: audioAnalysis?.segments?.length },
+    { attribute: 'Tatums', value: audioAnalysis?.tatums?.length },
+  ];
+
+  return (
+    <div>
+      <div className={styles.banner}>
+        {image && (
+          <Image
+            className={styles.image}
+            alt="Album cover"
+            src={image?.url}
+            width={image?.width}
+            height={image?.height}
+          />
+        )}
+
+        <div>
+          <h1 className={styles.name}>{name}</h1>
+          <div className={styles.artists}>
+            {artists.map((artist, index) => (
+              <>
+                <p key={artist.id}>{artist.name}</p>
+                {index < artists.length - 1 && <span>, </span>}
+              </>
+            ))}
+          </div>
+          <div>
+            <p className={styles.albumName}>{album.name}</p>
+          </div>
+          <div className={styles.buttons}>
+            <Link href={`/track/${params.trackId}/audio-analysis`}>Audio Analysis</Link>
+            <Link href={externalUrls.spotify} target="__blank">
+              Play on spotify
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {audioAnalysis && (
+        <div className={styles.tableContainer}>
+          {tableData.map((row) => (
+            <div key={row.attribute} className={styles.tableBlock}>
+              <p className={styles.value}>{row.value}</p>
+              <p>{row.attribute}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Page;

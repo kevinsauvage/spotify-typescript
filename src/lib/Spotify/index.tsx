@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 
-const enpointUserBaseUrl = 'https://api.spotify.com/v1/me';
+const enpointBaseUrl = 'https://api.spotify.com/v1';
+const enpointUserBaseUrl = `${enpointBaseUrl}/me`;
 
 const endpointPlaylists = `${enpointUserBaseUrl}/playlists`;
 const endpointTopArtists = `${enpointUserBaseUrl}/top/artists`;
@@ -9,6 +10,9 @@ const endpointRecentTracks = `${enpointUserBaseUrl}/player/recently-played`;
 const endpointSavedAlbums = `${enpointUserBaseUrl}/albums`;
 const endpointSavedTracks = `${enpointUserBaseUrl}/tracks`;
 const endpointFollowedArtists = `${enpointUserBaseUrl}/following?type=artist`;
+
+const expointTrack = `${enpointBaseUrl}/tracks`;
+const endpointAudioAnalysis = `${enpointBaseUrl}/audio-analysis`;
 
 const fetchHelper = async (endpoint: string, options: object = {}) => {
   try {
@@ -64,6 +68,9 @@ export const getEndpointSavedTracks = async (limit = 10) =>
   fetchHelper(`${endpointSavedTracks}?limit=${limit}`);
 
 export const getEndpointSavedAlbums = async () => fetchHelper(endpointSavedAlbums);
+
+export const getTrack = async (id: string) => fetchHelper(`${expointTrack}/${id}`);
+export const getAudioAnalysis = async (id: string) => fetchHelper(`${endpointAudioAnalysis}/${id}`);
 
 export const getStats = async () => {
   const [savedTracks, followedArtists, userInfo] = await Promise.all([
