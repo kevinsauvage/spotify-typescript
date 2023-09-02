@@ -4,6 +4,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 const {
   spotify_client_id: spotifyClientId = '',
   spotify_redirect_uri: spotifyRedirectUri = '',
+
   spotify_scope: spotifyScope = '',
 } = process.env;
 
@@ -22,6 +23,7 @@ const spotifyConfig: {
 const middleware = (request: NextRequest) => {
   const spotifyToken: RequestCookie | undefined = request.cookies.get('spotify_token');
 
+  console.log('🚀 ~~~~  file: middleware.tsx:8 ~~~~  spotifyRedirectUri:', spotifyRedirectUri);
   // We need the user shopify token to access the spotify API
   if (!spotifyToken?.value) {
     const parameters = new URLSearchParams();
@@ -30,7 +32,7 @@ const middleware = (request: NextRequest) => {
     );
     const url = `https://accounts.spotify.com/authorize?${parameters.toString()}`;
     console.log('🚀 ~~~~  file: middleware.tsx:34 ~~~~  middleware ~~~~  url:', url);
-    return NextResponse.redirect(encodeURI(url));
+    return NextResponse.redirect(url, { status: 302 });
   }
 };
 
