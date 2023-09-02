@@ -13,6 +13,7 @@ const endpointFollowedArtists = `${enpointUserBaseUrl}/following?type=artist`;
 
 const expointTrack = `${enpointBaseUrl}/tracks`;
 const endpointAudioAnalysis = `${enpointBaseUrl}/audio-analysis`;
+const endpointAudioFeatures = `${enpointBaseUrl}/audio-features`;
 
 const fetchHelper = async (endpoint: string, options: object = {}) => {
   try {
@@ -71,6 +72,7 @@ export const getEndpointSavedAlbums = async () => fetchHelper(endpointSavedAlbum
 
 export const getTrack = async (id: string) => fetchHelper(`${expointTrack}/${id}`);
 export const getAudioAnalysis = async (id: string) => fetchHelper(`${endpointAudioAnalysis}/${id}`);
+export const getAudioFeatures = async (id: string) => fetchHelper(`${endpointAudioFeatures}/${id}`);
 
 export const getStats = async () => {
   const [savedTracks, followedArtists, userInfo] = await Promise.all([

@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import ChartComponent from '@/components/Chart/Chart';
 import { TrackInterface } from '@/components/Track/Track';
-import { getAudioAnalysis, getTrack } from '@/lib/Spotify';
+import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify';
 import { getMinuteFromSeconds } from '@/utils/date';
 
 import styles from './page.module.scss';
@@ -14,7 +15,15 @@ interface PageInterface {
 
 const Page: React.FC<PageInterface> = async ({ params }) => {
   const track: TrackInterface = await getTrack(params.trackId);
-  const audioAnalysis = await getAudioAnalysis(params.trackId);
+  const [audioAnalysis, audioFeatures] = await Promise.all([
+    getAudioAnalysis(params.trackId),
+    getAudioFeatures(params.trackId),
+  ]);
+
+  console.log(
+    '🚀 ~~~~  file: page.tsx:20 ~~~~  constPage:React.FC<PageInterface>= ~~~~  audioFeatures:',
+    audioFeatures,
+  );
 
   const { name, artists, album, external_urls: externalUrls, popularity } = track || {};
   const { images } = album || {};
@@ -32,6 +41,45 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
     { attribute: 'Segments', value: audioAnalysis?.segments?.length },
     { attribute: 'Tatums', value: audioAnalysis?.tatums?.length },
   ];
+
+  const data = {
+    datasets: [
+      {
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 206, 86, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+        ],
+        borderWidth: 1,
+        data: [
+          audioFeatures.acousticness || 0,
+          audioFeatures.danceability || 0,
+          audioFeatures.energy || 0,
+          audioFeatures.valence || 0,
+          audioFeatures.instrumentalness || 0,
+          audioFeatures.liveness || 0,
+          audioFeatures.speechiness || 0,
+        ],
+        label: 'Audio Features',
+      },
+    ],
+    labels: [
+      'Acousticness',
+      'Danceability',
+      'Energy',
+      'Valence',
+      'Instrumentalness',
+      'Liveness',
+      'Speechiness',
+    ],
+  };
 
   return (
     <div>
@@ -78,6 +126,8 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
           ))}
         </div>
       )}
+
+      <ChartComponent chart={data} />
     </div>
   );
 };
