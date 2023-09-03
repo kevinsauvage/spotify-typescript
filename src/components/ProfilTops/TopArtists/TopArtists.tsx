@@ -1,6 +1,5 @@
-import LinkButton from '@/components/LinkButton/LinkButton';
-
 import Artist, { ArtistInterface } from '../../Artist/Artist';
+import ProfilTopsHeader from '../ProfilTopsHeader/ProfilTopsHeader';
 
 import styles from './TopArtists.module.scss';
 
@@ -11,10 +10,7 @@ export const TopArtists: React.FC<{
   userTopArtists: UserTopArtistInterface;
 }> = ({ userTopArtists }) => (
   <section className={styles.section}>
-    <header>
-      <b>Top artists of all time</b>
-      <LinkButton href="/top-artists">View More</LinkButton>
-    </header>
+    <ProfilTopsHeader title="Top tracks of all time" href="/top-artists" />
     {userTopArtists?.items?.length > 0 ? (
       <ul>
         {userTopArtists?.items?.map((artist: ArtistInterface) => (

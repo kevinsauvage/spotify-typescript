@@ -1,10 +1,12 @@
+@import '../../../styles/responsive';
+
 .navItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   padding: 0.5rem 1rem;
   border-right: 3px solid transparent;
   border-left: 3px solid transparent;
@@ -63,6 +65,27 @@
 
     a {
       color: var(--primary-100);
+    }
+  }
+
+  @include respond(tablet) {
+    height: 100%;
+    margin: 0;
+    padding: 0.4rem;
+    border: none;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+
+    svg {
+      font-size: 1.4rem;
+    }
+
+    span {
+      white-space: nowrap;
+    }
+
+    &.active {
+      border-bottom-color: var(--primary-100);
     }
   }
 }

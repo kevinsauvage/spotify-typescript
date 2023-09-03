@@ -1,4 +1,14 @@
+@import '../../styles/responsive';
+
 .container {
   width: 100%;
-  padding: 6rem;
+  padding: 6rem 4rem;
+
+  @include respond(tablet) {
+    padding: 4rem 2rem;
+  }
+
+  @include respond(mobile_l) {
+    padding: 4rem 1rem;
+  }
 }

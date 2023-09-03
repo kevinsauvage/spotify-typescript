@@ -82,7 +82,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
   };
 
   return (
-    <div>
+    <div className={styles.track}>
       <div className={styles.banner}>
         {image && (
           <Image
@@ -108,7 +108,6 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
             <p className={styles.albumName}>{album.name}</p>
           </div>
           <div className={styles.buttons}>
-            <Link href={`/track/${params.trackId}/audio-analysis`}>Audio Analysis</Link>
             <Link href={externalUrls.spotify} target="__blank">
               Play on spotify
             </Link>

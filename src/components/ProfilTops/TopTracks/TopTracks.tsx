@@ -1,6 +1,5 @@
-import LinkButton from '@/components/LinkButton/LinkButton';
-
 import Track, { TrackInterface } from '../../Track/Track';
+import ProfilTopsHeader from '../ProfilTopsHeader/ProfilTopsHeader';
 
 import styles from './TopTracks.module.scss';
 
@@ -12,10 +11,8 @@ const TopTracks: React.FC<{
   userTopTracks: UserTopTrackInterface;
 }> = ({ userTopTracks }) => (
   <section className={styles.section}>
-    <header>
-      <b>Top tracks of all time</b>
-      <LinkButton href="/top-tracks">View More</LinkButton>
-    </header>
+    <ProfilTopsHeader title="Top tracks of all time" href="/top-tracks" />
+
     {userTopTracks?.items?.length > 0 ? (
       <ul>
         {userTopTracks?.items?.map((track: TrackInterface) => (

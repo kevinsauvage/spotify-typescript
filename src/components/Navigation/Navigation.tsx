@@ -15,9 +15,9 @@ const navItems = [
   { href: '/', icon: <Person />, label: 'Profile' },
   { href: '/top-artists', icon: <Micro />, label: 'Top Artists' },
   { href: '/top-tracks', icon: <Library />, label: 'Top tracks' },
-  { href: '/recently-played', icon: <Time />, label: 'Recently Played' },
+  { href: '/recently-played', icon: <Time />, label: 'Recent' },
   { href: '/playlists', icon: <Music />, label: 'Playlists' },
-  { href: '/saved-tracks', icon: <Heart />, label: 'Saved Tracks' },
+  { href: '/saved-tracks', icon: <Heart />, label: 'Saved' },
 ];
 
 const Navigation = () => (

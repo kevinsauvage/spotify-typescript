@@ -17,6 +17,10 @@ body {
   display: flex;
   color: rgb(var(--color-text-2));
   background: var(--color-background-2);
+
+  @include respond(tablet) {
+    padding-bottom: 80px;
+  }
 }
 
 a {
