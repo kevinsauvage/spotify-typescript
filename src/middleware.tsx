@@ -1,26 +1,36 @@
+/* eslint-disable no-param-reassign */
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { type NextRequest, NextResponse } from 'next/server';
 
-const middleware = async (request: NextRequest) => {
-  const spotifyToken: RequestCookie | undefined = request.cookies.get('spotify_token');
+const noAccessToken = (request: NextRequest) => {
   const { nextUrl } = request;
 
-  const spotifyTokenParsed = JSON.parse(spotifyToken?.value || '{}');
-  const { accessToken } = spotifyTokenParsed || {};
-
-  if (accessToken && nextUrl.pathname.startsWith('/login')) {
-    nextUrl.pathname = '/';
-    return NextResponse.redirect(nextUrl);
-  }
-
-  if (
-    !accessToken &&
-    (!nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/logout'))
-  ) {
+  if (!nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/logout')) {
     nextUrl.pathname = '/login';
     return NextResponse.redirect(nextUrl);
   }
+};
 
+const hasAccessToken = (request: NextRequest) => {
+  const { nextUrl } = request;
+
+  if (nextUrl.pathname.startsWith('/login')) {
+    nextUrl.pathname = '/';
+    return NextResponse.redirect(nextUrl);
+  }
+};
+
+const checkAccessToken = async (request: NextRequest) => {
+  const spotifyToken: RequestCookie | undefined = request.cookies.get('spotify_token');
+  const spotifyTokenParsed = JSON.parse(spotifyToken?.value || '{}');
+  const { accessToken } = spotifyTokenParsed || {};
+
+  if (accessToken) hasAccessToken(request);
+  if (!accessToken) noAccessToken(request);
+};
+
+const middleware = async (request: NextRequest) => {
+  checkAccessToken(request);
   return NextResponse.next();
 };
 

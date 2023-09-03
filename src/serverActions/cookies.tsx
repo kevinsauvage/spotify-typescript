@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 
 const deleteTokens = async () => cookies().delete('spotify_token');
 
-export const storeToken = async (accessToken: string, expiresIn: number) => {
+export const loginServerAction = async (accessToken: string, expiresIn: number) => {
   try {
     const currentTime = Math.floor(Date.now() / 1000);
 
