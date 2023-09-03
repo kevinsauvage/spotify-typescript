@@ -1,23 +1,27 @@
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { type NextRequest, NextResponse } from 'next/server';
 
-const {
-  spotify_client_id: spotifyClientId = '',
-  spotify_redirect_uri: spotifyRedirectUri = '',
-  spotify_scope: spotifyScope = '',
-} = process.env;
-
-const middleware = (request: NextRequest) => {
+const middleware = async (request: NextRequest) => {
   const spotifyToken: RequestCookie | undefined = request.cookies.get('spotify_token');
+  const { nextUrl } = request;
 
-  // We need the user shopify token to access the spotify API
-  if (!spotifyToken?.value) {
-    const url = new URL(
-      `https://accounts.spotify.com/authorize?redirect_uri=${spotifyRedirectUri}&client_id=${spotifyClientId}&scope=${spotifyScope}&response_type=token`,
-    );
+  const spotifyTokenParsed = JSON.parse(spotifyToken?.value || '{}');
+  const { accessToken } = spotifyTokenParsed || {};
 
-    return NextResponse.redirect(url.href);
+  if (accessToken && nextUrl.pathname.startsWith('/login')) {
+    nextUrl.pathname = '/';
+    return NextResponse.redirect(nextUrl);
   }
+
+  if (
+    !accessToken &&
+    (!nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/logout'))
+  ) {
+    nextUrl.pathname = '/login';
+    return NextResponse.redirect(nextUrl);
+  }
+
+  return NextResponse.next();
 };
 
 export default middleware;

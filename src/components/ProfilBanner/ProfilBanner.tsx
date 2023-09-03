@@ -1,6 +1,6 @@
-
 import Person from '@/assets/icons/person';
 
+import LinkButton from '../LinkButton/LinkButton';
 import ProfilStats, { StatInterface } from '../ProfilStats/ProfilStats';
 
 import styles from './ProfilBanner.module.scss';
@@ -20,6 +20,7 @@ const ProfilBanner = ({ userData, stats }: ProfilBannerProperties) => (
     <Person />
     <h1>{userData?.display_name}</h1>
     <ProfilStats stats={stats} />
+    <LinkButton href="logout">Logout</LinkButton>
   </div>
 );
 

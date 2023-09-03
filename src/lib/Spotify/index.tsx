@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers';
+import { getSpotifyToken } from '@/utils/cookies';
 
 const enpointBaseUrl = 'https://api.spotify.com/v1';
 const enpointUserBaseUrl = `${enpointBaseUrl}/me`;
@@ -15,20 +15,16 @@ const expointTrack = `${enpointBaseUrl}/tracks`;
 const endpointAudioAnalysis = `${enpointBaseUrl}/audio-analysis`;
 const endpointAudioFeatures = `${enpointBaseUrl}/audio-features`;
 
-const fetchHelper = async (endpoint: string, options: object = {}) => {
+const fetchHelper = async (endpoint: string, options: object = {}, token: string = '') => {
   try {
-    const cookieStore = cookies();
+    const accessToken = token || getSpotifyToken()?.accessToken || {};
 
-    if (!cookieStore) {
-      return;
-    }
-
-    if (!cookieStore?.get('spotify_token')) {
+    if (!accessToken) {
       return console.error('spotify token missing');
     }
 
     const response = await fetch(endpoint, {
-      headers: { Authorization: `Bearer ${cookieStore?.get('spotify_token')?.value}` },
+      headers: { Authorization: `Bearer ${accessToken}` },
       method: 'GET',
       ...options,
     });

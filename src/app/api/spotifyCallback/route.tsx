@@ -15,12 +15,13 @@ export async function POST(request: NextRequest) {
     }
 
     const response = NextResponse.json({ ok: true }, { status: 200 });
+    const currentTime = Math.floor(Date.now() / 1000);
 
     response.cookies.set({
       httpOnly: true,
       maxAge: expiresIn,
       name: 'spotify_token',
-      value: accessToken,
+      value: JSON.stringify({ accessToken, expiresIn: currentTime + expiresIn }),
     });
 
     return response;
