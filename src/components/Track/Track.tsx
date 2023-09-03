@@ -24,7 +24,7 @@ const Track: React.FC<{
   const image = images?.pop();
 
   return (
-    <div className={styles.track}>
+    <li className={styles.track}>
       {image && (
         <Image alt="Album cover" src={image?.url} width={image?.width} height={image?.height} />
       )}
@@ -39,7 +39,7 @@ const Track: React.FC<{
         </div>
       </div>
       <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
-    </div>
+    </li>
   );
 };
 

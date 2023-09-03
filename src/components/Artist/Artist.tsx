@@ -18,7 +18,7 @@ const Artist: React.FC<{
   const image = images.at(variant === 'row' ? -1 : 1);
 
   return (
-    <div className={`${styles.artist} ${styles[variant]}`}>
+    <li className={`${styles.artist} ${styles[variant]}`}>
       <div className={styles.left}>
         {image && (
           <Image
@@ -31,7 +31,7 @@ const Artist: React.FC<{
         )}
         <p className={styles.name}>{name}</p>
       </div>
-    </div>
+    </li>
   );
 };
 

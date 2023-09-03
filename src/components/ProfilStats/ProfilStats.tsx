@@ -15,7 +15,7 @@ const ProfilStats: React.FC<ProfilStatsProperties> = ({ stats }) => (
       stats.map(({ title, value }) => (
         <div key={title} className={styles.stat}>
           <p className={styles.value}>{value}</p>
-          <h3 className={styles.title}>{title}</h3>
+          <p className={styles.title}>{title}</p>
         </div>
       ))}
   </div>

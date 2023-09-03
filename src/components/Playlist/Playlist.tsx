@@ -19,12 +19,12 @@ const Playlist: React.FC<{
   const image = (images?.length && images?.at(1)) || images?.at(0) || images?.pop();
 
   return (
-    <div className={styles.playlist}>
+    <li className={styles.playlist}>
       {image?.url && <Image alt="Album cover" src={image?.url} width={200} height={200} />}
       <div className={styles.left}>
         <p className={styles.name}>{name}</p>
       </div>
-    </div>
+    </li>
   );
 };
 
