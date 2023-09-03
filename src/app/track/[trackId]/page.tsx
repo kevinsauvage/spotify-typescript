@@ -20,11 +20,6 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
     getAudioFeatures(params.trackId),
   ]);
 
-  console.log(
-    '🚀 ~~~~  file: page.tsx:20 ~~~~  constPage:React.FC<PageInterface>= ~~~~  audioFeatures:',
-    audioFeatures,
-  );
-
   const { name, artists, album, external_urls: externalUrls, popularity } = track || {};
   const { images } = album || {};
   const image = images?.at(0);

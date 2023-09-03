@@ -3,7 +3,11 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-const deleteTokens = async () => cookies().delete('spotify_token');
+const {
+  spotify_client_id: spotifyClientId = '',
+  spotify_redirect_uri: spotifyRedirectUri = '',
+  spotify_scope: spotifyScope = '',
+} = process.env;
 
 export const loginServerAction = async (accessToken: string, expiresIn: number) => {
   try {
@@ -16,10 +20,10 @@ export const loginServerAction = async (accessToken: string, expiresIn: number) 
       value: JSON.stringify({ accessToken, expiresIn: currentTime + expiresIn }),
     });
 
-    return true;
+    redirect('/');
   } catch (error) {
     console.warn(error);
-    return false;
+    redirect('/login');
   }
 };
 
@@ -28,4 +32,10 @@ export const logoutServerAction = () => {
   redirect('/login');
 };
 
-export default deleteTokens;
+export const redirectToSpotifyLogin = () => {
+  const url = new URL(
+    `https://accounts.spotify.com/authorize?redirect_uri=${spotifyRedirectUri}&client_id=${spotifyClientId}&scope=${spotifyScope}&response_type=token`,
+  );
+
+  redirect(url.href);
+};

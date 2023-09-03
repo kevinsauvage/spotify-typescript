@@ -1,6 +1,6 @@
 'use client';
 
-import { redirectToSpotifyLogin } from '@/serverActions/url';
+import { redirectToSpotifyLogin } from '@/serverActions/auth';
 
 import styles from './LoginButton.module.scss';
 

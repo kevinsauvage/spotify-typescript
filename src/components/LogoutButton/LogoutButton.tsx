@@ -1,6 +1,6 @@
 'use client';
 
-import { logoutServerAction } from '@/serverActions/cookies';
+import { logoutServerAction } from '@/serverActions/auth';
 
 import Button from '../Button/Button';
 

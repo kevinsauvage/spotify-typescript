@@ -5,8 +5,7 @@ import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import ScreenLoader from '@/components/ScreenLoader/ScreenLoader';
-import { loginServerAction } from '@/serverActions/cookies';
-import { redirectUrl } from '@/serverActions/url';
+import { loginServerAction } from '@/serverActions/auth';
 
 const extractTokenAndExpires = (url: string) => {
   const parsedUrl = new URL(url);
@@ -25,9 +24,7 @@ const Page = () => {
   const { push } = useRouter();
 
   const spotifyCallback = useCallback(async (accessToken: string, expiresIn: string) => {
-    const response = await loginServerAction(accessToken, Number(expiresIn));
-    if (response) return redirectUrl('/');
-    // TODO: show error UI and redirect to login page after 5 seconds if no response from server (or server error)
+    await loginServerAction(accessToken, Number(expiresIn));
   }, []);
 
   useEffect(() => {
