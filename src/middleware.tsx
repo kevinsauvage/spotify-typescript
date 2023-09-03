@@ -3,9 +3,10 @@ import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { type NextRequest, NextResponse } from 'next/server';
 
 const noAccessToken = (request: NextRequest) => {
-  const { nextUrl } = request;
+  const { nextUrl } = request || {};
+  const { pathname } = nextUrl || {};
 
-  if (!nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/logout')) {
+  if (!pathname.startsWith('/login') || pathname.startsWith('/logout')) {
     nextUrl.pathname = '/login';
     return NextResponse.redirect(nextUrl);
   }
@@ -13,8 +14,9 @@ const noAccessToken = (request: NextRequest) => {
 
 const hasAccessToken = (request: NextRequest) => {
   const { nextUrl } = request;
+  const { pathname } = nextUrl || {};
 
-  if (nextUrl.pathname.startsWith('/login')) {
+  if (pathname.startsWith('/login')) {
     nextUrl.pathname = '/';
     return NextResponse.redirect(nextUrl);
   }
