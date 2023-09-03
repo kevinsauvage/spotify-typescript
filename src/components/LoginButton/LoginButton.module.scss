@@ -1,0 +1,12 @@
+.link {
+  padding: 1.5rem 3rem;
+  border: none;
+  border-radius: 30em;
+  color: var(--color-text-1);
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-decoration: none;
+  background-color: var(--primary-300);
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}

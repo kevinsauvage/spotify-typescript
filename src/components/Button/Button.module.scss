@@ -4,8 +4,10 @@
   border-radius: 99em;
   color: var(--color-text-1);
   font-weight: 500;
-  font-size: 0.9;
+  font-size: 1rem;
   white-space: nowrap;
+  background-color: transparent;
+  cursor: pointer;
   transition: all 0.2s ease-in-out;
 
   &:hover {

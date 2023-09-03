@@ -27,7 +27,7 @@ const Page = () => {
   const spotifyCallback = useCallback(async (accessToken: string, expiresIn: string) => {
     const response = await storeToken(accessToken, Number(expiresIn));
     if (response) return redirectUrl('/');
-    console.error(`Error: ${response}`);
+    // TODO: show error UI and redirect to login page after 5 seconds if no response from server (or server error)
   }, []);
 
   useEffect(() => {

@@ -32,6 +32,9 @@ $colors-dark: (
   // Reversed Colors
   color-text-reversed: #0a0a0a,
   color-background-reversed: #f4f4f4,
+
+  color-black: #070707,
+  color-white: #fbfbfb,
 );
 
 @function hex-to-rgb($hex) {

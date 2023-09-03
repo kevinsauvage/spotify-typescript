@@ -1,10 +1,9 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-const deleteTokens = async () => {
-  cookies().delete('spotify_token');
-};
+const deleteTokens = async () => cookies().delete('spotify_token');
 
 export const storeToken = async (accessToken: string, expiresIn: number) => {
   try {
@@ -22,6 +21,11 @@ export const storeToken = async (accessToken: string, expiresIn: number) => {
     console.warn(error);
     return false;
   }
+};
+
+export const logoutServerAction = () => {
+  cookies().delete('spotify_token');
+  redirect('/login');
 };
 
 export default deleteTokens;
