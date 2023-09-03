@@ -43,7 +43,7 @@
       padding: 0.8rem 1.8rem;
       border-radius: 25px;
       font-weight: 500;
-      background-color: #1db954;
+      background-color: var(--primary-100);
     }
   }
 }
@@ -63,7 +63,7 @@
   justify-content: center;
   padding: 10px;
   padding: 2rem;
-  border: 1px solid #cccccc83;
+  border: 1px solid rgba(var(--rgb-color-text-2), 0.5);
 
   p {
     text-align: center;

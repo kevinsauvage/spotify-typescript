@@ -1,0 +1,53 @@
+// DARK COLORS
+$primary-dark: #1db954;
+$surface-dark: #191919;
+$text-dark: #d2d9e6;
+$color-background-dark: #070c14;
+
+$colors-dark: (
+  primary-100: $primary-dark,
+  primary-200: darken($primary-dark, 10),
+  primary-300: darken($primary-dark, 20),
+  primary-400: darken($primary-dark, 30),
+  // Background
+  color-background-1: $color-background-dark,
+  color-background-2: lighten($color-background-dark, 3),
+  // Surface
+  color-surface-1: $surface-dark,
+  color-surface-2: lighten($surface-dark, 3),
+  color-surface-3: lighten($surface-dark, 6),
+  // Text
+  color-text-1: $text-dark,
+  color-text-2: rgba($text-dark, 80%),
+  color-text-3: rgba($text-dark, 70%),
+  color-text-4: rgba($text-dark, 60%),
+  // Borders
+  color-border-1: #ffffff8e,
+  color-border-2: #ffffff50,
+  color-border-3: #fcfcfc21,
+  // FEEDBACK
+  color-warning: #b54708,
+  color-error: #b7192e,
+  color-success: #338213,
+  // Reversed Colors
+  color-text-reversed: #0a0a0a,
+  color-background-reversed: #f4f4f4,
+);
+
+@function hex-to-rgb($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+
+@mixin generate-colors($colors) {
+  @each $color, $value in $colors {
+    --#{$color}: #{$value};
+  }
+
+  @each $color, $value in $colors {
+    --rgb-#{$color}: #{hex-to-rgb($value)};
+  }
+}
+
+html {
+  @include generate-colors($colors-dark);
+}

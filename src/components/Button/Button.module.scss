@@ -1,14 +1,15 @@
 .button {
   padding: 0.5rem 1rem;
-  border: 2px solid white;
+  border: 2px solid var(--color-border-1);
   border-radius: 99em;
-  color: white;
+  color: var(--color-text-1);
   font-weight: 500;
   font-size: 0.9;
+  white-space: nowrap;
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    color: #1d1d1d;
-    background-color: white;
+    color: var(--color-text-reversed);
+    background-color: var(--color-background-reversed);
   }
 }

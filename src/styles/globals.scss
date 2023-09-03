@@ -1,3 +1,7 @@
+@import './responsive';
+
+@import './theme';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,8 +15,8 @@ body {
 
 body {
   display: flex;
-  color: rgb(var(--foreground-rgb));
-  background: rgb(20, 20, 20);
+  color: rgb(var(--color-text-2));
+  background: var(--color-background-2);
 }
 
 a {
@@ -25,5 +29,3 @@ a {
     color-scheme: dark;
   }
 }
-
-$color-green: #1db954;
