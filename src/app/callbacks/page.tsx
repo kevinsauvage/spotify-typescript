@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
@@ -23,16 +23,12 @@ const extractTokenAndExpires = (url: string) => {
 const Page = () => {
   const { push } = useRouter();
 
-  const spotifyCallback = useCallback(async (accessToken: string, expiresIn: string) => {
-    await loginServerAction(accessToken, Number(expiresIn));
-  }, []);
-
   useEffect(() => {
     const { href } = window.location;
     const { accessToken, expiresInSeconds } = extractTokenAndExpires(href);
-    if (accessToken) spotifyCallback(accessToken, expiresInSeconds);
+    if (accessToken) loginServerAction(accessToken, Number(expiresInSeconds));
     else push('/login');
-  }, [push, spotifyCallback]);
+  }, [push]);
 
   return <ScreenLoader />;
 };
