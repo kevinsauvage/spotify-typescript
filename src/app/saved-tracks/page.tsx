@@ -1,3 +1,4 @@
+import ListingBanner from '@/components/ListingBanner/ListingBanner';
 import Track, { TrackInterface } from '@/components/Track/Track';
 import { getEndpointSavedTracks } from '@/lib/Spotify';
 
@@ -12,9 +13,7 @@ const page = async () => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.banner}>
-        <h1>Saved Tracks</h1>
-      </div>
+      <ListingBanner title="Saved Tracks" />
       <ul className={styles.list}>
         {Array.isArray(savedTracks?.items) &&
           savedTracks?.items?.map((track) => <Track key={track?.track?.id} track={track?.track} />)}

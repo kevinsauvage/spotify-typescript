@@ -10,21 +10,16 @@ const {
 } = process.env;
 
 export const loginServerAction = async (accessToken: string, expiresIn: number) => {
-  try {
-    const currentTime = Math.floor(Date.now() / 1000);
+  const currentTime = Math.floor(Date.now() / 1000);
 
-    cookies().set({
-      httpOnly: true,
-      maxAge: expiresIn,
-      name: 'spotify_token',
-      value: JSON.stringify({ accessToken, expiresIn: currentTime + expiresIn }),
-    });
+  cookies().set({
+    httpOnly: true,
+    maxAge: expiresIn,
+    name: 'spotify_token',
+    value: JSON.stringify({ accessToken, expiresIn: currentTime + expiresIn }),
+  });
 
-    redirect('/');
-  } catch (error) {
-    console.warn(error);
-    redirect('/login');
-  }
+  redirect('/');
 };
 
 export const logoutServerAction = () => {

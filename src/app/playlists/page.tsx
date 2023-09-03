@@ -1,3 +1,4 @@
+import ListingBanner from '@/components/ListingBanner/ListingBanner';
 import Playlist, { PlaylistInterface } from '@/components/Playlist/Playlist';
 import { getEndpointMePlaylists } from '@/lib/Spotify';
 
@@ -11,10 +12,8 @@ const page: React.FC = async () => {
   const followedPlaylists: UserPlaylistInterface = await getEndpointMePlaylists();
 
   return (
-    <div className={styles.page}>
-      <div className={styles.banner}>
-        <h1>Followed Playlists</h1>
-      </div>
+    <div>
+      <ListingBanner title="Followed Playlists" />
       <ul className={styles.list}>
         {Array.isArray(followedPlaylists?.items) &&
           followedPlaylists?.items?.map((playlist) => (

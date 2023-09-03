@@ -7,8 +7,6 @@ import {
   getStats,
 } from '@/lib/Spotify';
 
-import styles from './page.module.scss';
-
 const page: React.FC = async () => {
   const [userData, userTopArtists, userTopTracks, stats] = await Promise.all([
     getEndpointMe(),
@@ -18,10 +16,10 @@ const page: React.FC = async () => {
   ]);
 
   return (
-    <main className={styles.main}>
+    <>
       <ProfilBanner userData={userData} stats={stats} />
       <ProfilTops userTopArtists={userTopArtists} userTopTracks={userTopTracks} />
-    </main>
+    </>
   );
 };
 
