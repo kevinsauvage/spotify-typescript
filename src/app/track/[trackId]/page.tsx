@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import ChartComponent from '@/components/Chart/Chart';
 import { TrackInterface } from '@/components/Track/Track';
-import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify';
+import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
 import { getMinuteFromSeconds } from '@/utils/date';
 
 import styles from './page.module.scss';
@@ -92,6 +92,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
         <div>
           <h1 className={styles.name}>{name}</h1>
           <div className={styles.artists}>
+            <strong>Artists: </strong>
             {artists.map((artist, index) => (
               <>
                 <p key={artist.id}>{artist.name}</p>
@@ -100,12 +101,16 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
             ))}
           </div>
           <div>
-            <p className={styles.albumName}>{album.name}</p>
+            <p className={styles.albumName}>
+              <strong>Album: </strong>
+              {album.name}
+            </p>
           </div>
           <div className={styles.buttons}>
             <Link href={externalUrls.spotify} target="__blank">
               Play on spotify
             </Link>
+            <Link href={`/recommendations/tracks/${track.id}`}>See Track Recommendations</Link>
           </div>
         </div>
       </div>

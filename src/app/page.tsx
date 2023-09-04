@@ -5,7 +5,7 @@ import {
   getEndpointTopArtists,
   getEndpointTopTracks,
   getStats,
-} from '@/lib/Spotify';
+} from '@/lib/Spotify/user';
 
 const page: React.FC = async () => {
   const [userData, userTopArtists, userTopTracks, stats] = await Promise.all([

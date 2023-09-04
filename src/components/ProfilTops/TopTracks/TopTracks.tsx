@@ -1,4 +1,6 @@
-import Track, { TrackInterface } from '../../Track/Track';
+import TrackList from '@/components/TrackList/TrackList';
+
+import { TrackInterface } from '../../Track/Track';
 import ProfilTopsHeader from '../ProfilTopsHeader/ProfilTopsHeader';
 
 import styles from './TopTracks.module.scss';
@@ -14,11 +16,7 @@ const TopTracks: React.FC<{
     <ProfilTopsHeader title="Top tracks of all time" href="/top-tracks" />
 
     {userTopTracks?.items?.length > 0 ? (
-      <ul>
-        {userTopTracks?.items?.map((track: TrackInterface) => (
-          <Track key={track.id} track={track} />
-        ))}
-      </ul>
+      <TrackList tracks={userTopTracks?.items} />
     ) : (
       <div>No tracks found</div>
     )}

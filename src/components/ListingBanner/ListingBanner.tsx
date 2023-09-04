@@ -1,10 +1,12 @@
+import { ReactNode } from 'react';
+
 import FiltersPeriod from '@/components/FiltersPeriod/FiltersPeriod';
 
 import styles from './ListingBanner.module.scss';
 
 interface ListingBannerInterface {
   path?: string;
-  title: string;
+  title: string | ReactNode;
   period?: string;
 }
 

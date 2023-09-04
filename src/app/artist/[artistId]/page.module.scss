@@ -1,0 +1,68 @@
+@import '../../../styles/responsive';
+
+.artist {
+  .banner {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 5rem;
+
+    .image {
+      width: 100%;
+      max-width: 270px;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .name {
+      margin-bottom: 1rem;
+      font-size: 2.3rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 2rem;
+      width: fit-content;
+      margin-top: 2rem;
+
+      a {
+        padding: 0.8rem 1.8rem;
+        border-radius: 25px;
+        font-weight: 500;
+        background-color: var(--primary-100);
+      }
+    }
+
+    .popularity {
+      margin-top: 0.3rem;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .followers {
+      margin-top: 0.3rem;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .genres {
+      margin-top: 0.3rem;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+  }
+
+  .topTracks {
+    h2 {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+  }
+
+  @include respond(mobile_l) {
+    .banner {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+}

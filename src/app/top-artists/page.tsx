@@ -1,7 +1,7 @@
 import ListingArtists from '@/components/ListingArtists/ListingArtists';
 import ListingBanner from '@/components/ListingBanner/ListingBanner';
 import { UserTopArtistInterface } from '@/components/ProfilTops/TopArtists/TopArtists';
-import { getEndpointTopArtists } from '@/lib/Spotify';
+import { getEndpointTopArtists } from '@/lib/Spotify/user';
 
 interface PageInterface {
   params: object;

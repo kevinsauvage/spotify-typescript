@@ -1,6 +1,6 @@
 import ListingBanner from '@/components/ListingBanner/ListingBanner';
 import Playlist, { PlaylistInterface } from '@/components/Playlist/Playlist';
-import { getEndpointMePlaylists } from '@/lib/Spotify';
+import { getEndpointMePlaylists } from '@/lib/Spotify/user';
 
 import styles from './page.module.scss';
 

@@ -1,8 +1,7 @@
 import ListingBanner from '@/components/ListingBanner/ListingBanner';
-import Track, { TrackInterface } from '@/components/Track/Track';
-import { getEndpointSavedTracks } from '@/lib/Spotify';
-
-import styles from './page.module.scss';
+import { TrackInterface } from '@/components/Track/Track';
+import TrackList from '@/components/TrackList/TrackList';
+import { getEndpointSavedTracks } from '@/lib/Spotify/user';
 
 interface UserSavedTracksInterface {
   items: [{ track: TrackInterface }];
@@ -12,12 +11,9 @@ const page = async () => {
   const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(50);
 
   return (
-    <div className={styles.page}>
+    <div>
       <ListingBanner title="Saved Tracks" />
-      <ul className={styles.list}>
-        {Array.isArray(savedTracks?.items) &&
-          savedTracks?.items?.map((track) => <Track key={track?.track?.id} track={track?.track} />)}
-      </ul>
+      <TrackList tracks={savedTracks?.items?.map((track) => track?.track)} />
     </div>
   );
 };

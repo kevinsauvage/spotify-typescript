@@ -33,7 +33,9 @@ const Track: React.FC<{
           {name}
         </Link>
         <div className={styles.info}>
-          <p className={styles.artist}>{artists?.[0]?.name}</p>
+          <Link href={`/artist/${artists?.[0]?.id}`}>
+            <p className={styles.artist}>{artists?.[0]?.name}</p>
+          </Link>
           <span>-</span>
           <p className={styles.album}>{album?.name}</p>
         </div>
