@@ -1,7 +1,8 @@
 import ListingBanner from '@/components/ListingBanner/ListingBanner';
 import { TrackInterface } from '@/components/Track/Track';
 import TrackList from '@/components/TrackList/TrackList';
-import { getRecommendations, getTrack } from '@/lib/Spotify';
+import { getRecommendations } from '@/lib/Spotify/recommendations';
+import { getTrack } from '@/lib/Spotify/track';
 
 interface PageInterface {
   params: { trackId: string };
