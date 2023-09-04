@@ -10,7 +10,7 @@ export const TopArtists: React.FC<{
   userTopArtists: UserTopArtistInterface;
 }> = ({ userTopArtists }) => (
   <section className={styles.section}>
-    <ProfilTopsHeader title="Top tracks of all time" href="/top-artists" />
+    <ProfilTopsHeader title="Top artists of all time" href="/top-artists" />
     {userTopArtists?.items?.length > 0 ? (
       <ul>
         {userTopArtists?.items?.map((artist: ArtistInterface) => (
