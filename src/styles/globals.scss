@@ -15,7 +15,7 @@ body {
 
 body {
   display: flex;
-  color: rgb(var(--color-text-2));
+  color: var(--color-text-2);
   background: var(--color-background-2);
 
   @include respond(tablet) {
