@@ -61,8 +61,7 @@ const Pagination: React.FC<IProperties> = ({ currentPage, totalPages, navigate, 
         pageRange.push(renderEllipsis('right-ellipsis'));
       }
     } else {
-      pageRange.push(renderPageButton(1));
-      pageRange.push(renderEllipsis('left-ellipsis'));
+      pageRange.push(renderPageButton(1), renderEllipsis('left-ellipsis'));
 
       for (let index = currentPage - 2; index <= currentPage + 2; index++) {
         if (index > 1 && index < totalPages) {
