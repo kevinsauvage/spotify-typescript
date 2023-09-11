@@ -1,24 +1,15 @@
+import RecommendationsPresenter from '@/components/_scopes/Recommendations/RecommendationsPresenter/RecommendationsPresenter';
 import ListingBanner from '@/components/ListingBanner/ListingBanner';
-import { TrackInterface } from '@/components/Track/Track';
-import TrackList from '@/components/TrackList/TrackList';
-import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { getTrack } from '@/lib/Spotify/track';
 
 interface PageInterface {
   params: { trackId: string };
-  searchParams: object;
+  searchParams: { seedArtists: string; seedGenres: string; seedTracks: string };
 }
 
-const page: React.FC<PageInterface> = async ({ params }) => {
+const page: React.FC<PageInterface> = async ({ searchParams, params }) => {
   const trackId = params?.trackId;
   const track = (await getTrack(trackId)) || '';
-
-  const recommencedTracks: { tracks: [TrackInterface] } = await getRecommendations({
-    seedArtists: '',
-    seedGenres: '',
-    seedTracks: trackId,
-  });
-
   const { name, artists } = track || {};
 
   return (
@@ -31,7 +22,7 @@ const page: React.FC<PageInterface> = async ({ params }) => {
         }
       />
 
-      <TrackList tracks={recommencedTracks?.tracks} />
+      <RecommendationsPresenter searchParams={searchParams} trackId={trackId} />
     </div>
   );
 };

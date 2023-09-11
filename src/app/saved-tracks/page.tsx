@@ -1,10 +1,16 @@
+import Listing from '@/components/Listing/Listing';
 import ListingBanner from '@/components/ListingBanner/ListingBanner';
 import { TrackInterface } from '@/components/Track/Track';
-import TrackList from '@/components/TrackList/TrackList';
 import { getEndpointSavedTracks } from '@/lib/Spotify/user';
 
-interface UserSavedTracksInterface {
+export interface UserSavedTracksInterface {
   items: [{ track: TrackInterface }];
+  track: TrackInterface;
+  total: number;
+  limit: number;
+  offset: number;
+  next: string;
+  previous: string;
 }
 
 const page = async () => {
@@ -13,7 +19,7 @@ const page = async () => {
   return (
     <div>
       <ListingBanner title="Saved Tracks" />
-      <TrackList tracks={savedTracks?.items?.map((track) => track?.track)} />
+      <Listing tracks={savedTracks} />
     </div>
   );
 };

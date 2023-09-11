@@ -1,0 +1,47 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 35px;
+    min-height: 35px;
+    border: 1px solid var(--primary-100);
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+
+    svg {
+      font-size: 1.5rem;
+    }
+  }
+
+  .number {
+    color: var(--primary-400);
+
+    &.active {
+      color: var(--color-text-1);
+      background-color: var(--primary-100);
+    }
+  }
+
+  .arrow {
+    svg {
+      color: var(--color-text-1);
+    }
+
+    &:disabled {
+      border: 0.1px solid var(--color-text-3);
+      cursor: auto;
+
+      svg {
+        color: var(--color-text-2);
+      }
+    }
+  }
+}

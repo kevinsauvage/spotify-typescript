@@ -1,0 +1,99 @@
+.container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 3rem;
+
+  .selectedAttibutes,
+  .selectedGenres {
+    margin-bottom: 2rem;
+
+    .title {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .attributes,
+    .genres {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .item {
+      position: relative;
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid var(--color-border-1);
+      border-radius: 5px;
+      font-size: 0.8rem;
+
+      &.applied {
+        color: white;
+        background-color: var(--primary-300);
+      }
+
+      .trashButton {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-error);
+        font-size: 1.1rem;
+        cursor: pointer;
+        opacity: 0;
+        inset: 0;
+      }
+
+      &:hover {
+        .trashButton {
+          opacity: 1;
+        }
+      }
+    }
+
+    .key {
+      flex: 1;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .value {
+      flex: 2;
+    }
+  }
+
+  .form {
+    height: 100%;
+
+    .slideButtons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        color: var(--color-text-1);
+        background-color: var(--primary-300);
+        cursor: pointer;
+
+        &[disabled] {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

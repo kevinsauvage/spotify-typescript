@@ -1,0 +1,31 @@
+.genreSelector {
+  h2 {
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+  }
+
+  .genres {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-bottom: 2rem;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+
+    input {
+      width: 1.3rem;
+      height: 1.3rem;
+      margin-left: auto;
+      border: 1px solid var(--color-text-3);
+      accent-color: var(--primary-100);
+    }
+
+    label {
+      text-transform: capitalize;
+    }
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+  }
+}

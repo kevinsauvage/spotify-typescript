@@ -28,14 +28,14 @@
   ],
   "extends": [
     "eslint:recommended",
-    "airbnb",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     "prettier",
     "next",
     "plugin:jsx-a11y/recommended",
     "plugin:css-modules/recommended",
     "plugin:sonarjs/recommended",
-    "plugin:unicorn/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:unicorn/recommended"
   ],
   "settings": {
     "import/resolver": {
@@ -122,8 +122,9 @@
     "no-use-before-define": "error",
     "no-multi-spaces": "error",
     "import/extensions": 0,
-    "no-unused-vars": [
-      "error",
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
       {
         "argsIgnorePattern": "^_"
       }
