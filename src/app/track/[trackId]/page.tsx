@@ -95,7 +95,9 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
             <strong>Artists: </strong>
             {artists.map((artist, index) => (
               <>
-                <p key={artist.id}>{artist.name}</p>
+                <Link href={`/artist/${artist.id}`} key={artist.id}>
+                  {artist.name}
+                </Link>
                 {index < artists.length - 1 && <span>, </span>}
               </>
             ))}
