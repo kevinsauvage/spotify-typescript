@@ -1,7 +1,6 @@
 import { enpointBaseUrl, fetchHelper } from '.';
 
 const enpointUserBaseUrl = `${enpointBaseUrl}/me`;
-
 const endpointPlaylists = `${enpointUserBaseUrl}/playlists`;
 const endpointTopArtists = `${enpointUserBaseUrl}/top/artists`;
 const endpointTopTracks = `${enpointUserBaseUrl}/top/tracks`;
@@ -10,16 +9,25 @@ const endpointSavedAlbums = `${enpointUserBaseUrl}/albums`;
 const endpointSavedTracks = `${enpointUserBaseUrl}/tracks`;
 const endpointFollowedArtists = `${enpointUserBaseUrl}/following?type=artist`;
 
-export const getEndpointMe = async () => fetchHelper(enpointUserBaseUrl);
-export const getEndpointMePlaylists = async () => fetchHelper(endpointPlaylists);
+const defaultLimit = 20;
 
-export const getEndpointTopArtists = async (limit = 10, period = 'long_term') => {
-  const url = `${endpointTopArtists}?time_range=${period}&limit=${limit}`;
+export const getEndpointMe = async () => fetchHelper(enpointUserBaseUrl);
+
+export const getEndpointMePlaylists = async (page = 1) => {
+  const offset = (page - 1) * defaultLimit;
+  const url = `${endpointPlaylists}?limit=${defaultLimit}&offset=${offset}`;
   return fetchHelper(url);
 };
 
-export const getEndpointTopTracks = async (limit = 10, period = 'long_term') => {
-  const url = `${endpointTopTracks}?time_range=${period}&limit=${limit}`;
+export const getEndpointTopArtists = async (page = 1, period = 'long_term') => {
+  const offset = (page - 1) * defaultLimit;
+  const url = `${endpointTopArtists}?time_range=${period}&limit=${defaultLimit}&offset=${offset}`;
+  return fetchHelper(url);
+};
+
+export const getEndpointTopTracks = async (page = 1, period = 'long_term') => {
+  const offset = (page - 1) * defaultLimit;
+  const url = `${endpointTopTracks}?time_range=${period}&limit=${defaultLimit}&offset=${offset}`;
   return fetchHelper(url);
 };
 
@@ -29,8 +37,11 @@ export const getEndpointRecentTracks = async (limit = 10) =>
 export const getEndpointFollowedArtists = async (limit = 10) =>
   fetchHelper(`${endpointFollowedArtists}&limit=${limit}`);
 
-export const getEndpointSavedTracks = async (limit = 10) =>
-  fetchHelper(`${endpointSavedTracks}?limit=${limit}`);
+export const getEndpointSavedTracks = async (page = 1) => {
+  const offset = (page - 1) * defaultLimit;
+  const url = `${endpointSavedTracks}?limit=${defaultLimit}&offset=${offset}`;
+  return fetchHelper(url);
+};
 
 export const getEndpointSavedAlbums = async () => fetchHelper(endpointSavedAlbums);
 

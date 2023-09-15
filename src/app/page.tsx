@@ -1,5 +1,5 @@
-import ProfilBanner from '@/components/ProfilBanner/ProfilBanner';
-import ProfilTops from '@/components/ProfilTops/ProfilTops';
+import ProfilBanner from '@/components/_scopes/Profil/ProfilBanner/ProfilBanner';
+import ProfilTops from '@/components/_scopes/Profil/ProfilTops/ProfilTops';
 import {
   getEndpointMe,
   getEndpointTopArtists,

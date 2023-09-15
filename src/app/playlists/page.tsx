@@ -1,4 +1,5 @@
-import ListingBanner from '@/components/ListingBanner/ListingBanner';
+import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
+import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Playlist, { PlaylistInterface } from '@/components/Playlist/Playlist';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
 
@@ -6,10 +7,19 @@ import styles from './page.module.scss';
 
 export interface UserPlaylistInterface {
   items: [PlaylistInterface];
+  limit: number;
+  offset: number;
+  total: number;
+}
+interface PageInterface {
+  params: object;
+  searchParams: { page: string };
 }
 
-const page: React.FC = async () => {
-  const followedPlaylists: UserPlaylistInterface = await getEndpointMePlaylists();
+const Page: React.FC<PageInterface> = async ({ searchParams }) => {
+  const page = Number(searchParams.page || 1);
+
+  const followedPlaylists: UserPlaylistInterface = await getEndpointMePlaylists(page);
 
   return (
     <div>
@@ -20,8 +30,13 @@ const page: React.FC = async () => {
             <Playlist key={playlist.id} playlist={playlist} />
           ))}
       </ul>
+      <Pagination
+        currentPage={page}
+        totalPages={Math.floor(followedPlaylists?.total / followedPlaylists?.limit)}
+        navigate
+      />
     </div>
   );
 };
 
-export default page;
+export default Page;

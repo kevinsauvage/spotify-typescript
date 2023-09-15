@@ -1,11 +1,10 @@
-import Artist, { ArtistInterface } from '../../Artist/Artist';
+import { UserTopArtistInterface } from '@/app/top-artists/page';
+import Artist, { ArtistInterface } from '@/components/Artist/Artist';
+
 import ProfilTopsHeader from '../ProfilTopsHeader/ProfilTopsHeader';
 
 import styles from './TopArtists.module.scss';
 
-export interface UserTopArtistInterface {
-  items: [ArtistInterface];
-}
 export const TopArtists: React.FC<{
   userTopArtists: UserTopArtistInterface;
 }> = ({ userTopArtists }) => (

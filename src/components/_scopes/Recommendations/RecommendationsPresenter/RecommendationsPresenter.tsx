@@ -1,5 +1,5 @@
+import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
 import { TrackInterface } from '@/components/Track/Track';
-import TrackList from '@/components/TrackList/TrackList';
 import { getAvailableGenreSeeds, getRecommendations } from '@/lib/Spotify/recommendations';
 
 import TrackAttributeForm from '../TrackAttributeForm/TrackAttributeForm';

@@ -1,11 +1,11 @@
-import Listing from '@/components/Listing/Listing';
-import ListingBanner from '@/components/ListingBanner/ListingBanner';
+import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
+import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
 import { TrackInterface } from '@/components/Track/Track';
 import { getEndpointSavedTracks } from '@/lib/Spotify/user';
 
 export interface UserSavedTracksInterface {
   items: [{ track: TrackInterface }];
-  track: TrackInterface;
   total: number;
   limit: number;
   offset: number;
@@ -13,15 +13,26 @@ export interface UserSavedTracksInterface {
   previous: string;
 }
 
-const page = async () => {
-  const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(50);
+interface PageInterface {
+  params: object;
+  searchParams: { page: string };
+}
+
+const Page: React.FC<PageInterface> = async ({ searchParams }) => {
+  const page = Number(searchParams.page || 1);
+  const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(page);
 
   return (
     <div>
       <ListingBanner title="Saved Tracks" />
-      <Listing tracks={savedTracks} />
+      <TrackList tracks={savedTracks?.items.map((track) => track?.track)} />
+      <Pagination
+        currentPage={page}
+        totalPages={Math.floor(savedTracks?.total / savedTracks?.limit)}
+        navigate
+      />
     </div>
   );
 };
 
-export default page;
+export default Page;

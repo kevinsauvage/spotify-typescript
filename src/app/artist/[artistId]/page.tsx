@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
 import { ArtistInterface } from '@/components/Artist/Artist';
-import TrackList from '@/components/TrackList/TrackList';
 import { getArtist, getArtistTopTracks } from '@/lib/Spotify/artist';
 
 import styles from './page.module.scss';

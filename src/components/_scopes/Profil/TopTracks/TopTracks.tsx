@@ -1,13 +1,9 @@
-import TrackList from '@/components/TrackList/TrackList';
+import { UserTopTrackInterface } from '@/app/top-tracks/page';
+import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
 
-import { TrackInterface } from '../../Track/Track';
 import ProfilTopsHeader from '../ProfilTopsHeader/ProfilTopsHeader';
 
 import styles from './TopTracks.module.scss';
-
-export interface UserTopTrackInterface {
-  items: [TrackInterface];
-}
 
 const TopTracks: React.FC<{
   userTopTracks: UserTopTrackInterface;

@@ -1,5 +1,5 @@
+import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import RecommendationsPresenter from '@/components/_scopes/Recommendations/RecommendationsPresenter/RecommendationsPresenter';
-import ListingBanner from '@/components/ListingBanner/ListingBanner';
 import { getTrack } from '@/lib/Spotify/track';
 
 interface PageInterface {

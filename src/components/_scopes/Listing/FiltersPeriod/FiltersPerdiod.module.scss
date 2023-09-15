@@ -1,7 +1,9 @@
 .filtersPeriod {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 2rem;
+  margin-bottom: 3rem;
 
   .filtersPeriodItem {
     opacity: 0.5;

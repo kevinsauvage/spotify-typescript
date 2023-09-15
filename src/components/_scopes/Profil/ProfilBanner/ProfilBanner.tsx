@@ -1,6 +1,6 @@
 import Person from '@/assets/icons/person';
 
-import LogoutButton from '../LogoutButton/LogoutButton';
+import LogoutButton from '../../../LogoutButton/LogoutButton';
 import ProfilStats, { StatInterface } from '../ProfilStats/ProfilStats';
 
 import styles from './ProfilBanner.module.scss';

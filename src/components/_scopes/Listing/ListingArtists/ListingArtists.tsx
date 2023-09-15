@@ -1,5 +1,5 @@
+import { UserTopArtistInterface } from '@/app/top-artists/page';
 import Artist from '@/components/Artist/Artist';
-import { UserTopArtistInterface } from '@/components/ProfilTops/TopArtists/TopArtists';
 
 import styles from './ListingArtists.module.scss';
 

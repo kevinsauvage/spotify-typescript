@@ -1,6 +1,6 @@
-import ListingBanner from '@/components/ListingBanner/ListingBanner';
+import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
+import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
 import { TrackInterface } from '@/components/Track/Track';
-import TrackList from '@/components/TrackList/TrackList';
 import { getEndpointRecentTracks } from '@/lib/Spotify/user';
 
 export interface RecentlyPlayedInterface {
