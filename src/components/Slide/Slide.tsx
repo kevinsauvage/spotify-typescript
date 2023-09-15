@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './Slide.module.scss';
 
@@ -15,6 +15,10 @@ const Slide: React.FC<IProperties> = ({ buttonText, children }) => {
   const toggleSlide = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+  }, [isOpen]);
 
   return (
     <div className={styles.slideContainer}>
