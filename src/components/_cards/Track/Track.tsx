@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ArtistInterface } from '@/components/Artist/Artist';
+import { ArtistInterface } from '@/components/_cards/Artist/Artist';
 import { getMinuteFromMilliseconds } from '@/utils/date';
 
 import styles from './Track.module.scss';

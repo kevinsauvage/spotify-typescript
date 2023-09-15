@@ -11,16 +11,15 @@ const page: React.FC<PageInterface> = async ({ params, searchParams }) => {
   const artistId = params?.artistId;
   const artist = await getArtist(artistId);
 
+  const title = (
+    <>
+      Recommendations for <strong>{artist?.name}</strong>
+    </>
+  );
+
   return (
     <div>
-      <ListingBanner
-        title={
-          <>
-            Recommendations for <strong>{artist?.name}</strong>
-          </>
-        }
-      />
-
+      <ListingBanner title={title} />
       <RecommendationsPresenter searchParams={searchParams} artistId={artistId} />
     </div>
   );

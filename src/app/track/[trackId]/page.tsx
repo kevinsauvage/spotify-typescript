@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { TrackInterface } from '@/components/_cards/Track/Track';
 import ChartComponent from '@/components/Chart/Chart';
-import { TrackInterface } from '@/components/Track/Track';
 import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
 import { getMinuteFromSeconds } from '@/utils/date';
 

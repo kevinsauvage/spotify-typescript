@@ -1,5 +1,5 @@
 import { UserTopTrackInterface } from '@/app/top-tracks/page';
-import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
+import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 
 import ProfilTopsHeader from '../ProfilTopsHeader/ProfilTopsHeader';
 

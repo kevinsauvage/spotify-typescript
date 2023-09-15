@@ -1,8 +1,8 @@
+import { TrackInterface } from '@/components/_cards/Track/Track';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
 import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
+import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
-import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
-import { TrackInterface } from '@/components/Track/Track';
 import { getEndpointTopTracks } from '@/lib/Spotify/user';
 
 export interface UserTopTrackInterface {

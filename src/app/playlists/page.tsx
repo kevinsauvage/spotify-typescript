@@ -1,6 +1,6 @@
+import Playlist, { PlaylistInterface } from '@/components/_cards/Playlist/Playlist';
 import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
-import Playlist, { PlaylistInterface } from '@/components/Playlist/Playlist';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
 
 import styles from './page.module.scss';

@@ -1,5 +1,5 @@
 import { UserTopArtistInterface } from '@/app/top-artists/page';
-import Artist, { ArtistInterface } from '@/components/Artist/Artist';
+import Artist, { ArtistInterface } from '@/components/_cards/Artist/Artist';
 
 import ProfilTopsHeader from '../ProfilTopsHeader/ProfilTopsHeader';
 

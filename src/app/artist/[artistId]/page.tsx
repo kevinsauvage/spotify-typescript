@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import TrackList from '@/components/_scopes/Listing/TrackList/TrackList';
-import { ArtistInterface } from '@/components/Artist/Artist';
+import { ArtistInterface } from '@/components/_cards/Artist/Artist';
+import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import { getArtist, getArtistTopTracks } from '@/lib/Spotify/artist';
 
 import styles from './page.module.scss';
@@ -35,11 +35,9 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
         <div>
           <h1 className={styles.name}>{name}</h1>
-
           <p className={styles.popularity}>Popularity: {popularity}</p>
           <p className={styles.followers}>Followers: {followers?.total}</p>
           <p className={styles.genres}>Genres: {genres?.join(', ')}</p>
-
           <div className={styles.buttons}>
             {href && (
               <Link href={href} target="__blank">
