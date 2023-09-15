@@ -54,7 +54,7 @@
   }
 
   &.active {
-    border-left-color: var(--primary-100);
+    border-right-color: var(--primary-100);
     background-color: var(--primary-500);
 
     svg {
