@@ -26,9 +26,9 @@ const Artist: React.FC<{
 
   return (
     <li className={`${styles.artist} ${styles[variant]}`}>
-      <div className={styles.left}>
-        {image && (
-          <Link href={`/artist/${id}`}>
+      <Link href={`/artist/${id}`}>
+        <div className={styles.left}>
+          {image && (
             <Image
               className={styles.image}
               alt="Album cover"
@@ -36,10 +36,10 @@ const Artist: React.FC<{
               width={image?.width}
               height={image?.height}
             />
-          </Link>
-        )}
-        <p className={styles.name}>{name}</p>
-      </div>
+          )}
+          <p className={styles.name}>{name}</p>
+        </div>
+      </Link>
     </li>
   );
 };

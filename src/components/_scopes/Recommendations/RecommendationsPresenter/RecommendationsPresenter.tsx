@@ -1,5 +1,6 @@
 import { TrackInterface } from '@/components/_cards/Track/Track';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
+import Container from '@/components/Container/Container';
 import { getAvailableGenreSeeds, getRecommendations } from '@/lib/Spotify/recommendations';
 
 import TrackAttributeForm from '../TrackAttributeForm/TrackAttributeForm';
@@ -37,14 +38,14 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
   const availableGenreSeeds: { genres: string[] } = (await getAvailableGenreSeeds()) || [];
 
   return (
-    <>
+    <Container>
       <TrackAttributeForm
         genres={availableGenreSeeds?.genres}
         initialParams={rest}
         seedGenres={seedGenres ? seedGenres?.split(',') : []}
       />
       <TrackList tracks={recommencedTracks?.tracks} />
-    </>
+    </Container>
   );
 };
 

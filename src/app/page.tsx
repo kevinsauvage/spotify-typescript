@@ -1,5 +1,6 @@
 import ProfilBanner from '@/components/_scopes/Profil/ProfilBanner/ProfilBanner';
 import ProfilTops from '@/components/_scopes/Profil/ProfilTops/ProfilTops';
+import Container from '@/components/Container/Container';
 import {
   getEndpointMe,
   getEndpointTopArtists,
@@ -16,10 +17,12 @@ const page: React.FC = async () => {
   ]);
 
   return (
-    <>
+    <div>
       <ProfilBanner userData={userData} stats={stats} />
-      <ProfilTops userTopArtists={userTopArtists} userTopTracks={userTopTracks} />
-    </>
+      <Container>
+        <ProfilTops userTopArtists={userTopArtists} userTopTracks={userTopTracks} />
+      </Container>
+    </div>
   );
 };
 

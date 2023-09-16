@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin: 2rem 0;
+  margin-bottom: 3rem;
 
   .item {
     display: flex;
@@ -11,9 +11,10 @@
     justify-content: center;
     min-width: 35px;
     min-height: 35px;
-    border: 1px solid var(--primary-100);
+    border: 1px solid var(--color-text-1);
     font-weight: 600;
     font-size: 1.1rem;
+    background-color: transparent;
     cursor: pointer;
 
     svg {
@@ -22,15 +23,18 @@
   }
 
   .number {
-    color: var(--primary-400);
+    color: var(--color-text-1);
 
     &.active {
+      border-color: var(--primary-100);
       color: var(--color-text-1);
-      background-color: var(--primary-100);
+      background-color: var(--primary-300);
     }
   }
 
   .arrow {
+    background-color: var(--background-1);
+
     svg {
       color: var(--color-text-1);
     }
@@ -38,6 +42,7 @@
     &:disabled {
       border: 0.1px solid var(--color-text-3);
       cursor: auto;
+      opacity: 0.2;
 
       svg {
         color: var(--color-text-2);

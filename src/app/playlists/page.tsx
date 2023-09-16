@@ -1,6 +1,7 @@
 import Playlist, { PlaylistInterface } from '@/components/_cards/Playlist/Playlist';
 import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import Container from '@/components/Container/Container';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
 
 import styles from './page.module.scss';
@@ -24,17 +25,20 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   return (
     <div>
       <ListingBanner title="Followed Playlists" />
-      <ul className={styles.list}>
-        {Array.isArray(followedPlaylists?.items) &&
-          followedPlaylists?.items?.map((playlist) => (
-            <Playlist key={playlist.id} playlist={playlist} />
-          ))}
-      </ul>
-      <Pagination
-        currentPage={page}
-        totalPages={Math.floor(followedPlaylists?.total / followedPlaylists?.limit)}
-        navigate
-      />
+      <Container>
+        <ul className={styles.list}>
+          {Array.isArray(followedPlaylists?.items) &&
+            followedPlaylists?.items?.map((playlist) => (
+              <Playlist key={playlist.id} playlist={playlist} />
+            ))}
+        </ul>
+
+        <Pagination
+          currentPage={page}
+          totalPages={Math.floor(followedPlaylists?.total / followedPlaylists?.limit)}
+          navigate
+        />
+      </Container>
     </div>
   );
 };

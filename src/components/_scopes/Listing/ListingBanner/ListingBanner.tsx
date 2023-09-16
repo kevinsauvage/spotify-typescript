@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+
 import styles from './ListingBanner.module.scss';
 
 interface ListingBannerInterface {
@@ -7,9 +9,11 @@ interface ListingBannerInterface {
 }
 
 const ListingBanner: React.FC<ListingBannerInterface> = ({ title }) => (
-  <div className={styles.banner}>
-    <h1>{title}</h1>
-  </div>
+  <PageBannerWrapper>
+    <div className={styles.banner}>
+      <h1>{title}</h1>
+    </div>
+  </PageBannerWrapper>
 );
 
 export default ListingBanner;

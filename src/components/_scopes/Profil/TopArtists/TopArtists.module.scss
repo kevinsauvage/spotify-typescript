@@ -1,4 +1,10 @@
 .section {
   flex: 1;
   width: 50%;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 }

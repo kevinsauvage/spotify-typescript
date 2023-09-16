@@ -3,6 +3,7 @@ import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPer
 import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import Container from '@/components/Container/Container';
 import { getEndpointTopTracks } from '@/lib/Spotify/user';
 
 export interface UserTopTrackInterface {
@@ -27,13 +28,15 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   return (
     <div>
       <ListingBanner title="Top Tracks" />
-      <FiltersPeriod path="/top-tracks" period={period} />
-      <TrackList tracks={topTracks?.items} />
-      <Pagination
-        currentPage={page}
-        totalPages={Math.floor(topTracks?.total / topTracks?.limit)}
-        navigate
-      />
+      <Container>
+        <FiltersPeriod path="/top-tracks" period={period} />
+        <TrackList tracks={topTracks?.items} />
+        <Pagination
+          currentPage={page}
+          totalPages={Math.floor(topTracks?.total / topTracks?.limit)}
+          navigate
+        />
+      </Container>
     </div>
   );
 };

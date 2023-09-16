@@ -1,11 +1,12 @@
 @import '../../../styles/responsive';
 
 .artist {
+  width: 100%;
+
   .banner {
     display: flex;
     align-items: flex-end;
-    gap: 1rem;
-    margin-bottom: 5rem;
+    gap: 2rem;
 
     .image {
       width: 100%;

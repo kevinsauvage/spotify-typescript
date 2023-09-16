@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { TrackInterface } from '../Track/Track';
 
@@ -14,7 +15,7 @@ export interface PlaylistInterface {
 const Playlist: React.FC<{
   playlist: PlaylistInterface;
 }> = ({ playlist }) => {
-  const { name, images } = playlist;
+  const { name, images, id } = playlist;
 
   const image = (images?.length && images?.at(1)) || images?.at(0) || images?.pop();
 
@@ -22,7 +23,9 @@ const Playlist: React.FC<{
     <li className={styles.playlist}>
       {image?.url && <Image alt="Album cover" src={image?.url} width={200} height={200} />}
       <div className={styles.left}>
-        <p className={styles.name}>{name}</p>
+        <Link href={`/playlists/${id}`} className={styles.name}>
+          {name}
+        </Link>
       </div>
     </li>
   );

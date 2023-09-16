@@ -2,6 +2,7 @@ import { TrackInterface } from '@/components/_cards/Track/Track';
 import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import Container from '@/components/Container/Container';
 import { getEndpointSavedTracks } from '@/lib/Spotify/user';
 
 export interface UserSavedTracksInterface {
@@ -25,12 +26,14 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   return (
     <div>
       <ListingBanner title="Saved Tracks" />
-      <TrackList tracks={savedTracks?.items.map((track) => track?.track)} />
-      <Pagination
-        currentPage={page}
-        totalPages={Math.floor(savedTracks?.total / savedTracks?.limit)}
-        navigate
-      />
+      <Container>
+        <TrackList tracks={savedTracks?.items.map((track) => track?.track)} />
+        <Pagination
+          currentPage={page}
+          totalPages={Math.floor(savedTracks?.total / savedTracks?.limit)}
+          navigate
+        />
+      </Container>
     </div>
   );
 };

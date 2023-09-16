@@ -3,6 +3,9 @@ import Link from 'next/link';
 
 import { TrackInterface } from '@/components/_cards/Track/Track';
 import ChartComponent from '@/components/Chart/Chart';
+import Container from '@/components/Container/Container';
+import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
 import { getMinuteFromSeconds } from '@/utils/date';
 
@@ -78,57 +81,63 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
   return (
     <div className={styles.track}>
-      <div className={styles.banner}>
-        {image && (
-          <Image
-            className={styles.image}
-            alt="Album cover"
-            src={image?.url}
-            width={image?.width}
-            height={image?.height}
-          />
-        )}
+      <PageBannerWrapper>
+        <div className={styles.banner}>
+          {image && (
+            <Image
+              className={styles.image}
+              alt="Album cover"
+              src={image?.url}
+              width={image?.width}
+              height={image?.height}
+            />
+          )}
 
-        <div>
-          <h1 className={styles.name}>{name}</h1>
-          <div className={styles.artists}>
-            <strong>Artists: </strong>
-            {artists.map((artist, index) => (
-              <>
-                <Link href={`/artist/${artist.id}`} key={artist.id}>
-                  {artist.name}
-                </Link>
-                {index < artists.length - 1 && <span>, </span>}
-              </>
+          <div>
+            <h1 className={styles.name}>{name}</h1>
+            <div className={styles.artists}>
+              <strong>Artists: </strong>
+              {artists.map((artist, index) => (
+                <>
+                  <Link href={`/artist/${artist.id}`} key={artist.id}>
+                    {artist.name}
+                  </Link>
+                  {index < artists.length - 1 && <span>, </span>}
+                </>
+              ))}
+            </div>
+            <div>
+              <p className={styles.albumName}>
+                <strong>Album: </strong>
+                {album.name}
+              </p>
+            </div>
+            <div className={styles.buttons}>
+              <LinkPrimary href={externalUrls.spotify} target="__blank">
+                Play on spotify
+              </LinkPrimary>
+              <LinkPrimary href={`/recommendations/tracks/${track.id}`}>
+                See Track Recommendations
+              </LinkPrimary>
+            </div>
+          </div>
+        </div>
+      </PageBannerWrapper>
+
+      <Container>
+        {audioAnalysis && (
+          <div className={styles.tableContainer}>
+            {tableData.map((row) => (
+              <div key={row.attribute} className={styles.tableBlock}>
+                <p className={styles.value}>{row.value}</p>
+                <p>{row.attribute}</p>
+              </div>
             ))}
           </div>
-          <div>
-            <p className={styles.albumName}>
-              <strong>Album: </strong>
-              {album.name}
-            </p>
-          </div>
-          <div className={styles.buttons}>
-            <Link href={externalUrls.spotify} target="__blank">
-              Play on spotify
-            </Link>
-            <Link href={`/recommendations/tracks/${track.id}`}>See Track Recommendations</Link>
-          </div>
-        </div>
-      </div>
+        )}
 
-      {audioAnalysis && (
-        <div className={styles.tableContainer}>
-          {tableData.map((row) => (
-            <div key={row.attribute} className={styles.tableBlock}>
-              <p className={styles.value}>{row.value}</p>
-              <p>{row.attribute}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <ChartComponent chart={data} />
+        <ChartComponent chart={data} />
+      </Container>
     </div>
   );
 };

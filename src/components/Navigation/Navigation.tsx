@@ -5,7 +5,6 @@ import Micro from '@/assets/icons/microphone';
 import Music from '@/assets/icons/music';
 import Library from '@/assets/icons/music-library';
 import Person from '@/assets/icons/person';
-import Time from '@/assets/icons/time';
 
 import NavItem from './NavItem/NavItem';
 
@@ -15,7 +14,6 @@ const navItems = [
   { href: '/', icon: <Person />, label: 'Profile' },
   { href: '/top-artists', icon: <Micro />, label: 'Top Artists' },
   { href: '/top-tracks', icon: <Library />, label: 'Top tracks' },
-  { href: '/recently-played', icon: <Time />, label: 'Recent' },
   { href: '/playlists', icon: <Music />, label: 'Playlists' },
   { href: '/saved-tracks', icon: <Heart />, label: 'Saved' },
 ];

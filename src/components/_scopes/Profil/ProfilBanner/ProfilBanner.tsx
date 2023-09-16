@@ -1,4 +1,5 @@
 import Person from '@/assets/icons/person';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 
 import LogoutButton from '../../../LogoutButton/LogoutButton';
 import ProfilStats, { StatInterface } from '../ProfilStats/ProfilStats';
@@ -16,12 +17,14 @@ interface ProfilBannerProperties {
 }
 
 const ProfilBanner = ({ userData, stats }: ProfilBannerProperties) => (
-  <div className={styles.banner}>
-    <Person />
-    <h1>{userData?.display_name}</h1>
-    <ProfilStats stats={stats} />
-    <LogoutButton />
-  </div>
+  <PageBannerWrapper>
+    <div className={styles.banner}>
+      <Person />
+      <h1>{userData?.display_name}</h1>
+      <ProfilStats stats={stats} />
+      <LogoutButton />
+    </div>
+  </PageBannerWrapper>
 );
 
 export default ProfilBanner;
