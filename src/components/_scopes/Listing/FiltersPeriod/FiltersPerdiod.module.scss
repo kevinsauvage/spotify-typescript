@@ -13,7 +13,8 @@
     }
 
     &.active {
-      border-bottom: 2px solid whitesmoke;
+      border-bottom: 2px solid var(--primary-100);
+      color: var(--primary-100);
       opacity: 1;
     }
   }
