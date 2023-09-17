@@ -52,25 +52,19 @@ const Pagination: React.FC<IProperties> = ({ currentPage, totalPages, navigate, 
 
   const renderPageRange = () => {
     const pageRange = [];
-    const maxVisiblePages = 5; // You can adjust this number as needed
 
     for (let page = 1; page <= totalPages; page++) {
       if (
         page === 1 || // Always show the first page
         page === totalPages || // Always show the last page
-        (page >= currentPage - Math.floor(maxVisiblePages / 2) && // Show pages around the current page
-          page <= currentPage + Math.floor(maxVisiblePages / 2))
+        (page >= currentPage - 2 && page <= currentPage + 2) // Show pages around the current page
       ) {
         pageRange.push(renderPageButton(page));
-      } else if (
-        page === currentPage - Math.floor(maxVisiblePages / 2) - 1 && // Show ellipsis before
-        currentPage > Math.floor(maxVisiblePages / 2) + 1
-      ) {
+      } else if (page === currentPage - 2 - 1 && currentPage > 2 + 1) {
+        // Show ellipsis before
         pageRange.push(renderEllipsis('left-ellipsis'));
-      } else if (
-        page === currentPage + Math.floor(maxVisiblePages / 2) + 1 && // Show ellipsis after
-        page < totalPages - Math.floor(maxVisiblePages / 2)
-      ) {
+      } else if (page === currentPage + 2 + 1 && page < totalPages - 2) {
+        // Show ellipsis after
         pageRange.push(renderEllipsis('right-ellipsis'));
       }
     }

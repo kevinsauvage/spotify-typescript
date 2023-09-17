@@ -19,7 +19,6 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
   const artistTopTracks = await getArtistTopTracks(params.artistId);
 
   const { name, popularity, images, id, href, followers, genres } = artist || {};
-
   const image = images?.at(0);
 
   return (
@@ -33,6 +32,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
               src={image?.url}
               width={image?.width}
               height={image?.height}
+              priority
             />
           )}
 

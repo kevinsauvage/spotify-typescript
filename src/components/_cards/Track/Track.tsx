@@ -14,6 +14,7 @@ export interface TrackInterface {
   artists: [ArtistInterface];
   external_urls: { spotify: string };
   album: { name: string; images: [{ height: number; url: string; width: number }] };
+  uri: string;
 }
 
 const Track: React.FC<{

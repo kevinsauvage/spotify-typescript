@@ -1,8 +1,9 @@
 import { TrackInterface } from '@/components/_cards/Track/Track';
-import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import Title from '@/components/Title/Title';
 import { getEndpointSavedTracks } from '@/lib/Spotify/user';
 
 export interface UserSavedTracksInterface {
@@ -25,7 +26,9 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
 
   return (
     <div>
-      <ListingBanner title="Saved Tracks" />
+      <PageBannerWrapper>
+        <Title>Saved Tracks</Title>
+      </PageBannerWrapper>
       <Container>
         <TrackList tracks={savedTracks?.items.map((track) => track?.track)} />
         <Pagination

@@ -1,9 +1,10 @@
 import { ArtistInterface } from '@/components/_cards/Artist/Artist';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
 import ListingArtists from '@/components/_scopes/Listing/ListingArtists/ListingArtists';
-import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import Title from '@/components/Title/Title';
 import { getEndpointTopArtists } from '@/lib/Spotify/user';
 
 export interface UserTopArtistInterface {
@@ -24,7 +25,9 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
 
   return (
     <div style={{ width: '100%' }}>
-      <ListingBanner title="Top Artists" />
+      <PageBannerWrapper>
+        <Title>Top Artists</Title>
+      </PageBannerWrapper>
       <Container>
         <FiltersPeriod path="/top-artists" period={period} />
         <ListingArtists artists={topArtists.items} />

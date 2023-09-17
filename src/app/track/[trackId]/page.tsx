@@ -90,6 +90,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
               src={image?.url}
               width={image?.width}
               height={image?.height}
+              priority
             />
           )}
 

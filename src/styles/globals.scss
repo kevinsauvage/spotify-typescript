@@ -20,6 +20,7 @@ body {
   background: var(--color-background-3);
 
   @include respond(tablet) {
+    grid-template-columns: 1fr;
     padding-bottom: 80px;
   }
 }

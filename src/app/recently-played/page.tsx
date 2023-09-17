@@ -1,6 +1,7 @@
 import { TrackInterface } from '@/components/_cards/Track/Track';
-import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import Title from '@/components/Title/Title';
 import { getEndpointRecentTracks } from '@/lib/Spotify/user';
 
 export interface RecentlyPlayedInterface {
@@ -12,7 +13,9 @@ const page: React.FC = async () => {
 
   return (
     <div>
-      <ListingBanner title="Recently Played Tracks" />
+      <PageBannerWrapper>
+        <Title>Recently Played Tracks</Title>
+      </PageBannerWrapper>
       <TrackList tracks={recentlyPlayed?.items?.map((track) => track?.track)} />
     </div>
   );

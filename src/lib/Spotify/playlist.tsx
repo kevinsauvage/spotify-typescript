@@ -1,16 +1,51 @@
-import { enpointBaseUrl, fetchHelper } from '.';
+import { TrackInterface } from '@/components/_cards/Track/Track';
 
-const endpointPlaylists = `${enpointBaseUrl}/playlists`;
+import { getEndpointMe } from './user';
+
+import { enpointBaseUrl, fetchHelper } from '.';
 
 const defaultLimit = 20;
 
 export const getEnpointPlaylist = async (playlistId: string) => {
-  const url = `${endpointPlaylists}/${playlistId}`;
+  const url = `${enpointBaseUrl}/playlists/${playlistId}`;
   return fetchHelper(url);
 };
 
 export const getPlaylistTracks = async (playlistId: string, page: number) => {
   const offset = (page - 1) * defaultLimit;
-  const url = `${endpointPlaylists}/${playlistId}/tracks?limit=${defaultLimit}&offset=${offset}`;
+  const url = `${enpointBaseUrl}/playlists/${playlistId}/tracks?limit=${defaultLimit}&offset=${offset}`;
   return fetchHelper(url);
+};
+
+export const createPlaylist = async (
+  name: string,
+  description: string,
+  isPublic: boolean,
+  userId: string,
+) => {
+  'use server';
+
+  const url = `${enpointBaseUrl}/users/${userId}/playlists`;
+  const body = JSON.stringify({
+    description,
+    name,
+    public: isPublic,
+  });
+  return fetchHelper(url, {
+    body,
+    method: 'POST',
+  });
+};
+
+export const addItemsToPlaylist = async (playlistId: string, tracks: TrackInterface[]) => {
+  'use server';
+
+  const url = `${enpointBaseUrl}/playlists/${playlistId}/tracks`;
+  const body = JSON.stringify({
+    uris: tracks.map((track) => track.uri),
+  });
+  return fetchHelper(url, {
+    body,
+    method: 'POST',
+  });
 };

@@ -1,4 +1,3 @@
-import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import RecommendationsPresenter from '@/components/_scopes/Recommendations/RecommendationsPresenter/RecommendationsPresenter';
 import { getTrack } from '@/lib/Spotify/track';
 
@@ -20,8 +19,12 @@ const page: React.FC<PageInterface> = async ({ searchParams, params }) => {
 
   return (
     <div>
-      <ListingBanner title={title} />
-      <RecommendationsPresenter searchParams={searchParams} trackId={trackId} />
+      <RecommendationsPresenter
+        searchParams={searchParams}
+        trackId={trackId}
+        title={title}
+        playlistName={`Recommendations for ${name} by ${artists?.[0]?.name}`}
+      />
     </div>
   );
 };

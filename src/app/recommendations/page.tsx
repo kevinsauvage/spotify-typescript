@@ -1,4 +1,3 @@
-import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import RecommendationsPresenter from '@/components/_scopes/Recommendations/RecommendationsPresenter/RecommendationsPresenter';
 
 interface PageInterface {
@@ -9,8 +8,11 @@ interface PageInterface {
 const page: React.FC<PageInterface> = async ({ searchParams }) => {
   return (
     <div>
-      <ListingBanner title="Recommendations playgourd" />
-      <RecommendationsPresenter searchParams={searchParams} />
+      <RecommendationsPresenter
+        searchParams={searchParams}
+        title="Recommendations playgourd"
+        playlistName=""
+      />
     </div>
   );
 };

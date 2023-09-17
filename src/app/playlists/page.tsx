@@ -1,7 +1,8 @@
 import Playlist, { PlaylistInterface } from '@/components/_cards/Playlist/Playlist';
-import ListingBanner from '@/components/_scopes/Listing/ListingBanner/ListingBanner';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import Title from '@/components/Title/Title';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
 
 import styles from './page.module.scss';
@@ -24,7 +25,9 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
 
   return (
     <div>
-      <ListingBanner title="Followed Playlists" />
+      <PageBannerWrapper>
+        <Title>Followed Playlists</Title>
+      </PageBannerWrapper>
       <Container>
         <ul className={styles.list}>
           {Array.isArray(followedPlaylists?.items) &&

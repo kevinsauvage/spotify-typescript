@@ -1,4 +1,4 @@
-import { getSpotifyToken } from '@/utils/cookies';
+import { getSpotifyToken } from '@/serverActions/auth';
 
 export const enpointBaseUrl = 'https://api.spotify.com/v1';
 
@@ -20,9 +20,14 @@ export const fetchHelper = async (endpoint: string, options: object = {}, token:
       return response?.json();
     }
 
-    // TODO: handle error response
+    try {
+      const error = await response?.json();
+      console.error(error);
+    } catch (error) {
+      console.error(error);
+      return response;
+    }
 
-    console.error(response);
     return response;
   } catch (error) {
     return error;

@@ -51,7 +51,6 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
   const page = Number(searchParams.page || 1);
 
   const playlistResponse: PlaylistResponseInterface = await getEnpointPlaylist(params.playlistId);
-
   const playlistTracks: PlaylistTracksInterface = await getPlaylistTracks(params.playlistId, page);
 
   const {
@@ -70,7 +69,9 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
     <div className={styles.page}>
       <PageBannerWrapper>
         <div className={styles.banner}>
-          {image?.url && <Image alt="Album cover" src={image.url} width={300} height={300} />}
+          {image?.url && (
+            <Image alt="Album cover" src={image.url} width={300} height={300} priority />
+          )}
           <div className={styles.details}>
             <h1 className={styles.name}>{playlistResponse.name}</h1>
             <p className={styles.description}>{description}</p>
