@@ -22,7 +22,7 @@ interface PageInterface {
 
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const period = searchParams?.period || undefined;
-  const page = Number(searchParams.page || 1);
+  const page = Number(searchParams.page ?? 1);
 
   const topTracks: UserTopTrackInterface = await getEndpointTopTracks(page, period);
 

@@ -1,5 +1,11 @@
+@import '../../../../styles/responsive';
+
 .tops {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(410px, 1fr));
+  gap: 3rem;
+
+  @include respond('tablet') {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }
