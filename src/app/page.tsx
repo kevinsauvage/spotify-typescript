@@ -11,8 +11,8 @@ import {
 const page: React.FC = async () => {
   const [userData, userTopArtists, userTopTracks, stats] = await Promise.all([
     getEndpointMe(),
-    getEndpointTopArtists(),
-    getEndpointTopTracks(),
+    getEndpointTopArtists(undefined, undefined, 5),
+    getEndpointTopTracks(undefined, undefined, 5),
     getStats(),
   ]);
 

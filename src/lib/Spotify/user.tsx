@@ -19,15 +19,19 @@ export const getEndpointMePlaylists = async (page = 1) => {
   return fetchHelper(url);
 };
 
-export const getEndpointTopArtists = async (page = 1, period = 'long_term') => {
-  const offset = (page - 1) * defaultLimit;
-  const url = `${endpointTopArtists}?time_range=${period}&limit=${defaultLimit}&offset=${offset}`;
+export const getEndpointTopArtists = async (page = 1, period = 'long_term', limit: number = 0) => {
+  const offset = (page - 1) * (limit || defaultLimit);
+  const url = `${endpointTopArtists}?time_range=${period}&limit=${
+    limit || defaultLimit
+  }&offset=${offset}`;
   return fetchHelper(url);
 };
 
-export const getEndpointTopTracks = async (page = 1, period = 'long_term') => {
-  const offset = (page - 1) * defaultLimit;
-  const url = `${endpointTopTracks}?time_range=${period}&limit=${defaultLimit}&offset=${offset}`;
+export const getEndpointTopTracks = async (page = 1, period = 'long_term', limit: number = 0) => {
+  const offset = (page - 1) * (limit || defaultLimit);
+  const url = `${endpointTopTracks}?time_range=${period}&limit=${
+    limit || defaultLimit
+  }&offset=${offset}`;
   return fetchHelper(url);
 };
 
