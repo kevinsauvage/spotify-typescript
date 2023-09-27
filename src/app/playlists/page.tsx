@@ -26,7 +26,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   return (
     <div>
       <PageBannerWrapper>
-        <Title>Followed Playlists</Title>
+        <Title>Playlists</Title>
       </PageBannerWrapper>
       <Container>
         <ul className={styles.list}>
