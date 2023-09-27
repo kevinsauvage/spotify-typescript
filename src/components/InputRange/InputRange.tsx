@@ -39,6 +39,9 @@ const InputRange: React.FC<SliderProperties> = ({
 
   return (
     <div className={styles.container}>
+      <p className={styles.label}>
+        {label}: {label === 'Duration (min)' ? getMinuteFromMilliseconds(value || 0) || 0 : value}
+      </p>
       <input
         id={name}
         type="range"
@@ -48,9 +51,6 @@ const InputRange: React.FC<SliderProperties> = ({
         step={step}
         onChange={handleSliderChange}
       />
-      <p className={styles.label}>
-        {label}: {label === 'Duration (min)' ? getMinuteFromMilliseconds(value || 0) || 0 : value}
-      </p>
     </div>
   );
 };
