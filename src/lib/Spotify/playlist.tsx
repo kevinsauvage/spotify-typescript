@@ -1,7 +1,3 @@
-import { TrackInterface } from '@/components/_cards/Track/Track';
-
-import { getEndpointMe } from './user';
-
 import { enpointBaseUrl, fetchHelper } from '.';
 
 const defaultLimit = 20;
@@ -37,13 +33,11 @@ export const createPlaylist = async (
   });
 };
 
-export const addItemsToPlaylist = async (playlistId: string, tracks: TrackInterface[]) => {
+export const addItemsToPlaylist = async (playlistId: string, uris: string[]) => {
   'use server';
 
   const url = `${enpointBaseUrl}/playlists/${playlistId}/tracks`;
-  const body = JSON.stringify({
-    uris: tracks.map((track) => track.uri),
-  });
+  const body = JSON.stringify({ uris });
   return fetchHelper(url, {
     body,
     method: 'POST',

@@ -1,6 +1,5 @@
 import { enpointBaseUrl, fetchHelper } from '.';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getRecommendations = async ({
   seedTracks = '',
   seedArtists = '',
