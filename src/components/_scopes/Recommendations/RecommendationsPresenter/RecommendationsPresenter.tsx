@@ -1,4 +1,4 @@
-import { TrackInterface } from '@/components/_cards/Track/Track';
+import Track, { TrackInterface } from '@/components/_cards/Track/Track';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Container from '@/components/Container/Container';
 import CreatePlaylist from '@/components/CreatePlaylist/CreatePlaylist';
@@ -67,7 +67,9 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
           initialParams={rest}
           seedGenres={seedGenres ? seedGenres?.split(',') : []}
         />
-        <TrackList tracks={recommencedTracks?.tracks} />
+        <TrackList>
+          {recommencedTracks?.tracks?.map((track) => <Track key={track.id} track={track} />)}
+        </TrackList>
       </Container>
     </>
   );

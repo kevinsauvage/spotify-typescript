@@ -1,4 +1,4 @@
-import { TrackInterface } from '@/components/_cards/Track/Track';
+import Track, { TrackInterface } from '@/components/_cards/Track/Track';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
@@ -30,7 +30,9 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
         <Title>Saved Tracks</Title>
       </PageBannerWrapper>
       <Container>
-        <TrackList tracks={savedTracks?.items.map((track) => track?.track)} />
+        <TrackList>
+          {savedTracks?.items?.map((track) => <Track key={track.track.id} track={track.track} />)}
+        </TrackList>
         <Pagination
           currentPage={page}
           totalPages={Math.floor(savedTracks?.total / savedTracks?.limit)}

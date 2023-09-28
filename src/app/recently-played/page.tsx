@@ -1,4 +1,4 @@
-import { TrackInterface } from '@/components/_cards/Track/Track';
+import Track, { TrackInterface } from '@/components/_cards/Track/Track';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Container from '@/components/Container/Container';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
@@ -15,7 +15,7 @@ export interface RecentlyPlayedInterface {
 }
 
 const page: React.FC = async () => {
-  const recentlyPlayed: RecentlyPlayedInterface = await getEndpointRecentTracks(50);
+  const recentlyPlayedTracks: RecentlyPlayedInterface = await getEndpointRecentTracks(50);
 
   return (
     <div>
@@ -23,7 +23,11 @@ const page: React.FC = async () => {
         <Title>Recently Played Tracks</Title>
       </PageBannerWrapper>
       <Container>
-        <TrackList tracks={recentlyPlayed?.items?.map((track) => track?.track)} />
+        <TrackList>
+          {recentlyPlayedTracks?.items?.map((track) => (
+            <Track key={track.track.id} track={track.track} />
+          ))}
+        </TrackList>{' '}
       </Container>
     </div>
   );

@@ -1,4 +1,4 @@
-import { TrackInterface } from '@/components/_cards/Track/Track';
+import Track, { TrackInterface } from '@/components/_cards/Track/Track';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
@@ -33,7 +33,9 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
       </PageBannerWrapper>
       <Container>
         <FiltersPeriod path="/top-tracks" period={period} />
-        <TrackList tracks={topTracks?.items} />
+        <TrackList>
+          {topTracks?.items?.map((track) => <Track key={track.id} track={track} />)}
+        </TrackList>
         <Pagination
           currentPage={page}
           totalPages={Math.floor(topTracks?.total / topTracks?.limit)}

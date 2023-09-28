@@ -34,9 +34,15 @@
     }
   }
 
-  .duration {
-    margin-left: auto;
-    font-size: 0.85rem;
-    opacity: 0.6;
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .duration {
+      margin-left: auto;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
   }
 }

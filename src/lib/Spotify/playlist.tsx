@@ -1,3 +1,5 @@
+import { revalidatePath } from 'next/cache';
+
 import { enpointBaseUrl, fetchHelper } from '.';
 
 const defaultLimit = 20;
@@ -42,4 +44,22 @@ export const addItemsToPlaylist = async (playlistId: string, uris: string[]) => 
     body,
     method: 'POST',
   });
+};
+
+export const removeFromPlaylist = async (
+  playlistId: string,
+  uris: string[],
+  revalidatePathUrl?: string,
+) => {
+  'use server';
+
+  const url = `${enpointBaseUrl}/playlists/${playlistId}/tracks`;
+  const body = JSON.stringify({ uris });
+  const response = await fetchHelper(url, {
+    body,
+    method: 'DELETE',
+  });
+  if (revalidatePathUrl) revalidatePath(revalidatePathUrl);
+
+  return response;
 };

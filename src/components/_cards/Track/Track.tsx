@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ArtistInterface } from '@/components/_cards/Artist/Artist';
+import TrackConfig from '@/components/TrackConfig/TrackConfig';
+import { removeFromPlaylist } from '@/lib/Spotify/playlist';
 import { getMinuteFromMilliseconds } from '@/utils/date';
 
 import styles from './Track.module.scss';
@@ -19,8 +21,9 @@ export interface TrackInterface {
 
 const Track: React.FC<{
   track: TrackInterface;
-}> = ({ track }) => {
-  const { name, artists, album, duration_ms: durationMs, id } = track || {};
+  playlistId?: string;
+}> = ({ track, playlistId }) => {
+  const { name, artists, album, duration_ms: durationMs, id, uri } = track || {};
   const { images } = album || {};
   const image = images?.pop();
 
@@ -41,7 +44,12 @@ const Track: React.FC<{
           <p className={styles.album}>{album?.name}</p>
         </div>
       </div>
-      <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
+      <div className={styles.right}>
+        <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
+        {playlistId && (
+          <TrackConfig playlistId={playlistId} uri={uri} removeFromPlaylist={removeFromPlaylist} />
+        )}
+      </div>
     </li>
   );
 };

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import Track, { TrackInterface } from '@/components/_cards/Track/Track';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
@@ -64,7 +65,11 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
       </PageBannerWrapper>
 
       <Container>
-        <TrackList tracks={playlistTracks?.items.map((track) => track.track)} />
+        <TrackList>
+          {playlistTracks?.items?.map((track) => (
+            <Track key={track.track.id} track={track.track} playlistId={id} />
+          ))}
+        </TrackList>
         <Pagination
           currentPage={page}
           totalPages={Math.floor(playlistTracks?.total / playlistTracks?.limit)}

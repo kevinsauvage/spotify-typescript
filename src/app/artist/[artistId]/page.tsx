@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { ArtistInterface } from '@/components/_cards/Artist/Artist';
+import Track, { TrackInterface } from '@/components/_cards/Track/Track';
 import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
@@ -16,7 +17,7 @@ interface PageInterface {
 
 const Page: React.FC<PageInterface> = async ({ params }) => {
   const artist: ArtistInterface = await getArtist(params.artistId);
-  const artistTopTracks = await getArtistTopTracks(params.artistId);
+  const artistTopTracks: { tracks: TrackInterface[] } = await getArtistTopTracks(params.artistId);
 
   const { name, popularity, images, id, href, followers, genres } = artist || {};
   const image = images?.at(0);
@@ -59,7 +60,9 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
       <Container>
         <div className={styles.topTracks}>
           <h2>Top Tracks</h2>
-          <TrackList tracks={artistTopTracks?.tracks} />
+          <TrackList>
+            {artistTopTracks?.tracks?.map((track) => <Track key={track.id} track={track} />)}
+          </TrackList>
         </div>
       </Container>
     </div>
