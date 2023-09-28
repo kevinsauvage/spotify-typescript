@@ -4,7 +4,7 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
-  images: { domains: ['i.scdn.co', 'mosaic.scdn.co', 'p.scdn.co'] },
+  images: { domains: ['i.scdn.co', 'mosaic.scdn.co', 'p.scdn.co'], unoptimized: true },
 };
 
 module.exports = nextConfig;
