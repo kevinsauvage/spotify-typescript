@@ -45,33 +45,42 @@ const page: React.FC = async () => {
     <div>
       <ProfilBanner userData={userData} stats={stats} />
       <Container>
-        <Section title="Top Tracks" href="/top-tracks">
-          <List>
-            {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
-          </List>
-        </Section>
+        {Array?.isArray(userTopTracks?.items) && (
+          <Section title="Top Tracks" href="/top-tracks">
+            <List>
+              {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
+            </List>
+          </Section>
+        )}
+        {Array?.isArray(userTopArtists?.items) && (
+          <Section title="Top Artists" href="/top-artists">
+            <Grid>
+              {userTopArtists?.items.map((artist) => (
+                <ArtistCard key={artist.id} artist={artist} />
+              ))}
+            </Grid>
+          </Section>
+        )}
 
-        <Section title="Top Artists" href="/top-artists">
-          <Grid>
-            {userTopArtists?.items.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
-          </Grid>
-        </Section>
+        {Array?.isArray(recentlyPlayedTracks?.items) && (
+          <Section title="Recently Played" href="/recently-played">
+            <List>
+              {recentlyPlayedTracks?.items?.map((track) => (
+                <TrackRow key={track.track.id} track={track.track} />
+              ))}
+            </List>
+          </Section>
+        )}
 
-        <Section title="Recently Played" href="/recently-played">
-          <List>
-            {recentlyPlayedTracks?.items?.map((track) => (
-              <TrackRow key={track.track.id} track={track.track} />
-            ))}
-          </List>
-        </Section>
-
-        <Section title="Playlists" href="/playlists">
-          <Grid>
-            {followedPlaylists?.items?.map((playlist) => (
-              <PlaylistCard key={playlist.id} playlist={playlist} />
-            ))}
-          </Grid>
-        </Section>
+        {Array?.isArray(followedPlaylists?.items) && (
+          <Section title="Playlists" href="/playlists">
+            <Grid>
+              {followedPlaylists?.items?.map((playlist) => (
+                <PlaylistCard key={playlist.id} playlist={playlist} />
+              ))}
+            </Grid>
+          </Section>
+        )}
       </Container>
     </div>
   );

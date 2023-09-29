@@ -22,18 +22,20 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ params }) => {
   const { artistId } = params || {};
 
-  const [artist, artistTopTracks, relatedArtists, recommencedTracks]: [
+  const [artist, artistTopTracks, relatedArtists]: [
     ArtistInterface,
     { tracks: TrackInterface[] },
     { artists: ArtistInterface[] },
-    { tracks: TrackInterface[] },
   ] = await Promise.all([
     getArtist(artistId),
     getArtistTopTracks(artistId),
     getArtistRelatedArtists(artistId),
-    getRecommendations({ limit: 10, seedArtists: artistId }),
   ]);
 
+  const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
+    limit: 5,
+    seedArtists: artistId,
+  });
   const { name, popularity, images, id, href, followers, genres } = artist || {};
   const image = images?.at(0);
 
