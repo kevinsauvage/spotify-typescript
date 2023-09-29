@@ -19,9 +19,12 @@
     overflow: hidden;
 
     .name {
+      position: relative;
+      z-index: 3;
       display: block;
       margin-bottom: 0.4rem;
       overflow: hidden;
+      color: var(--color-text-1);
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -34,6 +37,8 @@
       opacity: 0.5;
 
       .artist {
+        position: relative;
+        z-index: 3;
         white-space: nowrap;
       }
 
@@ -42,13 +47,6 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
-    }
-  }
-
-  &:hover {
-    .content {
-      position: relative;
-      z-index: 3;
     }
   }
 

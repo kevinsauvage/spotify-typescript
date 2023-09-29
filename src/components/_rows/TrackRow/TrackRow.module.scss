@@ -9,6 +9,8 @@
   @include overlayWithHover;
 
   .left {
+    position: relative;
+    z-index: 3;
     overflow: hidden;
 
     .name {
@@ -16,6 +18,7 @@
       width: fit-content;
       margin-bottom: 0.4rem;
       overflow: hidden;
+      color: var(--color-text-1);
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -40,6 +43,8 @@
   }
 
   .right {
+    position: relative;
+    z-index: 3;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -48,18 +53,6 @@
       margin-left: auto;
       font-size: 0.85rem;
       opacity: 0.6;
-    }
-  }
-
-  &:hover {
-    .left {
-      color: var(--color-text-1);
-    }
-
-    .left,
-    .right {
-      position: relative;
-      z-index: 3;
     }
   }
 }

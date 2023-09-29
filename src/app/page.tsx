@@ -1,6 +1,5 @@
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import PlaylistCard from '@/components/_cards/PlaylistCard/PlaylistCard';
-import TrackCard from '@/components/_cards/TrackCard/TrackCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import ProfilBanner from '@/components/_scopes/Profil/ProfilBanner/ProfilBanner';
 import CardsPresenter from '@/components/CardsPresenter/CardsPresenter';
@@ -53,11 +52,11 @@ const page: React.FC = async () => {
           {userTopArtists?.items.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
         </CardsPresenter>
 
-        <CardsPresenter title="Recently Played" href="/recently-played">
+        <RowsPresenter title="Recently Played" href="/recently-played">
           {recentlyPlayedTracks?.items?.map((track) => (
-            <TrackCard key={track.track.id} track={track.track} />
+            <TrackRow key={track.track.id} track={track.track} />
           ))}
-        </CardsPresenter>
+        </RowsPresenter>
 
         <CardsPresenter title="Playlists" href="/playlists">
           {followedPlaylists?.items?.map((playlist) => (
