@@ -13,9 +13,9 @@ const defaultLimit = 20;
 
 export const getEndpointMe = async () => fetchHelper(enpointUserBaseUrl);
 
-export const getEndpointMePlaylists = async (page = 1) => {
-  const offset = (page - 1) * defaultLimit;
-  const url = `${endpointPlaylists}?limit=${defaultLimit}&offset=${offset}`;
+export const getEndpointMePlaylists = async (page = 1, limit: number = 0) => {
+  const offset = (page - 1) * (limit || defaultLimit);
+  const url = `${endpointPlaylists}?limit=${limit || defaultLimit}&offset=${offset}`;
   return fetchHelper(url);
 };
 

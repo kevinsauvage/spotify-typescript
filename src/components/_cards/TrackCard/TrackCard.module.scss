@@ -1,0 +1,60 @@
+@import '../../../styles/mixins';
+
+.track {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-background-2);
+
+  @include overlayWithHover;
+
+  img {
+    width: 100%;
+    height: fit-content;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
+  .content {
+    padding: 0.5rem 0;
+    overflow: hidden;
+
+    .name {
+      display: block;
+      margin-bottom: 0.4rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 0.5;
+
+      .artist {
+        white-space: nowrap;
+      }
+
+      .album {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  &:hover {
+    .content {
+      position: relative;
+      z-index: 3;
+    }
+  }
+
+  .duration {
+    margin-left: auto;
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+}

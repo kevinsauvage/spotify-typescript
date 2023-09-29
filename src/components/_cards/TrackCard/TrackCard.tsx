@@ -1,38 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ArtistInterface } from '@/components/_cards/Artist/Artist';
 import TrackConfig from '@/components/TrackConfig/TrackConfig';
 import { removeFromPlaylist } from '@/lib/Spotify/playlist';
+import { TrackInterface } from '@/types';
 import { getMinuteFromMilliseconds } from '@/utils/date';
 
-import styles from './Track.module.scss';
+import styles from './TrackCard.module.scss';
 
-export interface TrackInterface {
-  id: string;
-  name: string;
-  duration_ms: number;
-  popularity: number;
-  artists: [ArtistInterface];
-  external_urls: { spotify: string };
-  album: { name: string; images: [{ height: number; url: string; width: number }] };
-  uri: string;
-}
-
-const Track: React.FC<{
+const TrackCard: React.FC<{
   track: TrackInterface;
   playlistId?: string;
 }> = ({ track, playlistId }) => {
   const { name, artists, album, duration_ms: durationMs, id, uri } = track || {};
   const { images } = album || {};
-  const image = images?.pop();
+  const image = images?.at(1) ?? images?.at(0);
 
   return (
-    <li className={styles.track}>
+    <div className={styles.track}>
       {image && (
         <Image alt="Album cover" src={image?.url} width={image?.width} height={image?.height} />
       )}
-      <div className={styles.left}>
+      <div className={styles.content}>
         <Link className={styles.name} href={`/track/${id}`}>
           {name}
         </Link>
@@ -44,14 +33,12 @@ const Track: React.FC<{
           <p className={styles.album}>{album?.name}</p>
         </div>
       </div>
-      <div className={styles.right}>
-        <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
-        {playlistId && (
-          <TrackConfig playlistId={playlistId} uri={uri} removeFromPlaylist={removeFromPlaylist} />
-        )}
-      </div>
-    </li>
+      <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
+      {playlistId && (
+        <TrackConfig playlistId={playlistId} uri={uri} removeFromPlaylist={removeFromPlaylist} />
+      )}
+    </div>
   );
 };
 
-export default Track;
+export default TrackCard;

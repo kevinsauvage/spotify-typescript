@@ -1,0 +1,15 @@
+.RowsPresenter {
+  margin-bottom: 4rem;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+}

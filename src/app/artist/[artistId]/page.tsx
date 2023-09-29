@@ -1,12 +1,15 @@
 import Image from 'next/image';
 
-import { ArtistInterface } from '@/components/_cards/Artist/Artist';
-import Track, { TrackInterface } from '@/components/_cards/Track/Track';
-import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
+import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
+import TrackRow from '@/components/_rows/TrackRow/TrackRow';
+import CardsPresenter from '@/components/CardsPresenter/CardsPresenter';
 import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
-import { getArtist, getArtistTopTracks } from '@/lib/Spotify/artist';
+import RowsPresenter from '@/components/RowsPresenter/RowsPresenter';
+import { getArtist, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
+import { getRecommendations } from '@/lib/Spotify/recommendations';
+import { ArtistInterface, TrackInterface } from '@/types';
 
 import styles from './page.module.scss';
 
@@ -16,8 +19,19 @@ interface PageInterface {
 }
 
 const Page: React.FC<PageInterface> = async ({ params }) => {
-  const artist: ArtistInterface = await getArtist(params.artistId);
-  const artistTopTracks: { tracks: TrackInterface[] } = await getArtistTopTracks(params.artistId);
+  const { artistId } = params || {};
+
+  const [artist, artistTopTracks, relatedArtists, recommencedTracks]: [
+    ArtistInterface,
+    { tracks: TrackInterface[] },
+    { artists: ArtistInterface[] },
+    { tracks: TrackInterface[] },
+  ] = await Promise.all([
+    getArtist(artistId),
+    getArtistTopTracks(artistId),
+    getArtistRelatedArtists(artistId),
+    getRecommendations({ limit: 10, seedArtists: artistId }),
+  ]);
 
   const { name, popularity, images, id, href, followers, genres } = artist || {};
   const image = images?.at(0);
@@ -59,10 +73,19 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
       <Container>
         <div className={styles.topTracks}>
-          <h2>Top Tracks</h2>
-          <TrackList>
-            {artistTopTracks?.tracks?.map((track) => <Track key={track.id} track={track} />)}
-          </TrackList>
+          <RowsPresenter title={'Top Tracks'}>
+            {artistTopTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
+          </RowsPresenter>
+
+          <CardsPresenter title="Related Artists">
+            {relatedArtists?.artists
+              ?.slice(0, 10)
+              .map((relatedArtist) => <ArtistCard key={relatedArtist.id} artist={relatedArtist} />)}
+          </CardsPresenter>
+
+          <RowsPresenter title="Recommended Tracks">
+            {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
+          </RowsPresenter>
         </div>
       </Container>
     </div>

@@ -19,6 +19,10 @@ body {
   color: var(--color-text-2);
   background: var(--color-background-3);
 
+  div {
+    min-width: 0; // Avoid overflow in grid
+  }
+
   @include respond(tablet) {
     grid-template-columns: 1fr;
     padding-bottom: 80px;

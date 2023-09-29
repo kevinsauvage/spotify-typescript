@@ -1,18 +1,12 @@
-import Playlist, { PlaylistInterface } from '@/components/_cards/Playlist/Playlist';
+import Playlist from '@/components/_cards/PlaylistCard/PlaylistCard';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
+import Grid from '@/components/Grid/Grid';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
+import { UserPlaylistInterface } from '@/types';
 
-import styles from './page.module.scss';
-
-export interface UserPlaylistInterface {
-  items: [PlaylistInterface];
-  limit: number;
-  offset: number;
-  total: number;
-}
 interface PageInterface {
   params: object;
   searchParams: { page: string };
@@ -29,13 +23,12 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
         <Title>Playlists</Title>
       </PageBannerWrapper>
       <Container>
-        <ul className={styles.list}>
+        <Grid>
           {Array.isArray(followedPlaylists?.items) &&
             followedPlaylists?.items?.map((playlist) => (
               <Playlist key={playlist.id} playlist={playlist} />
             ))}
-        </ul>
-
+        </Grid>
         <Pagination
           currentPage={page}
           totalPages={Math.floor(followedPlaylists?.total / followedPlaylists?.limit)}

@@ -1,18 +1,10 @@
-import Track, { TrackInterface } from '@/components/_cards/Track/Track';
-import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
+import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Container from '@/components/Container/Container';
+import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
 import { getEndpointRecentTracks } from '@/lib/Spotify/user';
-
-export interface RecentlyPlayedInterface {
-  items: [{ track: TrackInterface }];
-  total: number;
-  limit: number;
-  offset: number;
-  next: string;
-  previous: string;
-}
+import { RecentlyPlayedInterface } from '@/types';
 
 const page: React.FC = async () => {
   const recentlyPlayedTracks: RecentlyPlayedInterface = await getEndpointRecentTracks(50);
@@ -23,11 +15,11 @@ const page: React.FC = async () => {
         <Title>Recently Played Tracks</Title>
       </PageBannerWrapper>
       <Container>
-        <TrackList>
+        <List>
           {recentlyPlayedTracks?.items?.map((track) => (
-            <Track key={track.track.id} track={track.track} />
+            <TrackRow key={track.track.id} track={track.track} />
           ))}
-        </TrackList>{' '}
+        </List>
       </Container>
     </div>
   );

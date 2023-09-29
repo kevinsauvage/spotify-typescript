@@ -7,10 +7,10 @@ export const getRecommendations = async ({
   otherParams: otherParameters = '',
   limit = 100,
 }: {
-  seedTracks: string;
-  seedArtists: string;
-  seedGenres: string;
-  otherParams: string;
+  seedTracks?: string;
+  seedArtists?: string;
+  seedGenres?: string;
+  otherParams?: string;
   limit?: number;
 }) => {
   if (!seedTracks && !seedArtists && !seedGenres && !otherParameters) {

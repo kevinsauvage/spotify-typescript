@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-// eslint-disable-next-line css-modules/no-unused-class
 import styles from './Artist.module.scss';
 
 export interface ArtistInterface {
@@ -19,13 +18,12 @@ export interface ArtistInterface {
 
 const Artist: React.FC<{
   artist: ArtistInterface;
-  variant: string;
-}> = ({ artist, variant = 'row' }) => {
+}> = ({ artist }) => {
   const { name, images, id } = artist;
-  const image = images.at(variant === 'row' ? -1 : 1);
+  const image = images.at(-1) ?? images.at(1) ?? images.at(0);
 
   return (
-    <li className={`${styles.artist} ${styles[variant]}`}>
+    <li className={styles.artist}>
       <Link href={`/artist/${id}`}>
         <div className={styles.left}>
           {image && (

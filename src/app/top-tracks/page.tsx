@@ -1,20 +1,13 @@
-import Track, { TrackInterface } from '@/components/_cards/Track/Track';
+import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
-import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
+import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
 import { getEndpointTopTracks } from '@/lib/Spotify/user';
+import { UserTopTrackInterface } from '@/types';
 
-export interface UserTopTrackInterface {
-  items: TrackInterface[];
-  total: number;
-  limit: number;
-  offset: number;
-  next: string;
-  previous: string;
-}
 interface PageInterface {
   params: object;
   searchParams: { period: string; page?: string };
@@ -33,9 +26,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
       </PageBannerWrapper>
       <Container>
         <FiltersPeriod path="/top-tracks" period={period} />
-        <TrackList>
-          {topTracks?.items?.map((track) => <Track key={track.id} track={track} />)}
-        </TrackList>
+        <List>{topTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}</List>
         <Pagination
           currentPage={page}
           totalPages={Math.floor(topTracks?.total / topTracks?.limit)}

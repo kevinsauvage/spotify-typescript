@@ -14,6 +14,7 @@ export const fetchHelper = async (endpoint: string, options: object = {}, token:
       headers: { Authorization: `Bearer ${accessToken}` },
       method: 'GET',
       ...options,
+      next: { revalidate: 3600 },
     });
 
     if (response?.status >= 200 && response?.status < 300) {

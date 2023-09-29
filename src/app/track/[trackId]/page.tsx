@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { TrackInterface } from '@/components/_cards/Track/Track';
 import ChartComponent from '@/components/Chart/Chart';
 import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
+import { TrackInterface } from '@/types';
 import { getMinuteFromSeconds } from '@/utils/date';
 
 import styles from './page.module.scss';

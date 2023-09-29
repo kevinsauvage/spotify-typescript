@@ -1,14 +1,19 @@
+@import '../../../styles/mixins';
+
 .track {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
 
+  @include overlayWithHover;
+
   .left {
     overflow: hidden;
 
     .name {
       display: block;
+      width: fit-content;
       margin-bottom: 0.4rem;
       overflow: hidden;
       white-space: nowrap;
@@ -43,6 +48,18 @@
       margin-left: auto;
       font-size: 0.85rem;
       opacity: 0.6;
+    }
+  }
+
+  &:hover {
+    .left {
+      color: var(--color-text-1);
+    }
+
+    .left,
+    .right {
+      position: relative;
+      z-index: 3;
     }
   }
 }

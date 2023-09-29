@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
-import { TrackInterface } from '../_cards/Track/Track';
+import { TrackInterface } from '@/types';
+
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import ScreenLoader from '../ScreenLoader/ScreenLoader';
 

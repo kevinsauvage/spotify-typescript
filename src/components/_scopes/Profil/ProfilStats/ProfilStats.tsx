@@ -1,9 +1,6 @@
-import styles from './ProfilStats.module.scss';
+import { StatInterface } from '@/types';
 
-export interface StatInterface {
-  title: string;
-  value: number;
-}
+import styles from './ProfilStats.module.scss';
 
 interface ProfilStatsProperties {
   stats: StatInterface[];

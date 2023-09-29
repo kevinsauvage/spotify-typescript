@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
-import Track, { TrackInterface } from '@/components/_cards/Track/Track';
-import TrackList from '@/components/_scopes/Listing/ListingTracks/ListingTracks';
+import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
+import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { getEnpointPlaylist, getPlaylistTracks } from '@/lib/Spotify/playlist';
 import { PlaylistResponseInterface, PlaylistTracksInterface } from '@/types';
@@ -65,11 +65,11 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
       </PageBannerWrapper>
 
       <Container>
-        <TrackList>
+        <List>
           {playlistTracks?.items?.map((track) => (
-            <Track key={track.track.id} track={track.track} playlistId={id} />
+            <TrackRow key={track.track.id} track={track.track} playlistId={id} />
           ))}
-        </TrackList>
+        </List>
         <Pagination
           currentPage={page}
           totalPages={Math.floor(playlistTracks?.total / playlistTracks?.limit)}

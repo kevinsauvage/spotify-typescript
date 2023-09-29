@@ -1,8 +1,9 @@
 import Person from '@/assets/icons/person';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import { StatInterface } from '@/types';
 
 import LogoutButton from '../../../LogoutButton/LogoutButton';
-import ProfilStats, { StatInterface } from '../ProfilStats/ProfilStats';
+import ProfilStats from '../ProfilStats/ProfilStats';
 
 import styles from './ProfilBanner.module.scss';
 

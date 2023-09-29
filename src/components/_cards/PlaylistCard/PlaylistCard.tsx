@@ -1,18 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { TrackInterface } from '../Track/Track';
+import { PlaylistInterface } from '@/types';
 
-import styles from './Playlist.module.scss';
+import styles from './PlaylistCard.module.scss';
 
-export interface PlaylistInterface {
-  id: string;
-  images: [{ height: number; url: string; width: number }];
-  name: string;
-  tracks: [TrackInterface];
-}
-
-const Playlist: React.FC<{
+const PlaylistCard: React.FC<{
   playlist: PlaylistInterface;
 }> = ({ playlist }) => {
   const { name, images, id } = playlist;
@@ -22,7 +15,7 @@ const Playlist: React.FC<{
   return (
     <li className={styles.playlist}>
       {image?.url && <Image alt="Album cover" src={image?.url} width={200} height={200} />}
-      <div className={styles.left}>
+      <div className={styles.content}>
         <Link href={`/playlists/${id}`} className={styles.name}>
           {name}
         </Link>
@@ -31,4 +24,4 @@ const Playlist: React.FC<{
   );
 };
 
-export default Playlist;
+export default PlaylistCard;
