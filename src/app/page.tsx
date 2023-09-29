@@ -2,9 +2,10 @@ import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import PlaylistCard from '@/components/_cards/PlaylistCard/PlaylistCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import ProfilBanner from '@/components/_scopes/Profil/ProfilBanner/ProfilBanner';
-import CardsPresenter from '@/components/CardsPresenter/CardsPresenter';
 import Container from '@/components/Container/Container';
-import RowsPresenter from '@/components/RowsPresenter/RowsPresenter';
+import Grid from '@/components/Grid/Grid';
+import List from '@/components/List/List';
+import Section from '@/components/Section/Section';
 import {
   getEndpointMe,
   getEndpointMePlaylists,
@@ -44,25 +45,33 @@ const page: React.FC = async () => {
     <div>
       <ProfilBanner userData={userData} stats={stats} />
       <Container>
-        <RowsPresenter title="Top Tracks" href="/top-tracks">
-          {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
-        </RowsPresenter>
+        <Section title="Top Tracks" href="/top-tracks">
+          <List>
+            {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
+          </List>
+        </Section>
 
-        <CardsPresenter title="Top Artists" href="/top-artists">
-          {userTopArtists?.items.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
-        </CardsPresenter>
+        <Section title="Top Artists" href="/top-artists">
+          <Grid>
+            {userTopArtists?.items.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
+          </Grid>
+        </Section>
 
-        <RowsPresenter title="Recently Played" href="/recently-played">
-          {recentlyPlayedTracks?.items?.map((track) => (
-            <TrackRow key={track.track.id} track={track.track} />
-          ))}
-        </RowsPresenter>
+        <Section title="Recently Played" href="/recently-played">
+          <List>
+            {recentlyPlayedTracks?.items?.map((track) => (
+              <TrackRow key={track.track.id} track={track.track} />
+            ))}
+          </List>
+        </Section>
 
-        <CardsPresenter title="Playlists" href="/playlists">
-          {followedPlaylists?.items?.map((playlist) => (
-            <PlaylistCard key={playlist.id} playlist={playlist} />
-          ))}
-        </CardsPresenter>
+        <Section title="Playlists" href="/playlists">
+          <Grid>
+            {followedPlaylists?.items?.map((playlist) => (
+              <PlaylistCard key={playlist.id} playlist={playlist} />
+            ))}
+          </Grid>
+        </Section>
       </Container>
     </div>
   );

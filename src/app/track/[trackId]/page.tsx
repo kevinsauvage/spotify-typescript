@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import ChartComponent from '@/components/Chart/Chart';
 import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
+import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import Section from '@/components/Section/Section';
+import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
 import { TrackInterface } from '@/types';
 import { getMinuteFromSeconds } from '@/utils/date';
@@ -17,10 +21,12 @@ interface PageInterface {
 }
 
 const Page: React.FC<PageInterface> = async ({ params }) => {
-  const track: TrackInterface = await getTrack(params.trackId);
-  const [audioAnalysis, audioFeatures] = await Promise.all([
-    getAudioAnalysis(params.trackId),
-    getAudioFeatures(params.trackId),
+  const { trackId } = params || {};
+  const track: TrackInterface = await getTrack(trackId);
+  const [audioAnalysis, audioFeatures, recommendedTracks] = await Promise.all([
+    getAudioAnalysis(trackId),
+    getAudioFeatures(trackId),
+    getRecommendations({ limit: 10, seedTracks: trackId }),
   ]);
 
   const { name, artists, album, external_urls: externalUrls, popularity } = track || {};
@@ -117,9 +123,6 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
               <LinkPrimary href={externalUrls.spotify} target="__blank">
                 Play on spotify
               </LinkPrimary>
-              <LinkPrimary href={`/recommendations/tracks/${track.id}`}>
-                See Track Recommendations
-              </LinkPrimary>
             </div>
           </div>
         </div>
@@ -127,17 +130,30 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
       <Container>
         {audioAnalysis && (
-          <div className={styles.tableContainer}>
-            {tableData.map((row) => (
-              <div key={row.attribute} className={styles.tableBlock}>
-                <p className={styles.value}>{row.value}</p>
-                <p>{row.attribute}</p>
-              </div>
-            ))}
-          </div>
+          <Section title="Track Analysis">
+            <div className={styles.tableContainer}>
+              {tableData.map((row) => (
+                <div key={row.attribute} className={styles.tableBlock}>
+                  <p className={styles.value}>{row.value}</p>
+                  <p>{row.attribute}</p>
+                </div>
+              ))}
+            </div>
+          </Section>
         )}
 
-        <ChartComponent chart={data} />
+        {recommendedTracks?.tracks?.length > 0 && (
+          <Section title="Recommended Tracks" href={`/recommendations/tracks/${track.id}`}>
+            <List>
+              {recommendedTracks?.tracks?.map((trackRecommend: TrackInterface) => (
+                <TrackRow key={trackRecommend.id} track={trackRecommend} />
+              ))}
+            </List>
+          </Section>
+        )}
+        <Section title="Audio Features">
+          <ChartComponent chart={data} />
+        </Section>
       </Container>
     </div>
   );

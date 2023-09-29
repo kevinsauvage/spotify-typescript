@@ -2,11 +2,12 @@ import Image from 'next/image';
 
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
-import CardsPresenter from '@/components/CardsPresenter/CardsPresenter';
 import Container from '@/components/Container/Container';
+import Grid from '@/components/Grid/Grid';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
+import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
-import RowsPresenter from '@/components/RowsPresenter/RowsPresenter';
+import Section from '@/components/Section/Section';
 import { getArtist, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { ArtistInterface, TrackInterface } from '@/types';
@@ -62,10 +63,6 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
                   See on spotify
                 </LinkPrimary>
               )}
-
-              <LinkPrimary href={`/recommendations/artists/${id}`}>
-                See Track Recommendations
-              </LinkPrimary>
             </div>
           </div>
         </div>
@@ -73,19 +70,35 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
       <Container>
         <div className={styles.topTracks}>
-          <RowsPresenter title={'Top Tracks'}>
-            {artistTopTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
-          </RowsPresenter>
+          {artistTopTracks?.tracks?.length > 0 && (
+            <Section title={'Top Tracks'}>
+              <List>
+                {artistTopTracks.tracks.map((track) => (
+                  <TrackRow key={track.id} track={track} />
+                ))}
+              </List>
+            </Section>
+          )}
 
-          <CardsPresenter title="Related Artists">
-            {relatedArtists?.artists
-              ?.slice(0, 10)
-              .map((relatedArtist) => <ArtistCard key={relatedArtist.id} artist={relatedArtist} />)}
-          </CardsPresenter>
+          {relatedArtists?.artists?.length > 0 && (
+            <Section title="Related Artists">
+              <Grid>
+                {relatedArtists.artists.slice(0, 10).map((relatedArtist) => (
+                  <ArtistCard key={relatedArtist.id} artist={relatedArtist} />
+                ))}
+              </Grid>
+            </Section>
+          )}
 
-          <RowsPresenter title="Recommended Tracks">
-            {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
-          </RowsPresenter>
+          {recommencedTracks?.tracks?.length > 0 && (
+            <Section title="Recommended Tracks" href={`/recommendations/artists/${id}`}>
+              <List>
+                {recommencedTracks.tracks.map((track) => (
+                  <TrackRow key={track.id} track={track} />
+                ))}
+              </List>
+            </Section>
+          )}
         </div>
       </Container>
     </div>

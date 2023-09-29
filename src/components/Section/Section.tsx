@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
-import List from '../List/List';
-
-import styles from './RowsPresenter.module.scss';
+import styles from './Section.module.scss';
 
 interface IProperties {
   title?: string;
@@ -10,16 +8,16 @@ interface IProperties {
   href?: string;
 }
 
-const RowsPresenter: React.FC<IProperties> = ({ title, children, href }) => {
+const Section: React.FC<IProperties> = ({ title, children, href }) => {
   return (
-    <div className={styles.RowsPresenter}>
+    <div className={styles.Section}>
       <div className={styles.header}>
         {title && <p className={styles.title}>{title}</p>}
         {href && <Link href={href}>See all</Link>}
       </div>
-      <List>{children}</List>
+      {children}
     </div>
   );
 };
 
-export default RowsPresenter;
+export default Section;

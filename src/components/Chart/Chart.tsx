@@ -14,7 +14,6 @@ interface IChartProperties {
 
 const ChartComponent: React.FunctionComponent<IChartProperties> = ({ chart }) => (
   <div className={styles.chart}>
-    <h2>Audio Features Chart</h2>
     <Bar
       data={chart}
       options={{
