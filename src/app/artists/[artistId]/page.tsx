@@ -1,18 +1,12 @@
-import Image from 'next/image';
-
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
-import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import List from '@/components/List/List';
-import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Section from '@/components/Section/Section';
-import { getArtist, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
+import { getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { ArtistInterface, TrackInterface } from '@/types';
-
-import styles from './page.module.scss';
 
 interface PageInterface {
   params: { artistId: string };

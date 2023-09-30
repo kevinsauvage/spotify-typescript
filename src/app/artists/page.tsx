@@ -1,9 +1,7 @@
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import ListingArtistsClient from '@/components/_scopes/Listing/ListingArtistsClient/ListingArtistsClient';
-import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
-import InfiniteScroll from '@/components/InfiniteScroll/InfiniteScroll';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
 import { getEndpointFollowedArtists } from '@/lib/Spotify/user';
