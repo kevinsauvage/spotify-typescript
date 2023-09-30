@@ -95,7 +95,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
         )}
 
         {recommendedTracks?.tracks?.length > 0 && (
-          <Section title="Recommended Tracks" href={`/recommendations/tracks/${track.id}`}>
+          <Section title="Recommended Tracks" href={`/tracks/${track.id}/recommendations`}>
             <List>
               {recommendedTracks?.tracks?.map((trackRecommend: TrackInterface) => (
                 <TrackRow key={trackRecommend.id} track={trackRecommend} />

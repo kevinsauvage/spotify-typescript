@@ -12,9 +12,9 @@ $colors-dark: (
   primary-500: darken($primary-dark, 36),
   // Background
   color-background-1: $color-background-dark,
-  color-background-2: rgba(255, 255, 255, 0.05),
-  color-background-3: rgba(255, 255, 255, 0.055),
-  color-background-4: rgba(255, 255, 255, 0.6),
+  color-background-2: lighten($color-background-dark, 6),
+  color-background-3: lighten($color-background-dark, 9),
+  color-background-4: lighten($color-background-dark, 12),
   // Text
   color-text-1: $text-dark,
   color-text-2: rgba($text-dark, 80%),

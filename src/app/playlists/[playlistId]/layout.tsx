@@ -50,7 +50,7 @@ const layout: React.FC<IProperties> = async ({ children, params }) => {
                 <LinkPrimary href={external_urls?.spotify} target="__blank">
                   Open in Spotify
                 </LinkPrimary>
-                <LinkPrimary href={`/recommendations/playlists/${id}`}>
+                <LinkPrimary href={`/playlists/${id}/recommendations`}>
                   See Track Recommendations
                 </LinkPrimary>
               </div>

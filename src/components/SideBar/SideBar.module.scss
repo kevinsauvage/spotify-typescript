@@ -2,7 +2,7 @@
 
 .sidebar {
   position: sticky;
-  top: 0.5rem;
+  top: 0.8rem;
   right: 0;
   bottom: 0;
   left: 0;
@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: center;
   min-width: 100px;
-  height: calc(100vh - 1rem);
+  height: calc(100vh - 1.6rem);
   border-radius: 0.5rem;
   background-color: var(--color-background-2);
 

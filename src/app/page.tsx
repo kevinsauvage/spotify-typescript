@@ -1,12 +1,14 @@
 import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import PlaylistCard from '@/components/_cards/PlaylistCard/PlaylistCard';
+import TrackCard from '@/components/_cards/TrackCard/TrackCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import ProfilBanner from '@/components/_scopes/Profil/ProfilBanner/ProfilBanner';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
+import { getRecommendations } from '@/lib/Spotify/recommendations';
 import {
   getEndpointFollowedArtists,
   getEndpointMePlaylists,
@@ -20,6 +22,7 @@ import {
   FollowedArtistsInterface,
   RecentlyPlayedInterface,
   SavedAlbumResponseInterface,
+  TrackInterface,
   UserPlaylistInterface,
   UserTopArtistInterface,
   UserTopTrackInterface,
@@ -47,14 +50,23 @@ const page: React.FC = async () => {
     UserSavedTracksInterface,
     SavedAlbumResponseInterface,
   ] = await Promise.all([
-    getEndpointTopArtists(undefined, undefined, 10),
-    getEndpointTopTracks(undefined, undefined, 6),
+    getEndpointTopArtists(undefined, 'short_term', 10),
+    getEndpointTopTracks(undefined, 'short_term', 6),
     getEndpointFollowedArtists(10),
     getEndpointRecentTracks(6),
     getEndpointMePlaylists(1, 10),
     getEndpointSavedTracks(1, 10),
     getEndpointSavedAlbums(1, 10),
   ]);
+
+  const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
+    limit: 10,
+    seedTracks:
+      userTopTracks?.items
+        ?.slice(0, 5)
+        .map((track) => track.id)
+        .join(',') || undefined,
+  });
 
   const bannerData = [
     {
@@ -89,7 +101,7 @@ const page: React.FC = async () => {
       <ProfilBanner bannerData={bannerData} />
       <div className={styles.wrapper}>
         {Array?.isArray(userTopTracks?.items) && (
-          <Section title="Top Tracks of all time" href="/top-tracks">
+          <Section title="Top Tracks" href="/top-tracks">
             <List>
               {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
             </List>
@@ -105,6 +117,14 @@ const page: React.FC = async () => {
           </Section>
         )}
       </div>
+
+      {Array?.isArray(recommendations?.tracks) && (
+        <Section title="Tracks You May Like" href="/tracks">
+          <Grid>
+            {recommendations?.tracks?.map((track) => <TrackCard key={track.id} track={track} />)}
+          </Grid>
+        </Section>
+      )}
 
       {Array?.isArray(userTopArtists?.items) && (
         <Section title="Top Artists" href="/top-artists">

@@ -1,11 +1,10 @@
 @import '../../../styles/mixins';
 
 .track {
+  width: 100%;
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: var(--color-background-2);
-
-  @include overlayWithHover;
+  background-color: var(--color-background-3);
 
   img {
     width: 100%;

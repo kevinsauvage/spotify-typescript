@@ -3,11 +3,10 @@
 .playlist {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1rem;
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: var(--color-background-2);
+  background-color: var(--color-background-3);
 
   @include overlayWithHover;
 
@@ -33,6 +32,12 @@
       /* stylelint-disable-next-line property-no-unknown */
       line-clamp: 2;
       -webkit-box-orient: vertical;
+    }
+
+    .totalTracks {
+      color: var(--color-text-3);
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
   }
 }
