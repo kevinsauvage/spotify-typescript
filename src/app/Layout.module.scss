@@ -1,0 +1,39 @@
+@import '../styles/responsive';
+
+.body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  color: var(--color-text-1);
+  background-color: var(--color-background-1);
+
+  &::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.216);
+  }
+
+  @include respond(tablet) {
+    display: block;
+    gap: 0;
+    padding: 0;
+  }
+}
+
+.main {
+  width: 100%;
+  min-width: 0; // Avoid overflow in grid
+  border-radius: 0.5rem;
+  background-color: var(--color-background-2);
+
+  @include respond(tablet) {
+    padding-bottom: 90px;
+  }
+}

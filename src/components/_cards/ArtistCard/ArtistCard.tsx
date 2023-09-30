@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Popularity from '@/components/Popularity/Popularity';
 import { ArtistInterface } from '@/types';
 
-// eslint-disable-next-line css-modules/no-unused-class
 import styles from './ArtistCard.module.scss';
 
 const ArtistCard: React.FC<{
   artist: ArtistInterface;
 }> = ({ artist }) => {
-  const { name, images, id } = artist;
+  const { name, images, id, popularity } = artist;
   const image = images.at(2) ?? images.at(1) ?? images.at(0);
 
   return (
@@ -24,9 +24,12 @@ const ArtistCard: React.FC<{
             height={image?.height}
           />
         )}
-        <Link href={`/artist/${id}`} className={styles.name}>
+        <Link href={`/artists/${id}`} className={styles.name}>
           {name}
         </Link>
+        <div className={styles.popularity}>
+          <Popularity popularity={popularity} />
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
-
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import ChartComponent from '@/components/Chart/Chart';
 import Container from '@/components/Container/Container';
-import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import List from '@/components/List/List';
-import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Section from '@/components/Section/Section';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
@@ -29,16 +24,14 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
     getRecommendations({ limit: 10, seedTracks: trackId }),
   ]);
 
-  const { name, artists, album, external_urls: externalUrls, popularity } = track || {};
-  const { images } = album || {};
-  const image = images?.at(0);
+  const { popularity } = track || {};
 
   const trackAnalysis = audioAnalysis.track;
 
   const tableData = [
-    { attribute: 'Duration', value: getMinuteFromSeconds(trackAnalysis.duration) },
+    { attribute: 'Duration', value: getMinuteFromSeconds(trackAnalysis?.duration) },
     { attribute: 'Popularity', value: `${popularity}%` },
-    { attribute: 'Tempo', value: trackAnalysis.tempo.toString().split('.')[0].toString() },
+    { attribute: 'Tempo', value: trackAnalysis?.tempo.toString().split('.')[0].toString() },
     { attribute: 'Bars', value: audioAnalysis?.bars?.length },
     { attribute: 'Beats', value: audioAnalysis?.beats?.length },
     { attribute: 'Sections', value: audioAnalysis?.sections?.length },
@@ -87,47 +80,6 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
   return (
     <div className={styles.track}>
-      <PageBannerWrapper>
-        <div className={styles.banner}>
-          {image && (
-            <Image
-              className={styles.image}
-              alt="Album cover"
-              src={image?.url}
-              width={image?.width}
-              height={image?.height}
-              priority
-            />
-          )}
-
-          <div>
-            <h1 className={styles.name}>{name}</h1>
-            <div className={styles.artists}>
-              <strong>Artists: </strong>
-              {artists.map((artist, index) => (
-                <>
-                  <Link href={`/artist/${artist.id}`} key={artist.id}>
-                    {artist.name}
-                  </Link>
-                  {index < artists.length - 1 && <span>, </span>}
-                </>
-              ))}
-            </div>
-            <div>
-              <p className={styles.albumName}>
-                <strong>Album: </strong>
-                {album.name}
-              </p>
-            </div>
-            <div className={styles.buttons}>
-              <LinkPrimary href={externalUrls.spotify} target="__blank">
-                Play on spotify
-              </LinkPrimary>
-            </div>
-          </div>
-        </div>
-      </PageBannerWrapper>
-
       <Container>
         {audioAnalysis && (
           <Section title="Track Analysis">

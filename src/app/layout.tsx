@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import SideBar from '@/components/SideBar/SideBar';
 
 import '../styles/globals.scss';
+import styles from './Layout.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,9 +16,9 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
-    <body className={inter.className}>
+    <body className={`${inter.className} ${styles.body}`}>
       <SideBar />
-      {children}
+      <main className={styles.main}>{children}</main>
     </body>
   </html>
 );

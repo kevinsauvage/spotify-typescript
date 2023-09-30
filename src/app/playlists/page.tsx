@@ -18,24 +18,22 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const followedPlaylists: UserPlaylistInterface = await getEndpointMePlaylists(page);
 
   return (
-    <div>
+    <Container>
       <PageBannerWrapper>
         <Title>Playlists</Title>
       </PageBannerWrapper>
-      <Container>
-        <Grid>
-          {Array.isArray(followedPlaylists?.items) &&
-            followedPlaylists?.items?.map((playlist) => (
-              <Playlist key={playlist.id} playlist={playlist} />
-            ))}
-        </Grid>
-        <Pagination
-          currentPage={page}
-          totalPages={Math.floor(followedPlaylists?.total / followedPlaylists?.limit)}
-          navigate
-        />
-      </Container>
-    </div>
+      <Grid>
+        {Array.isArray(followedPlaylists?.items) &&
+          followedPlaylists?.items?.map((playlist) => (
+            <Playlist key={playlist.id} playlist={playlist} />
+          ))}
+      </Grid>
+      <Pagination
+        currentPage={page}
+        totalPages={Math.floor(followedPlaylists?.total / followedPlaylists?.limit)}
+        navigate
+      />
+    </Container>
   );
 };
 

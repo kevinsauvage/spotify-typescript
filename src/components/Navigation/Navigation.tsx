@@ -12,10 +12,10 @@ import styles from './Navigation.module.scss';
 
 const navItems = [
   { href: '/', icon: <Person />, label: 'Profile' },
-  { href: '/top-artists', icon: <Micro />, label: 'Top Artists' },
-  { href: '/top-tracks', icon: <Library />, label: 'Top tracks' },
+  { href: '/tracks', icon: <Heart />, label: 'Tracks' },
+  { href: '/artists', icon: <Micro />, label: 'Artists' },
+  { href: '/albums', icon: <Library />, label: 'Albums' },
   { href: '/playlists', icon: <Music />, label: 'Playlists' },
-  { href: '/saved-tracks', icon: <Heart />, label: 'Saved' },
 ];
 
 const Navigation = () => (

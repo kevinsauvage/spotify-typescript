@@ -1,22 +1,29 @@
 @import '../../../styles/mixins';
 
+@import '../../../styles/responsive';
+
 .track {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 2fr 1fr auto;
   align-items: center;
   gap: 1rem;
+  min-width: 300px;
+  padding-right: 0.5rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
 
-  @include overlayWithHover;
+  img {
+    border-radius: 0.5rem;
+  }
 
   .left {
-    position: relative;
-    z-index: 3;
+    margin-right: 1rem;
+    padding: 0.5rem;
     overflow: hidden;
 
     .name {
       display: block;
-      width: fit-content;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.2rem;
       overflow: hidden;
       color: var(--color-text-1);
       white-space: nowrap;
@@ -42,6 +49,10 @@
     }
   }
 
+  .popularity {
+    position: unset;
+  }
+
   .right {
     position: relative;
     z-index: 3;
@@ -53,6 +64,18 @@
       margin-left: auto;
       font-size: 0.85rem;
       opacity: 0.6;
+    }
+  }
+
+  &:hover {
+    background-color: var(--color-background-2);
+  }
+
+  @include respond(tablet) {
+    grid-template-columns: auto 1fr 0fr auto;
+
+    .popularity {
+      display: none;
     }
   }
 }

@@ -57,7 +57,7 @@ const Pagination: React.FC<IProperties> = ({ currentPage, totalPages, navigate, 
       if (
         page === 1 || // Always show the first page
         page === totalPages || // Always show the last page
-        (page >= currentPage - 2 && page <= currentPage + 2) // Show pages around the current page
+        (page >= currentPage - 1 && page <= currentPage + 1) // Show pages around the current page
       ) {
         pageRange.push(renderPageButton(page));
       } else if (page === currentPage - 2 - 1 && currentPage > 2 + 1) {

@@ -1,4 +1,5 @@
 .Section {
+  flex: 1;
   margin-bottom: 4rem;
 
   .header {
@@ -9,6 +10,7 @@
   }
 
   .title {
+    color: var(--color-text-1);
     font-weight: bold;
     font-size: 1.3rem;
   }

@@ -1,4 +1,4 @@
-@mixin overlayWithHover($color: rgba(var(--rgb-color-background-2), 0.2)) {
+@mixin overlayWithHover($color: rgba(var(--rgb-color-background-1), 0.1)) {
   position: relative;
   overflow: hidden;
 

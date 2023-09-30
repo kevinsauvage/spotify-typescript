@@ -1,0 +1,40 @@
+.artistCardSkeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.6rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-background-2);
+}
+
+.skeletonImage {
+  height: 100%;
+  padding: 1rem;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: var(--color-background-3);
+  aspect-ratio: 1/1;
+  animation: fade-in 1s ease-in-out infinite;
+}
+
+.skeletonName {
+  width: 60%;
+  height: 1.5rem;
+  background-color: var(--color-background-3);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}

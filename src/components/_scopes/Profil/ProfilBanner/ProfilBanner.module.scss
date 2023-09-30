@@ -1,18 +1,42 @@
+@import '../../../../styles/responsive';
+
 .banner {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   align-items: center;
   justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
 
-  svg {
-    margin-bottom: 2rem;
-    border: 1rem solid whitesmoke;
-    border-radius: 50%;
-    font-size: 220px;
-    opacity: 0.9;
+  .bannerItemImage {
+    width: 100%;
+    max-width: 100px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    background-position: 100%;
+  }
 
-    path {
-      stroke: whitesmoke;
+  .bannerItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-background-3);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
     }
+
+    .bannerItemTitle {
+      padding: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  }
+
+  @include respond(mobile_l) {
+    grid-template-columns: 1fr;
   }
 }

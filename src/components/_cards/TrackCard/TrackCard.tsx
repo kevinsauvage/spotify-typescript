@@ -22,11 +22,11 @@ const TrackCard: React.FC<{
         <Image alt="Album cover" src={image?.url} width={image?.width} height={image?.height} />
       )}
       <div className={styles.content}>
-        <Link className={styles.name} href={`/track/${id}`}>
+        <Link className={styles.name} href={`/tracks/${id}`}>
           {name}
         </Link>
         <div className={styles.info}>
-          <Link href={`/artist/${artists?.[0]?.id}`}>
+          <Link href={`/artists/${artists?.[0]?.id}`}>
             <p className={styles.artist}>{artists?.[0]?.name}</p>
           </Link>
           <span>-</span>

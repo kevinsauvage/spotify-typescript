@@ -24,7 +24,7 @@ const Artist: React.FC<{
 
   return (
     <li className={styles.artist}>
-      <Link href={`/artist/${id}`}>
+      <Link href={`/artists/${id}`}>
         <div className={styles.left}>
           {image && (
             <Image

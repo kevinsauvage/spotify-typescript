@@ -1,0 +1,39 @@
+import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
+import ListingArtistsClient from '@/components/_scopes/Listing/ListingArtistsClient/ListingArtistsClient';
+import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import Container from '@/components/Container/Container';
+import Grid from '@/components/Grid/Grid';
+import InfiniteScroll from '@/components/InfiniteScroll/InfiniteScroll';
+import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import Title from '@/components/Title/Title';
+import { getEndpointFollowedArtists } from '@/lib/Spotify/user';
+import { FollowedArtistsInterface } from '@/types';
+
+import styles from './page.module.scss';
+
+interface PageInterface {}
+
+const Page: React.FC<PageInterface> = async () => {
+  const savedArtists: FollowedArtistsInterface = await getEndpointFollowedArtists(15);
+
+  return (
+    <div className={styles.page}>
+      <Container>
+        <PageBannerWrapper>
+          <Title>Favorite Artists</Title>
+        </PageBannerWrapper>
+        <Grid>
+          {savedArtists?.artists?.items?.map((artist) => (
+            <ArtistCard key={artist.id} artist={artist} />
+          ))}
+          <ListingArtistsClient
+            after={savedArtists?.artists?.cursors?.after}
+            handleFetch={getEndpointFollowedArtists}
+          />
+        </Grid>
+      </Container>
+    </div>
+  );
+};
+
+export default Page;
