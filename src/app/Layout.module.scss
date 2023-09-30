@@ -28,6 +28,7 @@
 }
 
 .main {
+  position: relative;
   width: 100%;
   min-width: 0; // Avoid overflow in grid
   border-radius: 0.5rem;

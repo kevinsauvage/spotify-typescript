@@ -1,0 +1,28 @@
+.screenLoader {
+  position: absolute;
+  z-index: 999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 1.6rem);
+  border-radius: 0.5rem;
+  inset: 0;
+  background: linear-gradient(271deg, #1f1f1f, #131313, #000000);
+  background-size: 180% 180%;
+  animation: gradient-animation 12s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
