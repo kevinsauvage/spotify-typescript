@@ -59,7 +59,14 @@ export interface PlaylistInterface {
   primary_color: string;
   public: boolean;
   snapshot_id: string;
-  tracks: [TrackInterface];
+  tracks: {
+    items: TrackInterface[];
+    total: number;
+    limit: number;
+    offset: number;
+    next: string;
+    previous: string;
+  };
 }
 
 export interface PlaylistResponseInterface {
