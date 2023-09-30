@@ -49,7 +49,7 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
   const user = await getEndpointMe();
 
   return (
-    <>
+    <Container>
       <PageBannerWrapper>
         <Title>{title}</Title>
         <CreatePlaylist
@@ -62,17 +62,15 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
           addItemsToPlaylist={addItemsToPlaylist}
         />
       </PageBannerWrapper>
-      <Container>
-        <TrackAttributeForm
-          genres={availableGenreSeeds?.genres}
-          initialParams={rest}
-          seedGenres={seedGenres ? seedGenres?.split(',') : []}
-        />
-        <List>
-          {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
-        </List>
-      </Container>
-    </>
+      <TrackAttributeForm
+        genres={availableGenreSeeds?.genres}
+        initialParams={rest}
+        seedGenres={seedGenres ? seedGenres?.split(',') : []}
+      />
+      <List>
+        {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
+      </List>
+    </Container>
   );
 };
 

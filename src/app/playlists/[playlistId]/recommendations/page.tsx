@@ -14,13 +14,6 @@ const page: React.FC<PageInterface> = async ({ searchParams, params }) => {
 
   const { name, owner } = playlistResponse || {};
 
-  const title = (
-    <>
-      Recommendations for <strong>{playlistResponse?.name}</strong> by{' '}
-      <strong>{owner?.display_name}</strong>
-    </>
-  );
-
   return (
     <div>
       <RecommendationsPresenter
@@ -29,7 +22,7 @@ const page: React.FC<PageInterface> = async ({ searchParams, params }) => {
           ?.slice(0, 5)
           .map((track) => track.track.id)
           .join(',')}
-        title={title}
+        title="Recommendations"
         playlistName={`Recommendations for ${name} by ${owner?.display_name}`}
       />
     </div>

@@ -33,7 +33,11 @@ const TrackRow: React.FC<{
         </div>
       </div>
       <div>
-        {popularity && <Popularity popularity={popularity} extratyles={styles.popularity} />}
+        {popularity ? (
+          <Popularity popularity={popularity} extratyles={styles.popularity} />
+        ) : (
+          <Popularity popularity={0} extratyles={styles.popularity} />
+        )}
       </div>
       <div className={styles.right}>
         <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
