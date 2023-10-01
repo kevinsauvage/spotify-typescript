@@ -17,6 +17,8 @@ export const fetchHelper = async (endpoint: string, options: object = {}, token:
       next: { revalidate: 3600 },
     });
 
+    if (!response) return;
+
     if (response?.status >= 200 && response?.status < 300) {
       return response?.json();
     }
