@@ -185,3 +185,12 @@ export interface NewReleasesAlbums {
     previous: string;
   };
 }
+
+export interface ArtistAlbumsInterface {
+  items: AlbumInterface[];
+  limit: number;
+  offset: number;
+  total: number;
+  next: string;
+  previous: string;
+}

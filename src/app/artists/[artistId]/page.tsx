@@ -6,7 +6,7 @@ import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
 import TrackTable from '@/components/TrackTable/TrackTable';
 import { getArtistAlbums, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
-import { AlbumInterface, ArtistInterface, TrackInterface } from '@/types';
+import { AlbumInterface, ArtistAlbumsInterface, ArtistInterface, TrackInterface } from '@/types';
 
 interface PageInterface {
   params: { artistId: string };
@@ -19,7 +19,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
   const [artistTopTracks, relatedArtists, albums]: [
     { tracks: TrackInterface[] },
     { artists: ArtistInterface[] },
-    { items: AlbumInterface[] },
+    ArtistAlbumsInterface,
   ] = await Promise.all([
     getArtistTopTracks(artistId),
     getArtistRelatedArtists(artistId),
@@ -44,7 +44,10 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
       )}
 
       {albums?.items?.length > 0 && (
-        <Section title="Albums">
+        <Section
+          title="Albums"
+          href={albums.total > albums.limit ? `/artists/${artistId}/albums` : ''}
+        >
           <Grid>
             {albums.items.map((album) => (
               <AlbumCard key={album.id} album={album} />

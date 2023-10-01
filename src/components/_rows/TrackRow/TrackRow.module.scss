@@ -7,6 +7,10 @@
   overflow: hidden;
   border-radius: 0.5rem;
 
+  td {
+    font-size: 0.8rem;
+  }
+
   img {
     border-radius: 0.5rem;
   }
@@ -19,6 +23,7 @@
       margin-bottom: 0.2rem;
       overflow: hidden;
       color: var(--color-text-1);
+      font-size: 0.9rem;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -27,7 +32,6 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8rem;
       opacity: 0.5;
 
       .artist {
@@ -47,7 +51,6 @@
 
     .duration {
       margin-left: auto;
-      font-size: 0.85rem;
     }
   }
 
