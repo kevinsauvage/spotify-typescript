@@ -19,12 +19,12 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ params }) => {
   const { trackId } = params || {};
   const track: TrackInterface = await getTrack(trackId);
-  const [audioAnalysis, audioFeatures, recommendedTracks] = await Promise.all([
+  const [audioAnalysis, audioFeatures] = await Promise.all([
     getAudioAnalysis(trackId),
     getAudioFeatures(trackId),
-    getRecommendations({ limit: 10, seedTracks: trackId }),
   ]);
 
+  const recommendedTracks = await getRecommendations({ limit: 10, seedTracks: trackId });
   const { popularity } = track || {};
 
   const trackAnalysis = audioAnalysis.track;
