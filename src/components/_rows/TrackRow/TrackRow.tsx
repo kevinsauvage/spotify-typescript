@@ -35,7 +35,7 @@ const TrackRow: React.FC<{
           <p className={styles.album}>{album?.name}</p>
         </div>
       </td>
-      {popularity && <td>{popularity}</td>}
+      {popularity ? <td>{popularity}</td> : ''}
       <td className={styles.right}>
         <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
       </td>
