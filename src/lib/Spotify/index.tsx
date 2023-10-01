@@ -1,6 +1,18 @@
-import { getSpotifyToken } from '@/serverActions/auth';
+import { cookies } from 'next/headers';
 
 export const enpointBaseUrl = 'https://api.spotify.com/v1';
+
+export const getSpotifyToken = () => {
+  try {
+    const cookieStore = cookies();
+    const spotifyTokenString = cookieStore?.get('spotify_token')?.value;
+
+    return JSON.parse(spotifyTokenString ?? '{}');
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
+};
 
 export const fetchHelper = async (endpoint: string, options: object = {}, token: string = '') => {
   try {

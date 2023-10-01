@@ -10,6 +10,7 @@ const {
 } = process.env;
 
 export const loginServerAction = async (accessToken: string, expiresIn: number) => {
+  console.log('🚀 ~~~~  file: auth.tsx:1 ~~~~  loginServerAction ~~~~  accessToken:', accessToken);
   const currentTime = Math.floor(Date.now() / 1000);
 
   cookies().set({
@@ -19,6 +20,9 @@ export const loginServerAction = async (accessToken: string, expiresIn: number) 
     value: JSON.stringify({ accessToken, expiresIn: currentTime + expiresIn }),
   });
 
+  console.log('cookie setted =', cookies().get('spotify_token'));
+
+  console.log('redirecting');
   redirect('/');
 };
 
@@ -33,16 +37,4 @@ export const redirectToSpotifyLogin = () => {
   );
 
   redirect(url.href);
-};
-
-export const getSpotifyToken = () => {
-  try {
-    const cookieStore = cookies();
-    const spotifyTokenString = cookieStore?.get('spotify_token')?.value;
-
-    return JSON.parse(spotifyTokenString ?? '{}');
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
 };
