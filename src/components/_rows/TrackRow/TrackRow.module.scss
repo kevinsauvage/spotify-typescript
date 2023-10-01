@@ -16,7 +16,6 @@
   }
 
   .left {
-    padding: 0.5rem 0;
     overflow: hidden;
 
     .name {
@@ -47,11 +46,26 @@
     }
   }
 
+  .popularity {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 0.3rem;
+    }
+  }
+
   .right {
     position: relative;
 
     .duration {
+      display: flex;
+      align-items: center;
       margin-left: auto;
+
+      svg {
+        margin-left: 0.3rem;
+      }
     }
   }
 

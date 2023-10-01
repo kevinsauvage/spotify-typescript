@@ -1,8 +1,60 @@
+@import '../../styles/responsive';
+
 .table {
   width: 100%;
   border-collapse: collapse;
   white-space: nowrap;
   table-layout: fixed;
+
+  colgroup {
+    .colCover {
+      width: 50px;
+    }
+
+    .colInfo {
+      width: 100%;
+    }
+
+    .colPopularity {
+      width: 20%;
+    }
+
+    .colDuration {
+      width: 20%;
+    }
+
+    .colRemove {
+      width: 10%;
+    }
+
+    @include respond(tablet) {
+      .colPopularity {
+        width: 70px;
+      }
+
+      .colDuration {
+        width: 70px;
+      }
+
+      .colRemove {
+        width: 60px;
+      }
+    }
+
+    @include respond(mobile_l) {
+      .colPopularity {
+        width: 50px;
+      }
+
+      .colDuration {
+        width: 50px;
+      }
+
+      .colRemove {
+        width: 40px;
+      }
+    }
+  }
 
   thead th {
     padding: 1rem 0.5rem;
@@ -15,18 +67,6 @@
       padding-left: 0rem;
     }
 
-    &:nth-child(2) {
-      padding-left: 0.5rem;
-    }
-
-    &:nth-child(3) {
-      text-align: end;
-    }
-
-    &:nth-child(4) {
-      text-align: end;
-    }
-
     &:last-child {
       padding-right: 0.5rem;
       text-align: right;
@@ -34,27 +74,30 @@
   }
 
   tbody td {
+    padding: 0 0.5rem;
     overflow: hidden;
     color: var(--color-text-3);
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    &:nth-child(2) {
-      padding: 0.5rem;
-      padding-right: 1rem;
-    }
-
-    &:nth-child(3) {
-      text-align: end;
-    }
-
-    &:nth-child(4) {
-      text-align: end;
+    &:nth-child(1) {
+      padding-left: 0rem;
     }
 
     &:last-child {
       padding-right: 0.5rem;
       text-align: end;
+
+      * {
+        justify-content: flex-end;
+        margin-left: auto;
+      }
+    }
+  }
+
+  @include respond(mobile_l) {
+    thead {
+      display: none;
     }
   }
 }

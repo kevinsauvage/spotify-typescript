@@ -12,6 +12,7 @@ const AlbumTable: React.FC<{
         <col width="40%" />
         <col width="30%" />
         <col width="15%" />
+        {showPopularity && <col width="15%" />}
         <col width="15%" />
       </colgroup>
       <thead>

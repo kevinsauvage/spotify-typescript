@@ -9,11 +9,11 @@ const TrackTable: React.FC<{
   return (
     <table className={styles.table}>
       <colgroup>
-        {showAlbum && <col width="50px" />}
-        <col width="100%" />
-        {showPopularity && <col width="65px" />}
-        <col width="70px" />
-        {remove && <col width="70px" />}
+        {showAlbum && <col className={styles.colCover} />}
+        <col className={styles.colInfo} />
+        {showPopularity && <col className={styles.colPopularity} />}
+        <col className={styles.colDuration} />
+        {remove && <col className={styles.colRemove} />}
       </colgroup>
       <thead>
         <tr>

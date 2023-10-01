@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Popularity from '@/assets/icons/popularity';
+import Time from '@/assets/icons/time';
 import TrackConfig from '@/components/TrackConfig/TrackConfig';
 import { removeFromPlaylist } from '@/lib/Spotify/playlist';
 import { TrackInterface } from '@/types';
@@ -35,9 +37,20 @@ const TrackRow: React.FC<{
           <p className={styles.album}>{album?.name}</p>
         </div>
       </td>
-      {popularity ? <td>{popularity}</td> : ''}
+      {popularity ? (
+        <td>
+          <div className={styles.popularity}>
+            {popularity}
+            <Popularity />
+          </div>
+        </td>
+      ) : (
+        <td />
+      )}
       <td className={styles.right}>
-        <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
+        <p className={styles.duration}>
+          {getMinuteFromMilliseconds(durationMs)} <Time />
+        </p>
       </td>
       {playlistId && (
         <td>
