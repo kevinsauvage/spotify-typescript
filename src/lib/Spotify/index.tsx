@@ -7,7 +7,7 @@ export const fetchHelper = async (endpoint: string, options: object = {}, token:
     const accessToken = token || getSpotifyToken()?.accessToken || {};
 
     if (!accessToken) {
-      return console.error('spotify token missing');
+      return;
     }
 
     const response = await fetch(endpoint, {
