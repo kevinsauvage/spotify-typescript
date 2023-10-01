@@ -174,3 +174,14 @@ export interface SavedAlbumResponseInterface {
   next: string;
   previous: string;
 }
+
+export interface NewReleasesAlbums {
+  albums: {
+    items: AlbumInterface[];
+    limit: number;
+    offset: number;
+    total: number;
+    next: string;
+    previous: string;
+  };
+}

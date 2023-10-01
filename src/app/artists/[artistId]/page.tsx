@@ -1,12 +1,12 @@
+import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
 import TrackTable from '@/components/TrackTable/TrackTable';
-import { getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
-import { getRecommendations } from '@/lib/Spotify/recommendations';
-import { ArtistInterface, TrackInterface } from '@/types';
+import { getArtistAlbums, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
+import { AlbumInterface, ArtistInterface, TrackInterface } from '@/types';
 
 interface PageInterface {
   params: { artistId: string };
@@ -16,15 +16,20 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ params }) => {
   const { artistId } = params || {};
 
-  const [artistTopTracks, relatedArtists]: [
+  const [artistTopTracks, relatedArtists, albums]: [
     { tracks: TrackInterface[] },
     { artists: ArtistInterface[] },
-  ] = await Promise.all([getArtistTopTracks(artistId), getArtistRelatedArtists(artistId)]);
+    { items: AlbumInterface[] },
+  ] = await Promise.all([
+    getArtistTopTracks(artistId),
+    getArtistRelatedArtists(artistId),
+    getArtistAlbums(artistId),
+  ]);
 
-  const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
+  /*   const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
     limit: 5,
     seedArtists: artistId,
-  });
+  }); */
 
   return (
     <Container>
@@ -38,6 +43,16 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
         </Section>
       )}
 
+      {albums?.items?.length > 0 && (
+        <Section title="Albums">
+          <Grid>
+            {albums.items.map((album) => (
+              <AlbumCard key={album.id} album={album} />
+            ))}
+          </Grid>
+        </Section>
+      )}
+
       {relatedArtists?.artists?.length > 0 && (
         <Section title="Related Artists">
           <Grid>
@@ -48,7 +63,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
         </Section>
       )}
 
-      {recommencedTracks?.tracks?.length > 0 && (
+      {/*       {recommencedTracks?.tracks?.length > 0 && (
         <Section title="Recommended Tracks" href={`/artists/${artistId}/recommendations`}>
           <TrackTable>
             {recommencedTracks.tracks.map((track) => (
@@ -56,7 +71,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
             ))}
           </TrackTable>
         </Section>
-      )}
+      )} */}
     </Container>
   );
 };

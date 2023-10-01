@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import Trash from '@/assets/icons/trash';
 
-import ScreenLoader from '../ScreenLoader/ScreenLoader';
+import ScreenLoader from '../ScreenLoaderAbsolute/ScreenLoader';
 
 import styles from './TrackConfig.module.scss';
 interface IProperties {

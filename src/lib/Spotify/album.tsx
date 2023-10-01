@@ -12,3 +12,9 @@ export const getAlbumTracks = async (id: string, page = 1, limit = 10) => {
   const url = `${endpointAlbums}/${id}/tracks?limit=${limit}&offset=${offset}`;
   return fetchHelper(url);
 };
+
+export const getNewRelease = async (country = 'US', page = 1, limit = 10) => {
+  const offset = (page - 1) * limit;
+  const url = `https://api.spotify.com/v1/browse/new-releases?country=${country}&limit=${limit}&offset=${offset}`;
+  return fetchHelper(url);
+};

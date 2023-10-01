@@ -8,6 +8,7 @@ import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
 import TrackTable from '@/components/TrackTable/TrackTable';
+import { getNewRelease } from '@/lib/Spotify/album';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import {
   getEndpointFollowedArtists,
@@ -20,6 +21,7 @@ import {
 } from '@/lib/Spotify/user';
 import {
   FollowedArtistsInterface,
+  NewReleasesAlbums,
   RecentlyPlayedInterface,
   SavedAlbumResponseInterface,
   TrackInterface,
@@ -41,6 +43,7 @@ const page: React.FC = async () => {
     followedPlaylists,
     savedTracks,
     savedAlbums,
+    newReleases,
   ]: [
     UserTopArtistInterface,
     UserTopTrackInterface,
@@ -49,6 +52,7 @@ const page: React.FC = async () => {
     UserPlaylistInterface,
     UserSavedTracksInterface,
     SavedAlbumResponseInterface,
+    NewReleasesAlbums,
   ] = await Promise.all([
     getEndpointTopArtists(undefined, 'short_term', 10),
     getEndpointTopTracks(undefined, 'short_term', 6),
@@ -57,7 +61,12 @@ const page: React.FC = async () => {
     getEndpointMePlaylists(1, 10),
     getEndpointSavedTracks(1, 10),
     getEndpointSavedAlbums(1, 10),
+    getNewRelease('US', 1, 10),
   ]);
+  console.log(
+    '🚀 ~~~~  file: page.tsx:48 ~~~~  constpage:React.FC= ~~~~  newReleases:',
+    newReleases,
+  );
 
   /*   const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
     limit: 10,
@@ -133,6 +142,14 @@ const page: React.FC = async () => {
           </Grid>
         </Section>
       )}
+
+      {Array?.isArray(newReleases?.albums?.items) && (
+        <Section title="New Releases">
+          <Grid>
+            {newReleases?.albums?.items?.map((album) => <AlbumCard key={album.id} album={album} />)}
+          </Grid>
+        </Section>
+      )}
       {Array?.isArray(followedPlaylists?.items) && (
         <Section title="Playlists" href="/playlists">
           <Grid>
@@ -142,6 +159,17 @@ const page: React.FC = async () => {
           </Grid>
         </Section>
       )}
+
+      {Array.isArray(savedTracks?.items) && (
+        <Section title="Favorite Tracks" href="/tracks">
+          <TrackTable>
+            {savedTracks?.items?.map((track) => (
+              <TrackRow key={track.track.id} track={track.track} />
+            ))}
+          </TrackTable>
+        </Section>
+      )}
+
       {Array.isArray(followedArtists?.artists?.items) && (
         <Section title="Favorite Artists" href="/artists">
           <Grid>
@@ -159,16 +187,6 @@ const page: React.FC = async () => {
               <AlbumCard key={album.album.id} album={album.album} />
             ))}
           </Grid>
-        </Section>
-      )}
-
-      {Array.isArray(savedTracks?.items) && (
-        <Section title="Favorite Tracks" href="/tracks">
-          <TrackTable>
-            {savedTracks?.items?.map((track) => (
-              <TrackRow key={track.track.id} track={track.track} />
-            ))}
-          </TrackTable>
         </Section>
       )}
     </Container>
