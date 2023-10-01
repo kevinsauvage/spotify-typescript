@@ -54,4 +54,12 @@
   &:hover {
     background-color: var(--color-background-3);
   }
+
+  @include respond(mobile_l) {
+    .left {
+      .name {
+        font-size: 0.9rem;
+      }
+    }
+  }
 }

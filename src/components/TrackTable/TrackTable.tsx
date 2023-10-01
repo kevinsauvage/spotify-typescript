@@ -12,8 +12,8 @@ const TrackTable: React.FC<{
         {showAlbum && <col width="50px" />}
         <col width="100%" />
         {showPopularity && <col width="65px" />}
-        <col width="80px" />
-        {remove && <col width="80px" />}
+        <col width="60px" />
+        {remove && <col width="60px" />}
       </colgroup>
       <thead>
         <tr>
