@@ -8,6 +8,7 @@ import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
+import TrackTable from '@/components/TrackTable/TrackTable';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import {
   getEndpointFollowedArtists,
@@ -102,18 +103,18 @@ const page: React.FC = async () => {
       <div className={styles.wrapper}>
         {Array?.isArray(userTopTracks?.items) && (
           <Section title="Top Tracks" href="/top-tracks">
-            <List>
+            <TrackTable>
               {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
-            </List>
+            </TrackTable>
           </Section>
         )}
         {Array?.isArray(recentlyPlayedTracks?.items) && (
           <Section title="Recently Played" href="/recently-played">
-            <List>
+            <TrackTable>
               {recentlyPlayedTracks?.items?.map((track) => (
                 <TrackRow key={track.track.id} track={track.track} />
               ))}
-            </List>
+            </TrackTable>
           </Section>
         )}
       </div>
@@ -164,11 +165,11 @@ const page: React.FC = async () => {
 
       {Array.isArray(savedTracks?.items) && (
         <Section title="Favorite Tracks" href="/tracks">
-          <List>
+          <TrackTable>
             {savedTracks?.items?.map((track) => (
               <TrackRow key={track.track.id} track={track.track} />
             ))}
-          </List>
+          </TrackTable>
         </Section>
       )}
     </Container>

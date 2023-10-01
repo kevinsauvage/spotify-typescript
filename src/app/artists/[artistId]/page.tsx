@@ -4,6 +4,7 @@ import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
+import TrackTable from '@/components/TrackTable/TrackTable';
 import { getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { ArtistInterface, TrackInterface } from '@/types';
@@ -30,11 +31,11 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
     <Container>
       {artistTopTracks?.tracks?.length > 0 && (
         <Section title={'Top Tracks'}>
-          <List>
+          <TrackTable>
             {artistTopTracks.tracks.map((track) => (
               <TrackRow key={track.id} track={track} />
             ))}
-          </List>
+          </TrackTable>
         </Section>
       )}
 
@@ -50,11 +51,11 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
       {recommencedTracks?.tracks?.length > 0 && (
         <Section title="Recommended Tracks" href={`/artists/${artistId}/recommendations`}>
-          <List>
+          <TrackTable>
             {recommencedTracks.tracks.map((track) => (
               <TrackRow key={track.id} track={track} />
             ))}
-          </List>
+          </TrackTable>
         </Section>
       )}
     </Container>

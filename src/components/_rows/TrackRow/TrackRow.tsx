@@ -18,9 +18,9 @@ const TrackRow: React.FC<{
   const image = images?.pop();
 
   return (
-    <li className={styles.track}>
-      {image && <Image alt="Album cover" src={image?.url} width={50} height={50} />}
-      <div className={styles.left}>
+    <tr className={styles.track}>
+      <td>{image && <Image alt="Album cover" src={image?.url} width={50} height={50} />}</td>
+      <td className={styles.left}>
         <Link className={styles.name} href={`/tracks/${id}`}>
           {name}
         </Link>
@@ -31,17 +31,15 @@ const TrackRow: React.FC<{
           <span>-</span>
           <p className={styles.album}>{album?.name}</p>
         </div>
-      </div>
-      <div>
-        {popularity ? <Popularity popularity={popularity} extratyles={styles.popularity} /> : ''}
-      </div>
-      <div className={styles.right}>
+      </td>
+      <td>{popularity ?? ''}</td>
+      <td className={styles.right}>
         <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
         {playlistId && (
           <TrackConfig playlistId={playlistId} uri={uri} removeFromPlaylist={removeFromPlaylist} />
         )}
-      </div>
-    </li>
+      </td>
+    </tr>
   );
 };
 

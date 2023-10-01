@@ -3,6 +3,7 @@ import ChartComponent from '@/components/Chart/Chart';
 import Container from '@/components/Container/Container';
 import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
+import TrackTable from '@/components/TrackTable/TrackTable';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
 import { TrackInterface } from '@/types';
@@ -96,11 +97,11 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
         {recommendedTracks?.tracks?.length > 0 && (
           <Section title="Recommended Tracks" href={`/tracks/${track.id}/recommendations`}>
-            <List>
+            <TrackTable>
               {recommendedTracks?.tracks?.map((trackRecommend: TrackInterface) => (
                 <TrackRow key={trackRecommend.id} track={trackRecommend} />
               ))}
-            </List>
+            </TrackTable>
           </Section>
         )}
         <Section title="Audio Features">

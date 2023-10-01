@@ -5,6 +5,7 @@ import Container from '@/components/Container/Container';
 import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
+import TrackTable from '@/components/TrackTable/TrackTable';
 import { getEndpointTopTracks } from '@/lib/Spotify/user';
 import { UserTopTrackInterface } from '@/types';
 
@@ -26,7 +27,9 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
       </PageBannerWrapper>
       <Container>
         <FiltersPeriod path="/top-tracks" period={period} />
-        <List>{topTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}</List>
+        <TrackTable>
+          {topTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
+        </TrackTable>
         <Pagination
           currentPage={page}
           totalPages={Math.floor(topTracks?.total / topTracks?.limit)}

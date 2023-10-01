@@ -1,8 +1,8 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
-import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
+import TrackTable from '@/components/TrackTable/TrackTable';
 import { getAlbumTracks } from '@/lib/Spotify/album';
 import { TrackInterface } from '@/types';
 
@@ -22,7 +22,9 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
     <Container>
       {items?.length > 0 && (
         <Section title={'Album Tracks'}>
-          <List>{items?.map((track) => <TrackRow key={track.id} track={track} />)}</List>
+          <TrackTable>
+            {items?.map((track) => <TrackRow key={track.id} track={track} />)}
+          </TrackTable>
         </Section>
       )}
       <Pagination currentPage={page} totalPages={Math.floor(total / limit)} navigate />

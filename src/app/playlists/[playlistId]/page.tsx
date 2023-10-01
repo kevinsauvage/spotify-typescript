@@ -1,7 +1,7 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
-import List from '@/components/List/List';
+import TrackTable from '@/components/TrackTable/TrackTable';
 import { getPlaylistTracks } from '@/lib/Spotify/playlist';
 import { PlaylistTracksInterface } from '@/types';
 
@@ -17,11 +17,11 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
 
   return (
     <Container>
-      <List>
+      <TrackTable>
         {playlistTracks?.items?.map((track) => (
           <TrackRow key={track.track.id} track={track.track} playlistId={params.playlistId} />
         ))}
-      </List>
+      </TrackTable>
       <Pagination
         currentPage={page}
         totalPages={Math.floor(playlistTracks?.total / playlistTracks?.limit)}

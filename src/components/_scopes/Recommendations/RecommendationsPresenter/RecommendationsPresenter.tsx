@@ -4,6 +4,7 @@ import CreatePlaylist from '@/components/CreatePlaylist/CreatePlaylist';
 import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
+import TrackTable from '@/components/TrackTable/TrackTable';
 import { addItemsToPlaylist, createPlaylist } from '@/lib/Spotify/playlist';
 import { getAvailableGenreSeeds, getRecommendations } from '@/lib/Spotify/recommendations';
 import { getEndpointMe } from '@/lib/Spotify/user';
@@ -67,9 +68,9 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
         initialParams={rest}
         seedGenres={seedGenres ? seedGenres?.split(',') : []}
       />
-      <List>
+      <TrackTable>
         {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
-      </List>
+      </TrackTable>
     </Container>
   );
 };

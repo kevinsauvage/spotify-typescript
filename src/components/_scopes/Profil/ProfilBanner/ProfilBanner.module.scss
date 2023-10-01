@@ -20,7 +20,6 @@
   .bannerItem {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     border-radius: 0.5rem;
     background-color: var(--color-background-3);
     transition: all 0.3s ease-in-out;
@@ -30,7 +29,7 @@
     }
 
     .bannerItemTitle {
-      padding: 0.5rem;
+      padding: 1rem;
       font-weight: 600;
       font-size: 1rem;
     }
