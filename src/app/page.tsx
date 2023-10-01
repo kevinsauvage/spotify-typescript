@@ -112,6 +112,7 @@ const page: React.FC = async () => {
             </TrackTable>
           </Section>
         )}
+
         {Array?.isArray(recentlyPlayedTracks?.items) && (
           <Section title="Recently Played" href="/recently-played">
             <TrackTable>
@@ -146,6 +147,7 @@ const page: React.FC = async () => {
           </Grid>
         </Section>
       )}
+
       {Array?.isArray(followedPlaylists?.items) && (
         <Section title="Playlists" href="/playlists">
           <Grid>
