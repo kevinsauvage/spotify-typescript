@@ -39,13 +39,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    &:nth-child(1) {
-      padding-left: 0rem;
-    }
-
     &:nth-child(2) {
+      padding: 0.5rem;
       padding-right: 1rem;
-      padding-left: 0.5rem;
     }
 
     &:nth-child(3) {

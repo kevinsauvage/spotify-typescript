@@ -14,9 +14,13 @@ const AlbumCard: React.FC<IProperties> = ({ album }) => {
   const { popularity, images, name, id, artists } = album;
   return (
     <div className={styles.AlbumCard}>
-      <div className={styles.popularity}>
-        <Popularity popularity={popularity} />
-      </div>
+      {popularity ? (
+        <div className={styles.popularity}>
+          <Popularity popularity={popularity} />
+        </div>
+      ) : (
+        ''
+      )}
       <Image className={styles.image} src={images[0].url} alt={name} width={300} height={300} />
       <div className={styles.info}>
         <Link className={styles.name} href={`/albums/${id}`}>
