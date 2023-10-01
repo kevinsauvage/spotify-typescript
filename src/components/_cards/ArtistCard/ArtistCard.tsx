@@ -9,7 +9,8 @@ import styles from './ArtistCard.module.scss';
 const ArtistCard: React.FC<{
   artist: ArtistInterface;
 }> = ({ artist }) => {
-  const { name, images, id, popularity } = artist;
+  const { name, images, id, popularity, followers } = artist;
+
   const image = images.at(2) ?? images.at(1) ?? images.at(0);
 
   return (
@@ -30,6 +31,7 @@ const ArtistCard: React.FC<{
         <div className={styles.popularity}>
           <Popularity popularity={popularity} />
         </div>
+        {followers && <div className={styles.followers}>{followers.total} followers</div>}
       </div>
     </div>
   );
