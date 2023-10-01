@@ -18,6 +18,8 @@ export const loginServerAction = async (accessToken: string, expiresIn: number) 
     name: 'spotify_token',
     value: JSON.stringify({ accessToken, expiresIn: currentTime + expiresIn }),
   });
+
+  redirect('/');
 };
 
 export const logoutServerAction = () => {

@@ -28,7 +28,6 @@ const Page = () => {
     const { accessToken, expiresInSeconds } = extractTokenAndExpires(href);
     if (accessToken) {
       loginServerAction(accessToken, Number(expiresInSeconds));
-      redirect('/');
     } else push('/login');
   }, [push]);
 

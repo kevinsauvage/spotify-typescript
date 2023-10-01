@@ -59,14 +59,14 @@ const page: React.FC = async () => {
     getEndpointSavedAlbums(1, 10),
   ]);
 
-  const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
+  /*   const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
     limit: 10,
     seedTracks:
       userTopTracks?.items
         ?.slice(0, 5)
         .map((track) => track.id)
         .join(',') || undefined,
-  });
+  }); */
 
   const bannerData = [
     {
@@ -117,7 +117,7 @@ const page: React.FC = async () => {
           </Section>
         )}
       </div>
-
+      {/* 
       {Array?.isArray(recommendations?.tracks) && (
         <Section title="Tracks You May Like" href="/tracks">
           <Grid>
@@ -125,7 +125,7 @@ const page: React.FC = async () => {
           </Grid>
         </Section>
       )}
-
+ */}
       {Array?.isArray(userTopArtists?.items) && (
         <Section title="Top Artists" href="/top-artists">
           <Grid>
