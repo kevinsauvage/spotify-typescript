@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 import ScreenLoader from '@/components/ScreenLoader/ScreenLoader';
 import { loginServerAction } from '@/serverActions/auth';
@@ -26,8 +26,10 @@ const Page = () => {
   useEffect(() => {
     const { href } = window.location;
     const { accessToken, expiresInSeconds } = extractTokenAndExpires(href);
-    if (accessToken) loginServerAction(accessToken, Number(expiresInSeconds));
-    else push('/login');
+    if (accessToken) {
+      loginServerAction(accessToken, Number(expiresInSeconds));
+      redirect('/');
+    } else push('/login');
   }, [push]);
 
   return <ScreenLoader />;
