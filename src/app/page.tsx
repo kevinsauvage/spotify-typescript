@@ -124,7 +124,7 @@ const page: React.FC = async () => {
       </div>
 
       {Array?.isArray(recommendations?.tracks) && (
-        <Section title="Tracks You May Like" href="/tracks">
+        <Section title="Tracks You May Like">
           <Grid>
             {recommendations?.tracks?.map((track) => <TrackCard key={track.id} track={track} />)}
           </Grid>

@@ -16,8 +16,8 @@ const PlaylistCard: React.FC<{
     <div className={styles.playlist}>
       {image?.url && <Image alt="Album cover" src={image?.url} width={200} height={200} />}
       <div className={styles.content}>
-        <Link href={`/playlists/${id}`} className={styles.name}>
-          {name}
+        <Link href={`/playlists/${id}`}>
+          <p className={styles.name}>{name}</p>
         </Link>
         <p className={styles.totalTracks}>{tracks?.total} tracks</p>
       </div>

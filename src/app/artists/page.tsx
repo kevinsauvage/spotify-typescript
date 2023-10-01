@@ -15,22 +15,20 @@ const Page: React.FC<PageInterface> = async () => {
   const savedArtists: FollowedArtistsInterface = await getEndpointFollowedArtists(15);
 
   return (
-    <div className={styles.page}>
-      <Container>
-        <PageBannerWrapper>
-          <Title>Favorite Artists</Title>
-        </PageBannerWrapper>
-        <Grid>
-          {savedArtists?.artists?.items?.map((artist) => (
-            <ArtistCard key={artist.id} artist={artist} />
-          ))}
-          <ListingArtistsClient
-            after={savedArtists?.artists?.cursors?.after}
-            handleFetch={getEndpointFollowedArtists}
-          />
-        </Grid>
-      </Container>
-    </div>
+    <Container className={styles.page}>
+      <PageBannerWrapper>
+        <Title>Favorite Artists</Title>
+      </PageBannerWrapper>
+      <Grid>
+        {savedArtists?.artists?.items?.map((artist) => (
+          <ArtistCard key={artist.id} artist={artist} />
+        ))}
+        <ListingArtistsClient
+          after={savedArtists?.artists?.cursors?.after}
+          handleFetch={getEndpointFollowedArtists}
+        />
+      </Grid>
+    </Container>
   );
 };
 

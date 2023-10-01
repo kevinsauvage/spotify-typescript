@@ -7,6 +7,7 @@ import TrackTable from '@/components/TrackTable/TrackTable';
 import { getEndpointSavedTracks } from '@/lib/Spotify/user';
 import { UserSavedTracksInterface } from '@/types';
 
+import styles from './page.module.scss';
 interface PageInterface {
   params: object;
   searchParams: { page: string };
@@ -14,10 +15,10 @@ interface PageInterface {
 
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const page = Number(searchParams.page || 1);
-  const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(page);
+  const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(page, 30);
 
   return (
-    <Container>
+    <Container className={styles.page}>
       <PageBannerWrapper>
         <Title>Favorite Tracks</Title>
       </PageBannerWrapper>

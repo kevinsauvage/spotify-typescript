@@ -8,6 +8,7 @@ import Title from '@/components/Title/Title';
 import { getEndpointTopArtists } from '@/lib/Spotify/user';
 import { UserTopArtistInterface } from '@/types';
 
+import styles from './page.module.scss';
 interface PageInterface {
   params: object;
   searchParams: { period: string; page: string };
@@ -16,26 +17,24 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const period = searchParams?.period || undefined;
   const page = Number(searchParams.page || 1);
-  const topArtists: UserTopArtistInterface = await getEndpointTopArtists(page, period);
+  const topArtists: UserTopArtistInterface = await getEndpointTopArtists(page, period, 30);
 
   return (
-    <div style={{ width: '100%' }}>
+    <Container className={styles.page}>
       <PageBannerWrapper>
         <Title>Top Artists</Title>
       </PageBannerWrapper>
-      <Container>
-        <FiltersPeriod path="/top-artists" period={period} />
-        <Grid>
-          {Array.isArray(topArtists.items) &&
-            topArtists?.items?.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
-        </Grid>
-        <Pagination
-          currentPage={page}
-          totalPages={Math.floor(topArtists?.total / topArtists?.limit)}
-          navigate
-        />
-      </Container>
-    </div>
+      <FiltersPeriod path="/top-artists" period={period} />
+      <Grid>
+        {Array.isArray(topArtists.items) &&
+          topArtists?.items?.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
+      </Grid>
+      <Pagination
+        currentPage={page}
+        totalPages={Math.floor(topArtists?.total / topArtists?.limit)}
+        navigate
+      />
+    </Container>
   );
 };
 

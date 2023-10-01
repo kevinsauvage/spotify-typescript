@@ -6,22 +6,21 @@ import TrackTable from '@/components/TrackTable/TrackTable';
 import { getEndpointRecentTracks } from '@/lib/Spotify/user';
 import { RecentlyPlayedInterface } from '@/types';
 
+import styles from './page.module.scss';
 const page: React.FC = async () => {
   const recentlyPlayedTracks: RecentlyPlayedInterface = await getEndpointRecentTracks(50);
 
   return (
-    <div>
+    <Container className={styles.page}>
       <PageBannerWrapper>
         <Title>Recently Played Tracks</Title>
       </PageBannerWrapper>
-      <Container>
-        <TrackTable>
-          {recentlyPlayedTracks?.items?.map((track) => (
-            <TrackRow key={track.track.id} track={track.track} />
-          ))}
-        </TrackTable>
-      </Container>
-    </div>
+      <TrackTable>
+        {recentlyPlayedTracks?.items?.map((track) => (
+          <TrackRow key={track.track.id} track={track.track} />
+        ))}
+      </TrackTable>
+    </Container>
   );
 };
 

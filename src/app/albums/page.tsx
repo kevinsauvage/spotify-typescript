@@ -7,6 +7,7 @@ import Title from '@/components/Title/Title';
 import { getEndpointSavedAlbums } from '@/lib/Spotify/user';
 import { SavedAlbumResponseInterface } from '@/types';
 
+import styles from './page.module.scss';
 interface PageInterface {
   searchParams: { page: string };
 }
@@ -14,10 +15,10 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const page = Number(searchParams.page || 1);
 
-  const savedAlbumns: SavedAlbumResponseInterface = await getEndpointSavedAlbums(page, 10);
+  const savedAlbumns: SavedAlbumResponseInterface = await getEndpointSavedAlbums(page, 20);
 
   return (
-    <Container>
+    <Container className={styles.page}>
       <PageBannerWrapper>
         <Title>Favorite Albums</Title>
       </PageBannerWrapper>
