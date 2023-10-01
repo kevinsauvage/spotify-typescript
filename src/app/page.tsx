@@ -6,7 +6,6 @@ import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import ProfilBanner from '@/components/_scopes/Profil/ProfilBanner/ProfilBanner';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
-import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
 import TrackTable from '@/components/TrackTable/TrackTable';
 import { getRecommendations } from '@/lib/Spotify/recommendations';

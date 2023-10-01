@@ -2,7 +2,6 @@ import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
-import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
 import TrackTable from '@/components/TrackTable/TrackTable';
 import { getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';

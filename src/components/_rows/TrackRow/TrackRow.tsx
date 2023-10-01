@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Popularity from '@/components/Popularity/Popularity';
 import TrackConfig from '@/components/TrackConfig/TrackConfig';
 import { removeFromPlaylist } from '@/lib/Spotify/playlist';
 import { TrackInterface } from '@/types';

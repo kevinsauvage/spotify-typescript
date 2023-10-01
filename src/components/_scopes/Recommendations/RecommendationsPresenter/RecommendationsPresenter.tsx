@@ -1,7 +1,6 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Container from '@/components/Container/Container';
 import CreatePlaylist from '@/components/CreatePlaylist/CreatePlaylist';
-import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
 import TrackTable from '@/components/TrackTable/TrackTable';

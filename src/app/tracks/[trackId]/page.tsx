@@ -1,7 +1,6 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import ChartComponent from '@/components/Chart/Chart';
 import Container from '@/components/Container/Container';
-import List from '@/components/List/List';
 import Section from '@/components/Section/Section';
 import TrackTable from '@/components/TrackTable/TrackTable';
 import { getRecommendations } from '@/lib/Spotify/recommendations';

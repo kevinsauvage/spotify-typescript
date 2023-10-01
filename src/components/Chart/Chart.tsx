@@ -1,10 +1,10 @@
 'use client';
 
-// eslint-disable-next-line simple-import-sort/imports
 import { Bar } from 'react-chartjs-2';
 
-import { Chart, ChartData, registerables } from 'chart.js';
 import styles from './Chart.module.scss';
+
+import { Chart, ChartData, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 

@@ -2,7 +2,6 @@ import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import Container from '@/components/Container/Container';
-import List from '@/components/List/List';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
 import TrackTable from '@/components/TrackTable/TrackTable';
