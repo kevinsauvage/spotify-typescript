@@ -1,9 +1,7 @@
-import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
 import AlbumRow from '@/components/_rows/AlbumRow/AlbumRow';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import AlbumTable from '@/components/AlbumTable/AlbumTable';
 import Container from '@/components/Container/Container';
-import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
 import { getArtistAlbums } from '@/lib/Spotify/artist';
 import { ArtistAlbumsInterface } from '@/types';
