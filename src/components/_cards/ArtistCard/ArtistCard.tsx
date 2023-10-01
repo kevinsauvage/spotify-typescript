@@ -31,7 +31,11 @@ const ArtistCard: React.FC<{
         <div className={styles.popularity}>
           <Popularity popularity={popularity} />
         </div>
-        {followers && <div className={styles.followers}>{followers.total} followers</div>}
+        {followers?.total ? (
+          <div className={styles.followers}>{followers.total} followers</div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
