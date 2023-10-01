@@ -92,7 +92,7 @@ const Pagination: React.FC<IProperties> = ({ currentPage, totalPages, navigate, 
       >
         <Back />
       </button>
-      {renderPageRange()}
+      <div className={styles.items}>{renderPageRange()}</div>
       <button
         className={`${styles.item} ${styles.arrow}`}
         disabled={currentPage === totalPages}
