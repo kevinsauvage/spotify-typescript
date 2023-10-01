@@ -17,6 +17,6 @@ export const getArtistRelatedArtists = async (artistId: string) => {
 
 export const getArtistAlbums = async (artistId: string, page = 1, limit = 10) => {
   const offset = (page - 1) * limit;
-  const url = `${enpointBaseUrl}/artists/${artistId}/albums?limit=${limit}&offset=${offset}`;
+  const url = `${enpointBaseUrl}/artists/${artistId}/albums?limit=${limit}&offset=${offset}&include_groups=album,single`;
   return fetchHelper(url);
 };

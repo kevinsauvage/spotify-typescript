@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Calendar from '@/assets/icons/calendar';
 import { AlbumInterface } from '@/types';
 
 import styles from './AlbumRow.module.scss';
@@ -31,7 +32,12 @@ const AlbumRow: React.FC<IProperties> = ({ album }) => {
         ))}
       </td>
 
-      <td className={styles.year}>{release_date.split('-')[0]}</td>
+      <td>
+        <div className={styles.year}>
+          {release_date.split('-')[0]}
+          <Calendar />
+        </div>
+      </td>
 
       {popularity && <td className={styles.popularity}>{popularity}</td>}
 

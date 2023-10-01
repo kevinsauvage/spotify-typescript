@@ -25,6 +25,14 @@
   .total,
   .popularity,
   .artist {
+    gap: 0.3rem;
+    color: var(--color-text-3);
     font-size: 0.8rem;
+  }
+
+  .year {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
   }
 }
