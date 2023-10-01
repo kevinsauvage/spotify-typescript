@@ -22,7 +22,7 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
     <Container>
       {items?.length > 0 && (
         <Section title={'Album Tracks'}>
-          <TrackTable>
+          <TrackTable showAlbum={false} showPopularity={false}>
             {items?.map((track) => <TrackRow key={track.id} track={track} />)}
           </TrackTable>
         </Section>

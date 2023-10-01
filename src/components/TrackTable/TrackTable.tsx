@@ -2,21 +2,26 @@ import styles from './TrackTable.module.scss';
 
 const TrackTable: React.FC<{
   children: React.ReactNode;
-}> = ({ children }) => {
+  remove?: boolean;
+  showAlbum?: boolean;
+  showPopularity?: boolean;
+}> = ({ children, remove, showAlbum = true, showPopularity = true }) => {
   return (
     <table className={styles.table}>
       <colgroup>
-        <col width="50px" />
+        {showAlbum && <col width="50px" />}
         <col width="100%" />
-        <col width="65px" />
+        {showPopularity && <col width="65px" />}
         <col width="80px" />
+        {remove && <col width="80px" />}
       </colgroup>
       <thead>
         <tr>
-          <th>Album</th>
+          {showAlbum && <th>Album</th>}
           <th>Info</th>
-          <th>Popularity</th>
+          {showPopularity && <th>Popularity</th>}
           <th>Duration</th>
+          {remove && <th>Remove</th>}
         </tr>
       </thead>
       <tbody>{children}</tbody>

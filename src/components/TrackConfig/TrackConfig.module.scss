@@ -1,11 +1,13 @@
 .TrackConfig {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.5rem;
 
   button {
     border: none;
-    color: white;
+    color: var(--color-text-3);
+    font-size: 1.1rem;
     background-color: transparent;
     cursor: pointer;
   }

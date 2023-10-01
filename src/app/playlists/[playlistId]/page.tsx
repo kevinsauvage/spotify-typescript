@@ -17,7 +17,7 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
 
   return (
     <Container>
-      <TrackTable>
+      <TrackTable remove>
         {playlistTracks?.items?.map((track) => (
           <TrackRow key={track.track.id} track={track.track} playlistId={params.playlistId} />
         ))}
