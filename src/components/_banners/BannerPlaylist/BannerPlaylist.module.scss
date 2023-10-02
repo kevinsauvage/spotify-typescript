@@ -1,0 +1,46 @@
+@import '../../../styles/responsive';
+
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 2rem;
+  width: 100%;
+
+  .details {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+
+    .name {
+      max-width: 400px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .public,
+    .description,
+    .collaborative,
+    .followers {
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+@include respond(tablet) {
+  .banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

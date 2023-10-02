@@ -1,10 +1,10 @@
 import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
+import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
-import TrackTable from '@/components/TrackTable/TrackTable';
 import { getArtistAlbums, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { ArtistAlbumsInterface, ArtistInterface, TrackInterface } from '@/types';

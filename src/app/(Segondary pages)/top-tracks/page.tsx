@@ -1,10 +1,10 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
-import TrackTable from '@/components/TrackTable/TrackTable';
 import { getEndpointTopTracks } from '@/lib/Spotify/user';
 import { UserTopTrackInterface } from '@/types';
 

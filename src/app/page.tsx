@@ -1,13 +1,13 @@
+import ProfilBanner from '@/components/_banners/ProfilBanner/ProfilBanner';
 import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import PlaylistCard from '@/components/_cards/PlaylistCard/PlaylistCard';
 import TrackCard from '@/components/_cards/TrackCard/TrackCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
-import ProfilBanner from '@/components/_scopes/Profil/ProfilBanner/ProfilBanner';
+import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
-import TrackTable from '@/components/TrackTable/TrackTable';
 import { getNewRelease } from '@/lib/Spotify/album';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import {

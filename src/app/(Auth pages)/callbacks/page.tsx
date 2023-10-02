@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import ScreenLoader from '@/components/ScreenLoader/ScreenLoader';
 import { loginServerAction } from '@/serverActions/auth';

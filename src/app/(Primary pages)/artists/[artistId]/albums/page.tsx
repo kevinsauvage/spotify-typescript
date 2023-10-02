@@ -1,6 +1,6 @@
 import AlbumRow from '@/components/_rows/AlbumRow/AlbumRow';
+import AlbumTable from '@/components/_scopes/Listing/AlbumTable/AlbumTable';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
-import AlbumTable from '@/components/AlbumTable/AlbumTable';
 import Container from '@/components/Container/Container';
 import Section from '@/components/Section/Section';
 import { getArtistAlbums } from '@/lib/Spotify/artist';

@@ -1,8 +1,8 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import Section from '@/components/Section/Section';
-import TrackTable from '@/components/TrackTable/TrackTable';
 import { getAlbumTracks } from '@/lib/Spotify/album';
 import { TrackInterface } from '@/types';
 

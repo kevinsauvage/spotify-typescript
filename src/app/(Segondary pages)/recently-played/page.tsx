@@ -1,8 +1,8 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
+import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
-import TrackTable from '@/components/TrackTable/TrackTable';
 import { getEndpointRecentTracks } from '@/lib/Spotify/user';
 import { RecentlyPlayedInterface } from '@/types';
 

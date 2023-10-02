@@ -1,9 +1,9 @@
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
+import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import CreatePlaylist from '@/components/CreatePlaylist/CreatePlaylist';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
-import TrackTable from '@/components/TrackTable/TrackTable';
 import { addItemsToPlaylist, createPlaylist } from '@/lib/Spotify/playlist';
 import { getAvailableGenreSeeds, getRecommendations } from '@/lib/Spotify/recommendations';
 import { getEndpointMe } from '@/lib/Spotify/user';
@@ -15,6 +15,7 @@ interface IProperties {
   searchParams: { seedArtists: string; seedGenres: string; seedTracks: string };
   trackId?: string;
   artistId?: string;
+  tracks?: string;
   title: React.JSX.Element | string;
   playlistName: string;
 }
@@ -38,7 +39,7 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
 
   const otherParameters = createSearchParameters(rest);
 
-  const recommencedTracks: { tracks: [TrackInterface] } = await getRecommendations({
+  const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
     otherParams: otherParameters,
     seedArtists: artistId ?? seedArtists,
     seedGenres,
