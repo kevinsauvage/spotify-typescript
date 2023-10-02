@@ -46,8 +46,7 @@ export const fetchHelper = async (endpoint: string, options: object = {}, token:
 
     return response;
   } catch (error) {
-    console.log('🚀 ~~~~  file: index.tsx:35 ~~~~  fetchHelper ~~~~  error:', error);
-
+    console.error('🚀 ~~~~  file: index.tsx:35 ~~~~  fetchHelper ~~~~  error:', error);
     return error;
   }
 };
