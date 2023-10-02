@@ -6,7 +6,8 @@ import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
 import TrackTable from '@/components/TrackTable/TrackTable';
 import { getArtistAlbums, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
-import { AlbumInterface, ArtistAlbumsInterface, ArtistInterface, TrackInterface } from '@/types';
+import { getRecommendations } from '@/lib/Spotify/recommendations';
+import { ArtistAlbumsInterface, ArtistInterface, TrackInterface } from '@/types';
 
 interface PageInterface {
   params: { artistId: string };
@@ -26,10 +27,10 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
     getArtistAlbums(artistId),
   ]);
 
-  /*   const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
-    limit: 5,
+  const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
+    limit: 10,
     seedArtists: artistId,
-  }); */
+  });
 
   return (
     <Container>
@@ -56,6 +57,16 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
         </Section>
       )}
 
+      {recommencedTracks?.tracks?.length > 0 && (
+        <Section title="Recommended Tracks" href={`/artists/${artistId}/recommendations`}>
+          <TrackTable>
+            {recommencedTracks.tracks.map((track) => (
+              <TrackRow key={track.id} track={track} />
+            ))}
+          </TrackTable>
+        </Section>
+      )}
+
       {relatedArtists?.artists?.length > 0 && (
         <Section title="Related Artists">
           <Grid>
@@ -65,16 +76,6 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
           </Grid>
         </Section>
       )}
-
-      {/*       {recommencedTracks?.tracks?.length > 0 && (
-        <Section title="Recommended Tracks" href={`/artists/${artistId}/recommendations`}>
-          <TrackTable>
-            {recommencedTracks.tracks.map((track) => (
-              <TrackRow key={track.id} track={track} />
-            ))}
-          </TrackTable>
-        </Section>
-      )} */}
     </Container>
   );
 };

@@ -7,7 +7,6 @@ import Title from '@/components/Title/Title';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
 import { UserPlaylistInterface } from '@/types';
 
-import styles from './page.module.scss';
 interface PageInterface {
   params: object;
   searchParams: { page: string };
@@ -19,7 +18,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const followedPlaylists: UserPlaylistInterface = await getEndpointMePlaylists(page, 20);
 
   return (
-    <Container className={styles.page}>
+    <Container>
       <PageBannerWrapper>
         <Title>Playlists</Title>
       </PageBannerWrapper>

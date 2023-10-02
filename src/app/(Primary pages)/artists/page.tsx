@@ -7,15 +7,13 @@ import Title from '@/components/Title/Title';
 import { getEndpointFollowedArtists } from '@/lib/Spotify/user';
 import { FollowedArtistsInterface } from '@/types';
 
-import styles from './page.module.scss';
-
 interface PageInterface {}
 
 const Page: React.FC<PageInterface> = async () => {
   const savedArtists: FollowedArtistsInterface = await getEndpointFollowedArtists(15);
 
   return (
-    <Container className={styles.page}>
+    <Container>
       <PageBannerWrapper>
         <Title>Favorite Artists</Title>
       </PageBannerWrapper>

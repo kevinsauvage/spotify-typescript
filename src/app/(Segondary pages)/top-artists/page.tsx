@@ -8,7 +8,6 @@ import Title from '@/components/Title/Title';
 import { getEndpointTopArtists } from '@/lib/Spotify/user';
 import { UserTopArtistInterface } from '@/types';
 
-import styles from './page.module.scss';
 interface PageInterface {
   params: object;
   searchParams: { period: string; page: string };
@@ -20,7 +19,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const topArtists: UserTopArtistInterface = await getEndpointTopArtists(page, period, 30);
 
   return (
-    <Container className={styles.page}>
+    <Container>
       <PageBannerWrapper>
         <Title>Top Artists</Title>
       </PageBannerWrapper>

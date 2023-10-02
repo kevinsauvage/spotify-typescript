@@ -6,12 +6,11 @@ import TrackTable from '@/components/TrackTable/TrackTable';
 import { getEndpointRecentTracks } from '@/lib/Spotify/user';
 import { RecentlyPlayedInterface } from '@/types';
 
-import styles from './page.module.scss';
 const page: React.FC = async () => {
   const recentlyPlayedTracks: RecentlyPlayedInterface = await getEndpointRecentTracks(50);
 
   return (
-    <Container className={styles.page}>
+    <Container>
       <PageBannerWrapper>
         <Title>Recently Played Tracks</Title>
       </PageBannerWrapper>

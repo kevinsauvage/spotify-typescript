@@ -8,7 +8,6 @@ import TrackTable from '@/components/TrackTable/TrackTable';
 import { getEndpointTopTracks } from '@/lib/Spotify/user';
 import { UserTopTrackInterface } from '@/types';
 
-import styles from './page.module.scss';
 interface PageInterface {
   params: object;
   searchParams: { period: string; page?: string };
@@ -21,7 +20,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const topTracks: UserTopTrackInterface = await getEndpointTopTracks(page, period, 30);
 
   return (
-    <Container className={styles.page}>
+    <Container>
       <PageBannerWrapper>
         <Title>Top Tracks</Title>
       </PageBannerWrapper>
