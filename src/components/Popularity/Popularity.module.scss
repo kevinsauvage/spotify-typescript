@@ -1,14 +1,18 @@
 .Popularity {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.1rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  width: 100%;
   width: fit-content;
   height: fit-content;
   padding: 0.3rem;
-  color: var(--primary-100);
-  font-weight: 600;
-  font-size: 1rem;
+  border-radius: 0.2rem 0.4rem 0.2rem 0.2rem;
+  color: var(--color-text-3);
+  font-weight: 500;
+  font-size: 0.9rem;
+  background: var(--color-background-2);
 
   svg {
     font-size: 1.2rem;

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Popularity from '@/assets/icons/popularity';
+import PopularityIcon from '@/assets/icons/popularity';
 import Time from '@/assets/icons/time';
 import TrackConfig from '@/components/TrackConfig/TrackConfig';
 import { removeFromPlaylist } from '@/lib/Spotify/playlist';
@@ -15,8 +15,9 @@ const TrackRow: React.FC<{
   playlistId?: string;
 }> = ({ track, playlistId }) => {
   const { name, artists, album, duration_ms: durationMs, id, uri, popularity } = track || {};
+
   const { images } = album || {};
-  const image = images?.pop();
+  const image = images?.at(2) ?? images?.at(1) ?? images?.at(0);
 
   return (
     <tr className={styles.track}>
@@ -33,24 +34,30 @@ const TrackRow: React.FC<{
           <Link href={`/artists/${artists?.[0]?.id}`}>
             <p className={styles.artist}>{artists?.[0]?.name}</p>
           </Link>
-          <span>-</span>
-          <p className={styles.album}>{album?.name}</p>
+          {album?.id && (
+            <>
+              <span>-</span>
+              <Link href={`/albums/${album?.id}`} className={styles.album}>
+                {album?.name}
+              </Link>
+            </>
+          )}
         </div>
       </td>
       {popularity ? (
         <td>
           <div className={styles.popularity}>
             {popularity}
-            <Popularity />
+            <PopularityIcon />
           </div>
         </td>
       ) : (
-        <td />
+        ''
       )}
-      <td className={styles.right}>
-        <p className={styles.duration}>
+      <td>
+        <div className={styles.duration}>
           {getMinuteFromMilliseconds(durationMs)} <Time />
-        </p>
+        </div>
       </td>
       {playlistId && (
         <td>

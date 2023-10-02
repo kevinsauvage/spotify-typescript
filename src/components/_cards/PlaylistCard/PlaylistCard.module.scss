@@ -8,8 +8,6 @@
   border-radius: 0.5rem;
   background-color: var(--color-background-3);
 
-  @include overlayWithHover;
-
   img {
     width: 100%;
     height: fit-content;

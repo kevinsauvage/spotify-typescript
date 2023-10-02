@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 export interface ArtistInterface {
   id: string;
   name: string;
@@ -18,7 +19,7 @@ export interface TrackInterface {
   popularity: number;
   artists: ArtistInterface[];
   external_urls: { spotify: string };
-  album: { name: string; images: [{ height: number; url: string; width: number }] };
+  album: AlbumInterface;
   uri: string;
 }
 

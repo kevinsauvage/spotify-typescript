@@ -3,7 +3,7 @@ import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import Section from '@/components/Section/Section';
-import { getAlbumTracks } from '@/lib/Spotify/album';
+import { getAlbumById, getAlbumTracks } from '@/lib/Spotify/album';
 import { TrackInterface } from '@/types';
 
 interface PageInterface {
@@ -13,6 +13,8 @@ interface PageInterface {
 
 const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
   const { albumId } = params || {};
+  const album = await getAlbumById(albumId);
+
   const page = Number(searchParams?.page || 1);
   const albumTracks: { items: TrackInterface[]; total: number; limit: number } =
     await getAlbumTracks(albumId, page, 10);
@@ -22,8 +24,8 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
     <Container>
       {items?.length > 0 && (
         <Section title={'Album Tracks'}>
-          <TrackTable showAlbum={false} showPopularity={false}>
-            {items?.map((track) => <TrackRow key={track.id} track={track} />)}
+          <TrackTable showPopularity={false}>
+            {items?.map((track) => <TrackRow key={track.id} track={{ ...track, album }} />)}
           </TrackTable>
         </Section>
       )}

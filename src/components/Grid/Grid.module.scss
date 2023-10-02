@@ -3,13 +3,17 @@
 .Grid {
   display: grid;
   grid-auto-rows: 1fr;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(18%, 1fr));
   gap: 0.5rem;
   width: 100%;
   margin-bottom: 4rem;
 
-  > * {
-    overflow: hidden;
+  @include respond(laptop_l) {
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  }
+
+  @include respond(laptop_s) {
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
   }
 
   @include respond(mobile_l) {

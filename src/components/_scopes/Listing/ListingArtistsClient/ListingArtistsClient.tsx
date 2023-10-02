@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import ArtistCardSkeleton from '@/components/_cards/ArtistCard/ArtistCardSkeleton';
@@ -11,6 +11,8 @@ interface IProperties {
   handleFetch: (limit: number, after: string) => Promise<FollowedArtistsInterface>;
   after: string;
 }
+
+const limit = 15;
 
 const ListingArtistsClient: React.FC<IProperties> = ({ handleFetch, after }) => {
   const bottomReference = useRef<HTMLDivElement>(null);
@@ -24,7 +26,7 @@ const ListingArtistsClient: React.FC<IProperties> = ({ handleFetch, after }) => 
     if (!currentAfter) return;
 
     setLoading(true);
-    const response = await handleFetch(15, currentAfter);
+    const response = await handleFetch(limit, currentAfter);
     setLoading(false);
 
     if (!response) {
@@ -36,18 +38,20 @@ const ListingArtistsClient: React.FC<IProperties> = ({ handleFetch, after }) => 
     setData((previous) => [...previous, ...(response?.artists?.items || [])]);
   }, [currentAfter, handleFetch]);
 
+  const skeletonKeys = useMemo(() => [...new Array(limit).keys()], []);
+
   useEffect(() => {
-    if (isOncreen) {
+    if (isOncreen && !loading && !error) {
       getData();
     }
-  }, [getData, isOncreen]);
+  }, [error, getData, isOncreen, loading]);
 
   return (
     <>
       {data.map((artist) => (
         <ArtistCard key={artist.id} artist={artist} />
       ))}
-      {loading && [...new Array(10).keys()].map((key) => <ArtistCardSkeleton key={key} />)}
+      {loading && skeletonKeys.map((key) => <ArtistCardSkeleton key={key} index={key} />)}
       {error && <div>Error</div>}
       <div ref={bottomReference} style={{ height: '2rem' }} />
     </>

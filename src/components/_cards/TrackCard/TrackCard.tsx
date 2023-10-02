@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import TrackConfig from '@/components/TrackConfig/TrackConfig';
-import { removeFromPlaylist } from '@/lib/Spotify/playlist';
+import Popularity from '@/components/Popularity/Popularity';
 import { TrackInterface } from '@/types';
 import { getMinuteFromMilliseconds } from '@/utils/date';
 
@@ -10,9 +9,8 @@ import styles from './TrackCard.module.scss';
 
 const TrackCard: React.FC<{
   track: TrackInterface;
-  playlistId?: string;
-}> = ({ track, playlistId }) => {
-  const { name, artists, album, duration_ms: durationMs, id, uri } = track || {};
+}> = ({ track }) => {
+  const { name, artists, album, duration_ms: durationMs, id, popularity } = track || {};
   const { images } = album || {};
   const image = images?.at(1) ?? images?.at(0);
 
@@ -30,13 +28,13 @@ const TrackCard: React.FC<{
             <p className={styles.artist}>{artists?.[0]?.name}</p>
           </Link>
           <span>-</span>
-          <p className={styles.album}>{album?.name}</p>
+          <Link href={`/albums/${album?.id}`} className={styles.album}>
+            {album?.name}
+          </Link>
         </div>
+        <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
       </div>
-      <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
-      {playlistId && (
-        <TrackConfig playlistId={playlistId} uri={uri} removeFromPlaylist={removeFromPlaylist} />
-      )}
+      {popularity ? <Popularity popularity={popularity} /> : ''}
     </div>
   );
 };

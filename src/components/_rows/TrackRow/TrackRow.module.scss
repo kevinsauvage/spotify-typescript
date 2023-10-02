@@ -55,17 +55,16 @@
     }
   }
 
-  .right {
-    position: relative;
+  .duration {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.3rem;
+    width: fit-content;
+    margin-left: auto;
 
-    .duration {
-      display: flex;
-      align-items: center;
-      margin-left: auto;
-
-      svg {
-        margin-left: 0.3rem;
-      }
+    svg {
+      margin-left: 0.3rem;
     }
   }
 
