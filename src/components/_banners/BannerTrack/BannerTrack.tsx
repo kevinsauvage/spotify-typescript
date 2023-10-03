@@ -46,7 +46,7 @@ const BannerTrack: React.FC<{
             <div>
               <p className={styles.albumName}>
                 <strong>Album: </strong>
-                {album.name}
+                <Link href={`/albums/${album.id}`}>{album.name}</Link>
               </p>
             </div>
             <div className={styles.buttons}>
