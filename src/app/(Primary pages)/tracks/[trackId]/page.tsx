@@ -28,9 +28,9 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
   return (
     <Container>
-      {audioAnalysis && (
+      {audioFeatures && (
         <Section title="Track Analysis">
-          <AudioAnalysis audioAnalysis={audioAnalysis} />
+          <AudioAnalysis audioFeatures={audioFeatures} />
         </Section>
       )}
 

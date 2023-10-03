@@ -1,21 +1,24 @@
-import { AudioAnalysisInterface } from '@/types';
+import { AudioFeaturesInterface } from '@/types';
 import { getMinuteFromSeconds } from '@/utils/date';
 
 import styles from './AudioAnalysis.module.scss';
 
 const AudioAnalysis: React.FC<{
-  audioAnalysis: AudioAnalysisInterface;
-}> = ({ audioAnalysis }) => {
-  const trackAnalysis = audioAnalysis.track;
-
+  audioFeatures: AudioFeaturesInterface;
+}> = ({ audioFeatures }) => {
   const tableData = [
-    { attribute: 'Duration', value: getMinuteFromSeconds(trackAnalysis?.duration) },
-    { attribute: 'Tempo', value: trackAnalysis?.tempo.toString().split('.')[0].toString() },
-    { attribute: 'Bars', value: audioAnalysis?.bars?.length },
-    { attribute: 'Beats', value: audioAnalysis?.beats?.length },
-    { attribute: 'Sections', value: audioAnalysis?.sections?.length },
-    { attribute: 'Segments', value: audioAnalysis?.segments?.length },
-    { attribute: 'Tatums', value: audioAnalysis?.tatums?.length },
+    { attribute: 'Danceability', value: audioFeatures.danceability },
+    { attribute: 'Energy', value: audioFeatures.energy },
+    { attribute: 'Key', value: audioFeatures.key },
+    { attribute: 'Loudness', value: audioFeatures.loudness },
+    { attribute: 'Speechiness', value: audioFeatures.speechiness },
+    { attribute: 'Acousticness', value: audioFeatures.acousticness },
+    { attribute: 'Instrumentalness', value: audioFeatures.instrumentalness },
+    { attribute: 'Liveness', value: audioFeatures.liveness },
+    { attribute: 'Valence', value: audioFeatures.valence },
+    { attribute: 'Tempo', value: audioFeatures.tempo },
+    { attribute: 'Duration', value: getMinuteFromSeconds(audioFeatures.duration_ms) },
+    { attribute: 'Time Signature', value: audioFeatures.time_signature },
   ];
 
   return (

@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 import { AudioFeaturesInterface } from '@/types';
@@ -7,38 +7,48 @@ import { AudioFeaturesInterface } from '@/types';
 import styles from './Chart.module.scss';
 
 import { Chart, registerables } from 'chart.js';
-
 Chart.register(...registerables);
 
+// Define type alias for audio features
+type AudioFeatures = {
+  acousticness?: number;
+  danceability?: number;
+  energy?: number;
+  valence?: number;
+  instrumentalness?: number;
+  liveness?: number;
+  speechiness?: number;
+};
+
 interface IChartProperties {
-  audioFeatures: AudioFeaturesInterface;
+  audioFeatures: AudioFeatures;
 }
 
 const ChartComponent: React.FunctionComponent<IChartProperties> = ({ audioFeatures }) => {
+  // Define colors for the dataset
+  const backgroundColors = [
+    'rgba(255, 99, 132, 0.6)', // Red
+    'rgba(54, 162, 235, 0.6)', // Blue
+    'rgba(255, 206, 86, 0.6)', // Yellow
+    'rgba(75, 192, 192, 0.6)', // Teal
+    'rgba(153, 102, 255, 0.6)', // Purple
+    'rgba(255, 159, 64, 0.6)', // Orange
+    'rgba(0, 128, 0, 0.6)', // Green
+  ];
+
+  // Prepare the data for the chart
   const data = {
     datasets: [
       {
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.5)',
-          'rgba(54, 162, 235, 0.5)',
-          'rgba(255, 206, 86, 0.5)',
-          'rgba(75, 192, 192, 0.5)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-        ],
-        borderWidth: 1,
+        backgroundColor: backgroundColors,
         data: [
-          audioFeatures.acousticness || 0,
-          audioFeatures.danceability || 0,
-          audioFeatures.energy || 0,
-          audioFeatures.valence || 0,
-          audioFeatures.instrumentalness || 0,
-          audioFeatures.liveness || 0,
-          audioFeatures.speechiness || 0,
+          audioFeatures?.acousticness ?? 0,
+          audioFeatures?.danceability ?? 0,
+          audioFeatures?.energy ?? 0,
+          audioFeatures?.valence ?? 0,
+          audioFeatures?.instrumentalness ?? 0,
+          audioFeatures?.liveness ?? 0,
+          audioFeatures?.speechiness ?? 0,
         ],
         label: 'Audio Features',
       },
@@ -53,23 +63,46 @@ const ChartComponent: React.FunctionComponent<IChartProperties> = ({ audioFeatur
       'Speechiness',
     ],
   };
+
   return (
     <div className={styles.chart}>
       <Bar
         data={data}
         options={{
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
           plugins: {
             title: {
               display: false,
             },
             tooltip: {
-              enabled: false,
+              callbacks: {
+                label: (context) => {
+                  const value = context.parsed.y;
+                  return value.toFixed(2); // Display values with 2 decimal places
+                },
+              },
+              enabled: true,
             },
           },
           responsive: true,
           scales: {
+            x: {
+              beginAtZero: true,
+              ticks: {
+                callback: (value) => value.toString(), // Convert ticks to strings
+              },
+              title: {
+                display: false,
+              },
+            },
             y: {
               beginAtZero: true,
+              title: {
+                display: false,
+              },
             },
           },
         }}
