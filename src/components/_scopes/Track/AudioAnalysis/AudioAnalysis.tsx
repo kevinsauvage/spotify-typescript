@@ -1,5 +1,5 @@
 import { AudioFeaturesInterface } from '@/types';
-import { getMinuteFromSeconds } from '@/utils/date';
+import { getMinuteFromMilliseconds, getMinuteFromSeconds } from '@/utils/date';
 
 import styles from './AudioAnalysis.module.scss';
 
@@ -17,7 +17,7 @@ const AudioAnalysis: React.FC<{
     { attribute: 'Liveness', value: audioFeatures.liveness },
     { attribute: 'Valence', value: audioFeatures.valence },
     { attribute: 'Tempo', value: audioFeatures.tempo },
-    { attribute: 'Duration', value: getMinuteFromSeconds(audioFeatures.duration_ms) },
+    { attribute: 'Duration', value: getMinuteFromMilliseconds(audioFeatures.duration_ms) },
     { attribute: 'Time Signature', value: audioFeatures.time_signature },
   ];
 
