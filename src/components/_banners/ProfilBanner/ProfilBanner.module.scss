@@ -6,6 +6,10 @@
   gap: 0.8rem;
   margin-bottom: 2rem;
 
+  h1 {
+    margin: auto;
+  }
+
   .bannerItemImage {
     width: 100%;
     max-width: 100px;
@@ -19,6 +23,7 @@
     display: flex;
     align-items: center;
     width: 100%;
+    height: 100%;
     border-radius: 0.5rem;
     background-color: var(--color-background-3);
     transition: all 0.3s ease-in-out;

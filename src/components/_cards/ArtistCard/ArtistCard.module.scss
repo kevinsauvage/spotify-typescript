@@ -5,7 +5,7 @@
 .artist {
   position: relative;
   width: 100%;
-  padding: 0.8rem;
+  padding: 1.5rem;
   overflow: hidden;
   border-radius: 0.5rem;
   background-color: var(--color-background-3);
@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     width: 100%;
 
     .image {
@@ -45,7 +45,6 @@
     .name {
       position: relative;
       z-index: 3;
-      margin-bottom: 0.5rem;
       color: var(--color-text-1);
       font-size: 1.1rem;
       white-space: nowrap;
