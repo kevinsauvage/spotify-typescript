@@ -1,16 +1,30 @@
 import Image from 'next/image';
 
+import Popularity from '@/assets/icons/popularity';
 import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { AlbumInterface } from '@/types';
+
+import ItemDetailSeparator from '../ItemDetailSeparator/ItemDetailSeparator';
+import ItemDetailsRow from '../ItemDetailsRow/ItemDetailsRow';
 
 import styles from './BannerAlbum.module.scss';
 
 const BannerAlbum: React.FC<{
   album: AlbumInterface;
 }> = ({ album }) => {
-  const { name, popularity, images, external_urls, genres } = album || {};
+  const {
+    name,
+    popularity,
+    images,
+    external_urls,
+    genres,
+    release_date,
+    album_type,
+    total_tracks,
+  } = album || {};
+
   const image = images?.at(0);
 
   return (
@@ -30,8 +44,21 @@ const BannerAlbum: React.FC<{
 
           <div>
             <h1 className={styles.name}>{name}</h1>
-            <p className={styles.popularity}>Popularity: {popularity}</p>
-            <p className={styles.genres}>Genres: {genres?.join(', ')}</p>
+            <ItemDetailsRow>
+              <p className={styles.popularity}>
+                {popularity}
+                <Popularity />
+              </p>
+              <ItemDetailSeparator />
+              {genres?.length > 0 && <p className={styles.genres}>{genres?.join(', ')}</p>}
+              {genres?.length > 0 && <ItemDetailSeparator />}
+
+              <p className={styles.release}>{release_date?.split('-')[0]}</p>
+              <ItemDetailSeparator />
+              <p className={styles.type}>{album_type}</p>
+              <ItemDetailSeparator />
+              <p className={styles.totalTracks}>{total_tracks} tracks</p>
+            </ItemDetailsRow>
             <div className={styles.buttons}>
               {external_urls?.spotify && (
                 <LinkPrimary href={external_urls?.spotify} target="__blank">

@@ -10,6 +10,9 @@ import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper'
 import { ArtistInterface, TrackInterface } from '@/types';
 import { getMinuteFromMilliseconds } from '@/utils/date';
 
+import ItemDetailSeparator from '../ItemDetailSeparator/ItemDetailSeparator';
+import ItemDetailsRow from '../ItemDetailsRow/ItemDetailsRow';
+
 import styles from './BannerTrack.module.scss';
 
 import { get } from 'node:http';
@@ -43,7 +46,7 @@ const BannerTrack: React.FC<{
           <div>
             <p className={styles.titleLabel}>Title</p>
             <h1 className={styles.name}>{name}</h1>
-            <div className={styles.detail}>
+            <ItemDetailsRow>
               {artist && (
                 <Link href={`/artists/${artist.id}`} className={styles.artist}>
                   {artistImage?.url && (
@@ -60,23 +63,24 @@ const BannerTrack: React.FC<{
                   <p>{artist.name}</p>
                 </Link>
               )}
-              <span className={styles.separator} />
+              <ItemDetailSeparator />
               <Link href={`/albums/${album.id}`}>{albumName}</Link>
-              <span className={styles.separator} />
+              <ItemDetailSeparator />
               <p className={styles.year}>
                 {album?.release_date.split('-')[0]}
                 <Calendar />
               </p>
-              <span className={styles.separator} />
+              <ItemDetailSeparator />
               <p className={styles.duration}>
                 {getMinuteFromMilliseconds(track?.duration_ms)} <Time />
               </p>
-              <span className={styles.separator} />
+              <ItemDetailSeparator />
               <p className={styles.popularity}>
                 {track?.popularity}
                 <Popularity />
               </p>
-            </div>
+            </ItemDetailsRow>
+
             <div className={styles.buttons}>
               <LinkPrimary href={externalUrls.spotify} target="__blank">
                 Play on spotify

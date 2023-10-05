@@ -30,6 +30,7 @@ export interface AlbumInterface {
   images: [{ height: number; url: string; width: number }];
   release_date: string;
   total_tracks: number;
+  album_type: string;
   uri: string;
   external_urls: { spotify: string };
   tracks: {

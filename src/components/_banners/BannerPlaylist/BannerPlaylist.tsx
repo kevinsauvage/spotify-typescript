@@ -5,6 +5,9 @@ import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { PlaylistResponseInterface } from '@/types';
 
+import ItemDetailSeparator from '../ItemDetailSeparator/ItemDetailSeparator';
+import ItemDetailsRow from '../ItemDetailsRow/ItemDetailsRow';
+
 import styles from './BannerPlaylist.module.scss';
 
 const BannerPlaylist: React.FC<{
@@ -29,14 +32,26 @@ const BannerPlaylist: React.FC<{
       <PageBannerWrapper>
         <div className={styles.banner}>
           {image?.url && (
-            <Image alt="Album cover" src={image.url} width={300} height={300} priority />
+            <Image
+              alt="Album cover"
+              src={image.url}
+              width={300}
+              height={300}
+              priority
+              className={styles.image}
+            />
           )}
-          <div className={styles.details}>
+          <div>
             <h1 className={styles.name}>{name}</h1>
             <p className={styles.description}>{description}</p>
-            <p className={styles.public}>Public: {String(isPublic)}</p>
-            <p className={styles.collaborative}>Collaborative: {String(collaborative)}</p>
-            <p className={styles.followers}>Followers: {followers?.total}</p>
+            <ItemDetailsRow>
+              <p className={styles.public}>{isPublic ? 'Public' : 'Private'}</p>
+              <ItemDetailSeparator />
+              {collaborative && <p className={styles.collaborative}>Collaborative</p>}
+              {collaborative && <ItemDetailSeparator />}
+
+              <p className={styles.followers}>{followers?.total}</p>
+            </ItemDetailsRow>
             <div className={styles.links}>
               <LinkPrimary href={owner.external_urls.spotify} target="__blank">
                 See owner profile

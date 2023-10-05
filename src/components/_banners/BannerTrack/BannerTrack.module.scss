@@ -21,48 +21,29 @@
     margin-bottom: 1rem;
     overflow: hidden;
     font-size: 2rem;
-    white-space: nowrap;
   }
 
-  .detail {
+  .artist {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: 1rem;
     white-space: nowrap;
 
-    .artist {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-weight: 600;
-      font-size: 1rem;
-      white-space: nowrap;
-
-      img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-      }
-    }
-
-    .duration,
-    .year,
-    .popularity {
-      display: flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
-
-    .separator {
-      position: relative;
-      top: 1px;
-      width: 5px;
-      height: 5px;
+    img {
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background-color: var(--color-text-3);
     }
+  }
+
+  .duration,
+  .year,
+  .popularity {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
   }
 
   .buttons {
@@ -82,7 +63,7 @@
   }
 }
 
-@include respond(mobile_l) {
+@include respond(tablet) {
   .banner {
     flex-direction: column;
     align-items: start;
