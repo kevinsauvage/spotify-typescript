@@ -16,15 +16,13 @@ const ArtistCard: React.FC<{
   return (
     <div className={styles.artist}>
       <div className={styles.inner}>
-        {image && (
-          <Image
-            className={styles.image}
-            alt="Album cover"
-            src={image?.url}
-            width={image?.width}
-            height={image?.height}
-          />
-        )}
+        <div className={styles.image}>
+          {image ? (
+            <Image alt="Album cover" src={image?.url} width={image?.width} height={image?.height} />
+          ) : (
+            <p>Image not available</p>
+          )}
+        </div>
         <Link href={`/artists/${id}`} className={styles.name}>
           {name}
         </Link>

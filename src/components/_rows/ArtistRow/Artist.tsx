@@ -1,24 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { ArtistInterface } from '@/types';
+
 import styles from './Artist.module.scss';
 
-export interface ArtistInterface {
-  id: string;
-  name: string;
-  popularity: number;
-  images: [{ url: string; width: number; height: number }];
-  href: string;
-  followers: {
-    href: 'string';
-    total: 0;
-  };
-  genres: string[];
-}
-
-const Artist: React.FC<{
-  artist: ArtistInterface;
-}> = ({ artist }) => {
+const Artist: React.FC<{ artist: ArtistInterface }> = ({ artist }) => {
   const { name, images, id } = artist;
   const image = images.at(-1) ?? images.at(1) ?? images.at(0);
 

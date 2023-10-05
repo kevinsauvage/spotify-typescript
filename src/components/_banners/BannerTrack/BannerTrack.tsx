@@ -1,19 +1,29 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Calendar from '@/assets/icons/calendar';
+import Popularity from '@/assets/icons/popularity';
+import Time from '@/assets/icons/time';
 import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
-import { TrackInterface } from '@/types';
+import { ArtistInterface, TrackInterface } from '@/types';
+import { getMinuteFromMilliseconds } from '@/utils/date';
 
 import styles from './BannerTrack.module.scss';
 
+import { get } from 'node:http';
+
 const BannerTrack: React.FC<{
   track: TrackInterface;
-}> = ({ track }) => {
-  const { name, artists, album, external_urls: externalUrls } = track || {};
-  const { images } = album || {};
+  artist: ArtistInterface;
+}> = ({ track, artist }) => {
+  const { name, album, external_urls: externalUrls } = track || {};
+  const { images, name: albumName } = album || {};
+
   const image = images?.at(0);
+
+  const artistImage = artist?.images?.at(2) ?? artist?.images?.at(1) ?? artist?.images?.at(0);
 
   return (
     <Container>
@@ -31,22 +41,40 @@ const BannerTrack: React.FC<{
           )}
 
           <div>
+            <p className={styles.titleLabel}>Title</p>
             <h1 className={styles.name}>{name}</h1>
-            <div className={styles.artists}>
-              <strong>Artists: </strong>
-              {artists.map((artist, index) => (
-                <>
-                  <Link href={`/artists/${artist.id}`} key={artist.id}>
-                    {artist.name}
-                  </Link>
-                  {index < artists.length - 1 && <span>, </span>}
-                </>
-              ))}
-            </div>
-            <div>
-              <p className={styles.albumName}>
-                <strong>Album: </strong>
-                <Link href={`/albums/${album.id}`}>{album.name}</Link>
+            <div className={styles.detail}>
+              {artist && (
+                <Link href={`/artists/${artist.id}`} className={styles.artist}>
+                  {artistImage?.url && (
+                    <Image
+                      className={styles.image}
+                      alt="Album cover"
+                      src={artistImage?.url}
+                      width={40}
+                      height={40}
+                      priority
+                    />
+                  )}
+
+                  <p>{artist.name}</p>
+                </Link>
+              )}
+              <span className={styles.separator} />
+              <Link href={`/albums/${album.id}`}>{albumName}</Link>
+              <span className={styles.separator} />
+              <p className={styles.year}>
+                {album?.release_date.split('-')[0]}
+                <Calendar />
+              </p>
+              <span className={styles.separator} />
+              <p className={styles.duration}>
+                {getMinuteFromMilliseconds(track?.duration_ms)} <Time />
+              </p>
+              <span className={styles.separator} />
+              <p className={styles.popularity}>
+                {track?.popularity}
+                <Popularity />
               </p>
             </div>
             <div className={styles.buttons}>

@@ -1,0 +1,48 @@
+.Search {
+  width: 100%;
+  max-width: 500px;
+
+  .form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 4px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      padding-left: 3rem;
+      border: none;
+      border-radius: 99em;
+      color: var(--color-text-1);
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.5;
+      background-color: var(--color-background-4);
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #000000;
+      }
+    }
+
+    button {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      display: flex;
+      border: none;
+      color: var(--color-text-1);
+      font-size: 1.2rem;
+      background-color: transparent;
+      transform: translateY(-50%);
+    }
+  }
+}

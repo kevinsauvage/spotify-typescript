@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
+import Header from '@/components/Header/Header';
 import SideBar from '@/components/SideBar/SideBar';
 
 import '../styles/globals.scss';
@@ -18,7 +19,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="en">
     <body className={`${inter.className} ${styles.body}`}>
       <SideBar />
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <Header />
+        <div className={styles.children}>{children}</div>
+      </main>
     </body>
   </html>
 );

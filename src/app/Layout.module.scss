@@ -30,12 +30,21 @@
 
 .main {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
   width: 100%;
   min-width: 0; // Avoid overflow in grid
-  border-radius: 0.5rem;
-  background-color: var(--color-background-2);
 
   @include respond(tablet) {
     padding-bottom: 90px;
   }
+}
+
+.children {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: var(--color-background-2);
 }
