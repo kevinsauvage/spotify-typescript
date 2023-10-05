@@ -16,7 +16,9 @@ interface ProfilBannerProperties {
 const ProfilBanner = ({ bannerData }: ProfilBannerProperties) => (
   <PageBannerWrapper>
     <div className={styles.banner}>
-      <h1>Hello there! 👋</h1>
+      <div>
+        <h1>Hello there! 👋</h1>
+      </div>
       {bannerData.map((banner) => (
         <Link className={styles.bannerItem} key={banner.href} href={banner.href}>
           <Image

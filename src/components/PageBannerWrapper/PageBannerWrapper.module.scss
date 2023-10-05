@@ -2,8 +2,4 @@
 
 .PageBannerWrapper {
   padding: 3rem 0;
-
-  @include respond(mobile_l) {
-    padding: 0 0 3rem 0;
-  }
 }
