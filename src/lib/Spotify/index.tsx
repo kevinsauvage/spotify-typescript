@@ -14,7 +14,7 @@ export const getSpotifyToken = () => {
     const cookieStore = cookies();
     const spotifyTokenString = cookieStore?.get('spotify_token')?.value;
 
-    return JSON.parse(spotifyTokenString ?? '{}');
+    return JSON.parse(spotifyTokenString ?? '{}')?.token;
   } catch (error) {
     console.error(error);
     return {};
@@ -28,7 +28,7 @@ export const fetchHelper = async (
   timeout: number = timeoutInSeconds,
 ) => {
   try {
-    const accessToken = token || getSpotifyToken()?.accessToken || {};
+    const accessToken = token || getSpotifyToken() || {};
 
     if (!accessToken) {
       return;

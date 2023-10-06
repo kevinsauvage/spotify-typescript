@@ -1,27 +1,80 @@
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+import { NextURL } from 'next/dist/server/web/next-url';
 import { type NextRequest, NextResponse } from 'next/server';
 
-const middleware = async (request: NextRequest) => {
-  const spotifyToken: RequestCookie | undefined = request.cookies.get('spotify_token');
-  const { nextUrl } = request;
+import { refreshAccessToken } from './lib/Spotify/auth';
 
-  const spotifyTokenParsed = JSON.parse(spotifyToken?.value || '{}');
-  const { accessToken } = spotifyTokenParsed || {};
+const hourInecound = 3600;
 
-  if (accessToken && nextUrl.pathname.startsWith('/login')) {
-    nextUrl.pathname = '/';
-    return NextResponse.redirect(nextUrl);
+const handleSpotifyToken = async (
+  spotifyToken: { token: string; expireTime: number },
+  refreshToken: { token: string },
+  nextUrl: NextURL,
+  response: NextResponse,
+) => {
+  const currentTime = Math.floor(Date.now() / 1000);
+  const isExpired = currentTime - hourInecound > spotifyToken.expireTime;
+
+  if (isExpired) {
+    const { access_token, expires_in, refresh_token } = await refreshAccessToken(
+      refreshToken.token,
+    );
+
+    if (!access_token) {
+      nextUrl.pathname = '/login';
+      response.cookies.delete('spotify_token');
+      return NextResponse.redirect(nextUrl);
+    }
+
+    if (expires_in) {
+      response.cookies.set({
+        httpOnly: true,
+        maxAge: expires_in,
+        name: 'spotify_token',
+        value: JSON.stringify({ expireTime: expires_in + currentTime, token: access_token }),
+      });
+    }
+
+    if (refresh_token) {
+      response.cookies.set({
+        httpOnly: true,
+        name: 'spotify_refresh_token',
+        value: JSON.stringify({ token: refresh_token }),
+      });
+    }
   }
 
+  return spotifyToken;
+};
+
+const middleware = async (request: NextRequest) => {
+  const response = NextResponse.next();
+
+  const { nextUrl, cookies } = request;
+
+  const spotifyToken: RequestCookie | undefined = cookies.get('spotify_token');
+  const spotifyRefreshToken: RequestCookie | undefined = cookies.get('spotify_refresh_token');
+
+  const token: { token: string; expireTime: number } = JSON.parse(spotifyToken?.value || '{}');
+  const refreshToken: { token: string } = JSON.parse(spotifyRefreshToken?.value || '{}');
+
   if (
-    !accessToken &&
+    !token?.token &&
     (!nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/logout'))
   ) {
     nextUrl.pathname = '/login';
     return NextResponse.redirect(nextUrl);
   }
 
-  return NextResponse.next();
+  if (token?.token) {
+    if (nextUrl.pathname.startsWith('/login')) {
+      nextUrl.pathname = '/';
+      return NextResponse.redirect(nextUrl);
+    }
+    await handleSpotifyToken(token, refreshToken, nextUrl, response);
+  }
+
+  return response;
 };
 
 export default middleware;

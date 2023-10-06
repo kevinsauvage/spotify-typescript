@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
@@ -9,32 +9,40 @@ import { loginServerAction } from '@/serverActions/auth';
 
 const extractTokenAndExpires = (url: string) => {
   const parsedUrl = new URL(url);
-  const fragment = parsedUrl.hash.slice(1);
-  const queryParameters = new URLSearchParams(fragment);
-  const accessToken = queryParameters.get('access_token') ?? '';
-  const expiresInSeconds = queryParameters.get('expires_in') ?? '';
 
-  return {
-    accessToken,
-    expiresInSeconds,
-  };
+  const queryParameters = new URLSearchParams(parsedUrl.searchParams);
+
+  const code = queryParameters.get('code') ?? '';
+
+  return { code };
 };
 
 const Page = () => {
   const { push } = useRouter();
+  const [isCalled, setIsCalled] = useState(false);
 
-  useEffect(() => {
-    const { href } = window.location;
-    const { accessToken, expiresInSeconds } = extractTokenAndExpires(href);
-    if (accessToken) {
-      try {
-        loginServerAction(accessToken, Number(expiresInSeconds));
-      } catch (error) {
-        console.error(error);
+  const handleLogin = useCallback(async () => {
+    if (isCalled) return;
+    try {
+      const { href } = window.location;
+
+      const { code } = extractTokenAndExpires(href);
+
+      if (code) {
+        setIsCalled(true);
+        await loginServerAction(code);
+      } else {
         push('/login');
       }
-    } else push('/login');
-  }, [push]);
+    } catch (error) {
+      console.error(error);
+      push('/login');
+    }
+  }, [isCalled, push]);
+
+  useEffect(() => {
+    handleLogin();
+  }, [handleLogin]);
 
   return <ScreenLoader />;
 };
