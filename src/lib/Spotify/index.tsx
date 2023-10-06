@@ -1,6 +1,13 @@
 import { cookies } from 'next/headers';
 
 export const enpointBaseUrl = 'https://api.spotify.com/v1';
+const timeoutInSeconds = 4;
+
+export const Timeout = (time: number) => {
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), time * 1000);
+  return controller.signal;
+};
 
 export const getSpotifyToken = () => {
   try {
@@ -14,7 +21,12 @@ export const getSpotifyToken = () => {
   }
 };
 
-export const fetchHelper = async (endpoint: string, options: object = {}, token: string = '') => {
+export const fetchHelper = async (
+  endpoint: string,
+  options: object = {},
+  token: string = '',
+  timeout: number = timeoutInSeconds,
+) => {
   try {
     const accessToken = token || getSpotifyToken()?.accessToken || {};
 
@@ -27,9 +39,10 @@ export const fetchHelper = async (endpoint: string, options: object = {}, token:
       method: 'GET',
       ...options,
       next: { revalidate: 3600 },
+      signal: Timeout(timeout),
     });
 
-    if (!response) return;
+    if (!response?.status) return;
 
     if (response?.status >= 200 && response?.status < 300) {
       return response?.json();
