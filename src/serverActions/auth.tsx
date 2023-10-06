@@ -43,6 +43,12 @@ const exchangeCodeForTokens = async (code: string) => {
   parameters.append('grant_type', 'authorization_code');
   parameters.append('code', code);
   parameters.append('redirect_uri', spotifyRedirectUri);
+
+  console.log(
+    '🚀 ~~~~  file: auth.tsx:47 ~~~~  exchangeCodeForTokens ~~~~  spotifyRedirectUri:',
+    spotifyRedirectUri,
+  );
+
   parameters.append('client_id', spotifyClientId);
   parameters.append('client_secret', spotifyClientSecret);
 
