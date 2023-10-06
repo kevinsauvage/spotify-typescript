@@ -122,7 +122,7 @@ export interface UserSavedTracksInterface {
 }
 
 export interface RecentlyPlayedInterface {
-  items: [{ track: TrackInterface }];
+  items: { track: TrackInterface }[];
   total: number;
   limit: number;
   offset: number;
