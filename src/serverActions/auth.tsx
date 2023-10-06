@@ -44,17 +44,13 @@ const exchangeCodeForTokens = async (code: string) => {
   parameters.append('code', code);
   parameters.append('redirect_uri', spotifyRedirectUri);
 
-  console.log(
-    '🚀 ~~~~  file: auth.tsx:47 ~~~~  exchangeCodeForTokens ~~~~  spotifyRedirectUri:',
-    spotifyRedirectUri,
-  );
-
-  parameters.append('client_id', spotifyClientId);
-  parameters.append('client_secret', spotifyClientSecret);
-
   const response = await fetch('https://accounts.spotify.com/api/token', {
     body: parameters.toString(),
     headers: {
+      // eslint-disable-next-line sonarjs/no-nested-template-literals
+      Authorization: `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString(
+        'base64',
+      )}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     method: 'POST',
@@ -81,11 +77,6 @@ const exchangeCodeForTokens = async (code: string) => {
 export const loginServerAction = async (code: string) => {
   if (!code) return;
   const { access_token, refresh_token, expires_in } = (await exchangeCodeForTokens(code)) || {};
-
-  console.log(
-    '🚀 ~~~~  file: auth.tsx:81 ~~~~  loginServerAction ~~~~  access_token:',
-    access_token,
-  );
 
   if (!access_token || !refresh_token || !expires_in) {
     return;
