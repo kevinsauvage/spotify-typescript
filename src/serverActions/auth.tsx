@@ -78,6 +78,11 @@ export const loginServerAction = async (code: string) => {
   if (!code) return;
   const { access_token, refresh_token, expires_in } = (await exchangeCodeForTokens(code)) || {};
 
+  console.log(
+    '🚀 ~~~~  file: auth.tsx:81 ~~~~  loginServerAction ~~~~  access_token:',
+    access_token,
+  );
+
   if (!access_token || !refresh_token || !expires_in) {
     return;
   }
