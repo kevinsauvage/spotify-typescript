@@ -84,9 +84,24 @@ const page: React.FC = async () => {
       title: userTopArtists?.items?.[0]?.name,
     },
     {
+      href: `/tracks/${userTopTracks?.items?.[1]?.id}`,
+      image: userTopTracks?.items?.[1]?.album?.images?.[0]?.url,
+      title: userTopTracks?.items?.[1]?.name,
+    },
+    {
+      href: `/artists/${userTopArtists?.items?.[1]?.id}`,
+      image: userTopArtists?.items?.[1]?.images?.[0]?.url,
+      title: userTopArtists?.items?.[1]?.name,
+    },
+    {
       href: `/tracks/${recentlyPlayedTracks?.items?.[0]?.track?.id}`,
       image: recentlyPlayedTracks?.items?.[0]?.track?.album?.images?.[0]?.url,
       title: recentlyPlayedTracks?.items?.[0]?.track?.name,
+    },
+    {
+      href: `/tracks/${recentlyPlayedTracks?.items?.[1]?.track?.id}`,
+      image: recentlyPlayedTracks?.items?.[1]?.track?.album?.images?.[0]?.url,
+      title: recentlyPlayedTracks?.items?.[1]?.track?.name,
     },
     {
       href: `/artists/${followedArtists?.artists?.items?.[0]?.id}`,
@@ -97,6 +112,11 @@ const page: React.FC = async () => {
       href: `/playlists/${followedPlaylists?.items?.[0]?.id}`,
       image: followedPlaylists?.items?.[0]?.images?.[0]?.url,
       title: followedPlaylists?.items?.[0]?.name,
+    },
+    {
+      href: `/tracks/${savedTracks?.items?.[0]?.track?.id}`,
+      image: savedTracks?.items?.[0]?.track?.album?.images?.[0]?.url,
+      title: savedTracks?.items?.[0]?.track?.name,
     },
   ];
 
