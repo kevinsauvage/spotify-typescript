@@ -45,7 +45,7 @@ const exchangeCodeForTokens = async (code: string) => {
   parameters.append('redirect_uri', spotifyRedirectUri);
 
   const response = await fetch('https://accounts.spotify.com/api/token', {
-    body: parameters.toString(),
+    body: parameters,
     headers: {
       // eslint-disable-next-line sonarjs/no-nested-template-literals
       Authorization: `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString(
