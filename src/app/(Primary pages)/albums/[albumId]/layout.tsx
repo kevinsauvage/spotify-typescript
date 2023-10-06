@@ -1,6 +1,8 @@
 import BannerAlbum from '@/components/_banners/BannerAlbum/BannerAlbum';
 import { getAlbumById } from '@/lib/Spotify/album';
 
+import styles from './layout.module.scss';
+
 interface IProperties {
   children: React.ReactNode;
   params: { albumId: string };
@@ -11,9 +13,9 @@ const layout: React.FC<IProperties> = async ({ children, params }) => {
   const album = await getAlbumById(albumId);
 
   return (
-    <div>
+    <div className={styles.layout}>
       <BannerAlbum album={album} />
-      {children}
+      <div className={styles.children}>{children}</div>
     </div>
   );
 };

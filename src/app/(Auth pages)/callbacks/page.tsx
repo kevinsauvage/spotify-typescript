@@ -27,7 +27,12 @@ const Page = () => {
     const { href } = window.location;
     const { accessToken, expiresInSeconds } = extractTokenAndExpires(href);
     if (accessToken) {
-      loginServerAction(accessToken, Number(expiresInSeconds));
+      try {
+        loginServerAction(accessToken, Number(expiresInSeconds));
+      } catch (error) {
+        console.error(error);
+        push('/login');
+      }
     } else push('/login');
   }, [push]);
 

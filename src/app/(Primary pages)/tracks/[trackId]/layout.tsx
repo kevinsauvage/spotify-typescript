@@ -3,6 +3,8 @@ import { getArtist } from '@/lib/Spotify/artist';
 import { getTrack } from '@/lib/Spotify/track';
 import { ArtistInterface, TrackInterface } from '@/types';
 
+import styles from './layout.module.scss';
+
 interface IProperties {
   children: React.ReactNode;
   params: { trackId: string };
@@ -13,9 +15,9 @@ const layout: React.FC<IProperties> = async ({ children, params }) => {
   const artist: ArtistInterface = await getArtist(track?.artists?.[0]?.id);
 
   return (
-    <div>
+    <div className={styles.layout}>
       <BannerTrack track={track} artist={artist} />
-      <div style={{ position: 'relative' }}>{children}</div>
+      <div className={styles.children}>{children}</div>
     </div>
   );
 };
