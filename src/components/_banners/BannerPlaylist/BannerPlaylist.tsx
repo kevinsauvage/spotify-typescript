@@ -22,7 +22,6 @@ const BannerPlaylist: React.FC<{
     external_urls,
     followers,
     public: isPublic,
-    owner,
   } = playlist || {};
 
   const image = images?.at(0);
@@ -53,9 +52,6 @@ const BannerPlaylist: React.FC<{
               <p className={styles.followers}>{followers?.total}</p>
             </ItemDetailsRow>
             <div className={styles.links}>
-              <LinkPrimary href={owner.external_urls.spotify} target="__blank">
-                See owner profile
-              </LinkPrimary>
               <LinkPrimary href={external_urls?.spotify} target="__blank">
                 Open in Spotify
               </LinkPrimary>

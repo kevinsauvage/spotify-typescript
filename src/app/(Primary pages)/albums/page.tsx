@@ -19,7 +19,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   return (
     <Container>
       <PageBannerWrapper>
-        <Title>Favorite Albums</Title>
+        <Title>Albums</Title>
       </PageBannerWrapper>
       <Grid>
         {savedAlbumns?.items?.map((album) => (

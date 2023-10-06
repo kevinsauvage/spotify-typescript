@@ -2,7 +2,7 @@
 
 .table {
   width: 100%;
-  margin-bottom: 4rem;
+  min-width: 400px;
   border-collapse: collapse;
   white-space: nowrap;
   table-layout: fixed;
@@ -58,7 +58,7 @@
   }
 
   thead th {
-    padding: 1rem 0.5rem;
+    padding: 0 0.5rem 1rem 0.5rem;
     color: var(--color-text-1);
     font-weight: 500;
     font-size: 0.8rem;
@@ -94,6 +94,10 @@
         margin-left: auto;
       }
     }
+  }
+
+  @include respond(tablet) {
+    min-width: 300px;
   }
 
   @include respond(mobile_l) {

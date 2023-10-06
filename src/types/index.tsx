@@ -288,3 +288,12 @@ export interface AudioFeaturesInterface {
   uri: string;
   valence: number;
 }
+
+export interface AlbumTracksInterface {
+  items: TrackInterface[];
+  total: number;
+  limit: number;
+  offset: number;
+  next: string;
+  previous: string;
+}

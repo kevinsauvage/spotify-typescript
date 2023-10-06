@@ -15,7 +15,7 @@ const Page: React.FC<PageInterface> = async () => {
   return (
     <Container>
       <PageBannerWrapper>
-        <Title>Favorite Artists</Title>
+        <Title>Artists</Title>
       </PageBannerWrapper>
       <Grid>
         {savedArtists?.artists?.items?.map((artist) => (

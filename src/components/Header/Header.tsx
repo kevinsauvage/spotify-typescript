@@ -9,9 +9,11 @@ interface IProperties {}
 const Header: React.FC<IProperties> = () => {
   return (
     <header className={styles.Header}>
-      <Container className={styles.inner}>
-        <Search />
-        <LogoutButton />
+      <Container>
+        <div className={styles.inner}>
+          <Search />
+          <LogoutButton />
+        </div>
       </Container>
     </header>
   );

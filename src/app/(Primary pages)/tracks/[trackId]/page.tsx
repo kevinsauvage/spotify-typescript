@@ -4,10 +4,11 @@ import AudioAnalysis from '@/components/_scopes/Track/AudioAnalysis/AudioAnalysi
 import ChartComponent from '@/components/_scopes/Track/Chart/Chart';
 import Container from '@/components/Container/Container';
 import Section from '@/components/Section/Section';
+import Wrapper from '@/components/Wrapper/Wrapper';
 import { getArtistTopTracks } from '@/lib/Spotify/artist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
-import { getAudioAnalysis, getAudioFeatures, getTrack } from '@/lib/Spotify/track';
-import { AudioAnalysisInterface, AudioFeaturesInterface, TrackInterface } from '@/types';
+import { getAudioFeatures, getTrack } from '@/lib/Spotify/track';
+import { AudioFeaturesInterface, TrackInterface } from '@/types';
 
 interface PageInterface {
   params: { trackId: string };
@@ -31,34 +32,32 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
   return (
     <Container>
-      {artistToTracks?.tracks?.length > 0 && (
-        <Section title="Artist Top Tracks">
-          <TrackTable>
-            {artistToTracks?.tracks
-              ?.slice(0, 5)
-              .map((topTrack: TrackInterface) => <TrackRow key={topTrack.id} track={topTrack} />)}
-          </TrackTable>
-        </Section>
-      )}
+      <Wrapper>
+        {artistToTracks?.tracks?.length > 0 && (
+          <Section title="Artist Top Tracks">
+            <TrackTable>
+              {artistToTracks?.tracks
+                ?.slice(0, 10)
+                .map((topTrack: TrackInterface) => <TrackRow key={topTrack.id} track={topTrack} />)}
+            </TrackTable>
+          </Section>
+        )}
+
+        {recommendedTracks?.tracks?.length > 0 && (
+          <Section title="Similar Tracks" href={`/tracks/${trackId}/recommendations`}>
+            <TrackTable>
+              {recommendedTracks?.tracks?.map((trackRecommend: TrackInterface) => (
+                <TrackRow key={trackRecommend.id} track={trackRecommend} />
+              ))}
+            </TrackTable>
+          </Section>
+        )}
+      </Wrapper>
+
       {audioFeatures && (
         <Section title="Track Analysis">
           <AudioAnalysis audioFeatures={audioFeatures} />
-        </Section>
-      )}
-
-      {audioFeatures && (
-        <Section title="Audio Features">
           <ChartComponent audioFeatures={audioFeatures} />
-        </Section>
-      )}
-
-      {recommendedTracks?.tracks?.length > 0 && (
-        <Section title="Recommended Tracks" href={`/tracks/${trackId}/recommendations`}>
-          <TrackTable>
-            {recommendedTracks?.tracks?.map((trackRecommend: TrackInterface) => (
-              <TrackRow key={trackRecommend.id} track={trackRecommend} />
-            ))}
-          </TrackTable>
         </Section>
       )}
     </Container>

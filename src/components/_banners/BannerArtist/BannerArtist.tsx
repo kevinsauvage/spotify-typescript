@@ -15,6 +15,7 @@ const BannerArtist: React.FC<{
   artist: ArtistInterface;
 }> = ({ artist }) => {
   const { name, popularity, images, href, followers, genres } = artist || {};
+
   const image = images?.at(0);
   return (
     <Container>

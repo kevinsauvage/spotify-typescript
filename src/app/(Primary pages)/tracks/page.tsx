@@ -19,7 +19,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   return (
     <Container>
       <PageBannerWrapper>
-        <Title>Favorite Tracks</Title>
+        <Title>Tracks</Title>
       </PageBannerWrapper>
       <TrackTable>
         {savedTracks?.items?.map((track) => <TrackRow key={track.track.id} track={track.track} />)}

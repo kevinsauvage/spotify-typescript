@@ -15,13 +15,12 @@ import ItemDetailsRow from '../ItemDetailsRow/ItemDetailsRow';
 
 import styles from './BannerTrack.module.scss';
 
-import { get } from 'node:http';
-
 const BannerTrack: React.FC<{
   track: TrackInterface;
   artist: ArtistInterface;
 }> = ({ track, artist }) => {
   const { name, album, external_urls: externalUrls } = track || {};
+
   const { images, name: albumName } = album || {};
 
   const image = images?.at(0);

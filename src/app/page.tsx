@@ -8,6 +8,7 @@ import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
+import Wrapper from '@/components/Wrapper/Wrapper';
 import { getNewRelease } from '@/lib/Spotify/album';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import {
@@ -31,8 +32,6 @@ import {
 } from '@/types';
 
 import { UserSavedTracksInterface } from '../types/index';
-
-import styles from './page.module.scss';
 
 const page: React.FC = async () => {
   const [
@@ -104,9 +103,9 @@ const page: React.FC = async () => {
   return (
     <Container>
       <ProfilBanner bannerData={bannerData} />
-      <div className={styles.wrapper}>
+      <Wrapper>
         {Array?.isArray(userTopTracks?.items) && (
-          <Section title="Top Tracks" href="/top-tracks">
+          <Section title="Your Top Tracks" href="/top-tracks">
             <TrackTable>
               {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
             </TrackTable>
@@ -122,7 +121,7 @@ const page: React.FC = async () => {
             </TrackTable>
           </Section>
         )}
-      </div>
+      </Wrapper>
 
       {Array?.isArray(recommendations?.tracks) && (
         <Section title="Tracks You May Like">
@@ -133,7 +132,7 @@ const page: React.FC = async () => {
       )}
 
       {Array?.isArray(userTopArtists?.items) && (
-        <Section title="Top Artists" href="/top-artists">
+        <Section title="Your Top Artists" href="/top-artists">
           <Grid>
             {userTopArtists?.items.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
           </Grid>
@@ -141,7 +140,7 @@ const page: React.FC = async () => {
       )}
 
       {Array?.isArray(newReleases?.albums?.items) && (
-        <Section title="New Releases">
+        <Section title="New Albums">
           <Grid>
             {newReleases?.albums?.items?.map((album) => <AlbumCard key={album.id} album={album} />)}
           </Grid>
@@ -149,7 +148,7 @@ const page: React.FC = async () => {
       )}
 
       {Array?.isArray(followedPlaylists?.items) && (
-        <Section title="Playlists" href="/playlists">
+        <Section title="Your Playlists" href="/playlists">
           <Grid>
             {followedPlaylists?.items?.map((playlist) => (
               <PlaylistCard key={playlist.id} playlist={playlist} />
@@ -159,7 +158,7 @@ const page: React.FC = async () => {
       )}
 
       {Array.isArray(savedTracks?.items) && (
-        <Section title="Favorite Tracks" href="/tracks">
+        <Section title="Your Favorite Tracks" href="/tracks">
           <TrackTable>
             {savedTracks?.items?.map((track) => (
               <TrackRow key={track.track.id} track={track.track} />
@@ -169,7 +168,7 @@ const page: React.FC = async () => {
       )}
 
       {Array.isArray(followedArtists?.artists?.items) && (
-        <Section title="Favorite Artists" href="/artists">
+        <Section title="Your Favorite Artists" href="/artists">
           <Grid>
             {followedArtists?.artists?.items.map((artist) => (
               <ArtistCard key={artist.id} artist={artist} />
@@ -179,7 +178,7 @@ const page: React.FC = async () => {
       )}
 
       {Array.isArray(savedAlbums?.items) && (
-        <Section title="Favorite Albums" href="/albums">
+        <Section title="your Favorite Albums" href="/albums">
           <Grid>
             {savedAlbums?.items?.map((album) => (
               <AlbumCard key={album.album.id} album={album.album} />

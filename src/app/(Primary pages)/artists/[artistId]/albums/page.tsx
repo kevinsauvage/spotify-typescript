@@ -17,6 +17,11 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
 
   const albums: ArtistAlbumsInterface = await getArtistAlbums(artistId, page, 20);
 
+  console.log(
+    '🚀 ~~~~  file: page.tsx:20 ~~~~  constPage:React.FC<PageInterface>= ~~~~  albums:',
+    albums,
+  );
+
   return (
     <Container>
       {albums?.items?.length > 0 && (

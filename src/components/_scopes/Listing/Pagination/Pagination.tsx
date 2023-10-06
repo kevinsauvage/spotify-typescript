@@ -63,7 +63,7 @@ const Pagination: React.FC<IProperties> = ({ currentPage, totalPages, navigate, 
       } else if (page === currentPage - 2 && currentPage > 2) {
         // Show ellipsis before
         pageRange.push(renderEllipsis('left-ellipsis'));
-      } else if (page === currentPage + 2 && page < totalPages - 2) {
+      } else if (page === currentPage + 2) {
         // Show ellipsis after
         pageRange.push(renderEllipsis('right-ellipsis'));
       }
