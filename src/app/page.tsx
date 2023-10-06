@@ -113,7 +113,7 @@ const page: React.FC = async () => {
         )}
 
         {Array?.isArray(recentlyPlayedTracks?.items) && (
-          <Section title="Recently Played" href="/recently-played">
+          <Section title="Recently Played">
             <TrackTable>
               {recentlyPlayedTracks?.items?.map((track) => (
                 <TrackRow key={track.track.id} track={track.track} />
