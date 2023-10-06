@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 
 export const enpointBaseUrl = 'https://api.spotify.com/v1';
-const timeoutInSeconds = 3;
+const timeoutInSeconds = 4;
 
 export const Timeout = (time: number) => {
   const controller = new AbortController();
