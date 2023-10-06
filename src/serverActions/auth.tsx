@@ -11,6 +11,8 @@ const {
 } = process.env;
 
 const setSpotifyToken = async (token: { access_token: string; expires_in: number }) => {
+  console.log('🚀 ~~~~  file: auth.tsx:15 ~~~~  setSpotifyToken ~~~~  token:', token);
+
   const currentTime = Math.floor(Date.now() / 1000);
 
   cookies().set({
@@ -54,6 +56,8 @@ const exchangeCodeForTokens = async (code: string) => {
 
   const data = await response.json();
 
+  console.log('🚀 ~~~~  file: auth.tsx:60 ~~~~  exchangeCodeForTokens ~~~~  data:', data);
+
   const { access_token, refresh_token, expires_in } =
     (data as {
       access_token: string;
@@ -69,6 +73,8 @@ const exchangeCodeForTokens = async (code: string) => {
 };
 
 export const loginServerAction = async (code: string) => {
+  console.log('🚀 ~~~~  file: auth.tsx:77 ~~~~  loginServerAction ~~~~  code:', code);
+
   if (!code) return;
   const { access_token, refresh_token, expires_in } = (await exchangeCodeForTokens(code)) || {};
 
