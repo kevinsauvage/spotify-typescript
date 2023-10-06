@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Popularity from '@/assets/icons/popularity';
 import Container from '@/components/Container/Container';
@@ -23,9 +24,11 @@ const BannerAlbum: React.FC<{
     release_date,
     album_type,
     total_tracks,
+    artists,
   } = album || {};
 
   const image = images?.at(0);
+  const artist = artists?.at(0);
 
   return (
     <Container>
@@ -45,6 +48,12 @@ const BannerAlbum: React.FC<{
           <div>
             <h1 className={styles.name}>{name}</h1>
             <ItemDetailsRow>
+              {artist && (
+                <Link href={`/artists/${artist.id}`} className={styles.artist}>
+                  <p>{artist.name}</p>
+                </Link>
+              )}
+              <ItemDetailSeparator />
               <p className={styles.popularity}>
                 {popularity}
                 <Popularity />
