@@ -44,15 +44,15 @@ const TrackRow: React.FC<{
           )}
         </div>
       </td>
-      {popularity ? (
+      {Number.isNaN(popularity) ? (
+        ''
+      ) : (
         <td>
           <div className={styles.popularity}>
             {popularity}
             <PopularityIcon />
           </div>
         </td>
-      ) : (
-        ''
       )}
       <td>
         <div className={styles.duration}>

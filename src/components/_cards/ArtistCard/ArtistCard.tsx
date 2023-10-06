@@ -26,7 +26,7 @@ const ArtistCard: React.FC<{
         <Link href={`/artists/${id}`} className={styles.name}>
           {name}
         </Link>
-        {popularity ? <Popularity popularity={popularity} /> : ''}
+        {Number.isNaN(popularity) ? '' : <Popularity popularity={popularity} />}
         {followers?.total ? (
           <div className={styles.followers}>{followers.total} followers</div>
         ) : (

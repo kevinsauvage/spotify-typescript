@@ -39,7 +39,7 @@ const AlbumRow: React.FC<IProperties> = ({ album }) => {
         </div>
       </td>
 
-      {popularity && <td className={styles.popularity}>{popularity}</td>}
+      {!Number.isNaN(popularity) && <td className={styles.popularity}>{popularity}</td>}
 
       <td className={styles.total}>{total_tracks}</td>
     </tr>
