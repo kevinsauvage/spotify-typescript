@@ -73,8 +73,6 @@ const exchangeCodeForTokens = async (code: string) => {
 };
 
 export const loginServerAction = async (code: string) => {
-  console.log('🚀 ~~~~  file: auth.tsx:77 ~~~~  loginServerAction ~~~~  code:', code);
-
   if (!code) return;
   const { access_token, refresh_token, expires_in } = (await exchangeCodeForTokens(code)) || {};
 
