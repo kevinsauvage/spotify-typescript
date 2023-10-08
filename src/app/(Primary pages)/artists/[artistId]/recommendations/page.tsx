@@ -14,7 +14,6 @@ const page: React.FC<PageInterface> = async ({ params, searchParams }) => {
     <RecommendationsPresenter
       searchParams={searchParams}
       artistId={artistId}
-      title="Recommendations"
       playlistName={`Recommendations for ${artist?.name}`}
     />
   );

@@ -17,7 +17,6 @@ interface IProperties {
   trackId?: string;
   artistId?: string;
   tracks?: string;
-  title: React.JSX.Element | string;
   playlistName: string;
 }
 
@@ -33,7 +32,6 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
   searchParams,
   trackId,
   artistId,
-  title,
   playlistName,
 }) => {
   const { seedArtists, seedGenres, seedTracks, ...rest } = searchParams || {};
@@ -53,7 +51,6 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
   return (
     <Container>
       <PageBannerWrapper>
-        <Title>{title}</Title>
         <CreatePlaylist
           tracks={recommencedTracks?.tracks}
           name={playlistName}

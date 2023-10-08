@@ -18,7 +18,6 @@ const page: React.FC<PageInterface> = async ({ params, searchParams }) => {
         ?.slice(0, 5)
         .map((track) => track.id)
         .join(',')}
-      title="Recommendations"
       playlistName={`Recommendations for ${album?.name}`}
     />
   );

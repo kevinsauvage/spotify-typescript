@@ -12,13 +12,13 @@ const extractCode = (url: string) => {
 
 const Page = async () => {
   const headersList = headers();
-  const pathname = headersList.get('x-href');
+  const href = headersList.get('x-href');
 
-  if (!pathname) {
-    console.error('Callback page: no pathname');
+  if (!href) {
+    console.error('Callback page: no href');
     return redirect('/login');
   }
-  const code = extractCode(pathname);
+  const code = extractCode(href);
 
   if (!code) {
     console.error('Callback page: no code');
