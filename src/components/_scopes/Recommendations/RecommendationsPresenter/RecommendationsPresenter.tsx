@@ -50,17 +50,15 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
 
   return (
     <Container>
-      <PageBannerWrapper>
-        <CreatePlaylist
-          tracks={recommencedTracks?.tracks}
-          name={playlistName}
-          isPublic={true}
-          description=""
-          user={user}
-          createPlaylist={createPlaylist}
-          addItemsToPlaylist={addItemsToPlaylist}
-        />
-      </PageBannerWrapper>
+      <CreatePlaylist
+        tracks={recommencedTracks?.tracks}
+        name={playlistName}
+        isPublic={true}
+        description=""
+        user={user}
+        createPlaylist={createPlaylist}
+        addItemsToPlaylist={addItemsToPlaylist}
+      />
       <TrackAttributeForm
         genres={availableGenreSeeds?.genres}
         initialParams={rest}
