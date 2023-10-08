@@ -39,29 +39,32 @@ export const setSpotifyRefreshToken = async (token: {
 
 const exchangeCodeForTokens = async (code: string) => {
   if (!code) return;
-  const formBody = [];
 
-  formBody.push(
-    `${encodeURIComponent('code')}=${encodeURIComponent(code)}`,
-    `${encodeURIComponent('redirect_uri')}=${encodeURIComponent(spotifyRedirectUri)}`,
-    `${encodeURIComponent('grant_type')}=${encodeURIComponent('authorization_code')}`,
-  );
+  const parameters: { [key: string]: string } = {
+    code,
+    grant_type: 'authorization_code',
+    redirect_uri: spotifyRedirectUri,
+  };
+
+  const body = Object.keys(parameters)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`)
+    .join('&');
 
   const response = await fetch('https://accounts.spotify.com/api/token', {
-    body: formBody.join('&'),
+    body,
     headers: {
       // eslint-disable-next-line sonarjs/no-nested-template-literals
       Authorization: `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString(
         'base64',
       )}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },
     method: 'POST',
   });
 
   const data = await response.json();
 
-  console.log('🚀 ~~~~  file: auth.tsx:60 ~~~~  exchangeCodeForTokens ~~~~  data:', data);
+  if (data.error) throw new Error(data.error);
 
   const { access_token, refresh_token, expires_in } =
     (data as {
