@@ -40,27 +40,22 @@ export const setSpotifyRefreshToken = async (token: {
 const exchangeCodeForTokens = async (code: string) => {
   if (!code) return;
 
-  const parameters: { [key: string]: string } = {
-    code,
-    grant_type: 'authorization_code',
-    redirect_uri: spotifyRedirectUri,
-  };
-
-  const body = Object.keys(parameters)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`)
-    .join('&');
-
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    body,
+  const authOptions = {
+    body: new URLSearchParams({
+      code,
+      grant_type: 'authorization_code',
+      redirect_uri: spotifyRedirectUri,
+    }),
     headers: {
-      // eslint-disable-next-line sonarjs/no-nested-template-literals
       Authorization: `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString(
         'base64',
       )}`,
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
     method: 'POST',
-  });
+  };
+
+  const response = await fetch('https://accounts.spotify.com/api/token', authOptions);
 
   const data = await response.json();
 
