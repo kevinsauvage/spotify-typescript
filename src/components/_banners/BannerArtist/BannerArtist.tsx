@@ -1,4 +1,3 @@
-import { headers } from 'next/headers';
 import Image from 'next/image';
 
 import Popularity from '@/assets/icons/popularity';
@@ -18,6 +17,7 @@ const BannerArtist: React.FC<{
   const { name, popularity, images, href, followers, genres } = artist || {};
 
   const image = images?.at(0);
+
   return (
     <Container>
       <PageBannerWrapper>
