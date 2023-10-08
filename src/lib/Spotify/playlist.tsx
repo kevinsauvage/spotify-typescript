@@ -35,15 +35,22 @@ export const createPlaylist = async (
   });
 };
 
-export const addItemsToPlaylist = async (playlistId: string, uris: string[]) => {
+export const addItemsToPlaylist = async (
+  playlistId: string,
+  uris: string[],
+  revalidatePathUrl?: string,
+) => {
   'use server';
 
   const url = `${enpointBaseUrl}/playlists/${playlistId}/tracks`;
   const body = JSON.stringify({ uris });
-  return fetchHelper(url, {
+  const response = await fetchHelper(url, {
     body,
     method: 'POST',
   });
+  if (revalidatePathUrl) revalidatePath(revalidatePathUrl);
+
+  return response;
 };
 
 export const removeFromPlaylist = async (

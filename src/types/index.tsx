@@ -91,6 +91,14 @@ export interface PlaylistResponseInterface {
   primary_color: string;
   public: boolean;
   snapshot_id: string;
+  tracks: {
+    items: TrackInterface[];
+    total: number;
+    limit: number;
+    offset: number;
+    next: string;
+    previous: string;
+  };
 }
 
 export interface UserDataInterface {
@@ -141,7 +149,7 @@ export interface UserTopTrackInterface {
 
 export interface PlaylistTracksInterface {
   href: string;
-  items: [{ track: TrackInterface }];
+  items: { track: TrackInterface }[];
   limit: number;
   next: string;
   offset: number;

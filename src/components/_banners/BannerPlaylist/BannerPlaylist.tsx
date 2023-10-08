@@ -14,7 +14,6 @@ const BannerPlaylist: React.FC<{
   playlist: PlaylistResponseInterface;
 }> = ({ playlist }) => {
   const {
-    id,
     name,
     images,
     description,
@@ -22,6 +21,7 @@ const BannerPlaylist: React.FC<{
     external_urls,
     followers,
     public: isPublic,
+    tracks,
   } = playlist || {};
 
   const image = images?.at(0);
@@ -50,13 +50,12 @@ const BannerPlaylist: React.FC<{
               {collaborative && <ItemDetailSeparator />}
 
               <p className={styles.followers}>{followers?.total}</p>
+              <ItemDetailSeparator />
+              <p className={styles.tracks}>{tracks?.total} tracks</p>
             </ItemDetailsRow>
             <div className={styles.links}>
               <LinkPrimary href={external_urls?.spotify} target="__blank">
                 Open in Spotify
-              </LinkPrimary>
-              <LinkPrimary href={`/playlists/${id}/recommendations`}>
-                See Track Recommendations
               </LinkPrimary>
             </div>
           </div>
