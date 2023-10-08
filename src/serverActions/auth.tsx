@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-nested-template-literals */
 'use server';
 
 import { cookies } from 'next/headers';
