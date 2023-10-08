@@ -38,6 +38,16 @@ export const setSpotifyRefreshToken = async (token: {
   });
 };
 
+export const redirectToSpotifyLogin = () => {
+  const url = new URL(
+    `https://accounts.spotify.com/authorize?redirect_uri=${encodeURI(
+      spotifyRedirectUri,
+    )}&client_id=${spotifyClientId}&scope=${spotifyScope}&response_type=code`,
+  );
+
+  redirect(url.href);
+};
+
 const exchangeCodeForTokens = async (code: string) => {
   if (!code) return;
 
@@ -95,14 +105,4 @@ export const logoutServerAction = () => {
   cookies().delete('spotify_token');
   cookies().delete('spotify_refresh_token');
   redirect('/login');
-};
-
-export const redirectToSpotifyLogin = () => {
-  const url = new URL(
-    `https://accounts.spotify.com/authorize?redirect_uri=${encodeURI(
-      spotifyRedirectUri,
-    )}&client_id=${spotifyClientId}&scope=${spotifyScope}&response_type=code`,
-  );
-
-  redirect(url.href);
 };
