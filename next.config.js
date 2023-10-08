@@ -5,6 +5,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: { domains: ['i.scdn.co', 'mosaic.scdn.co', 'p.scdn.co'], unoptimized: true },
+  reactStrictMode: false,
 };
 
 module.exports = nextConfig;

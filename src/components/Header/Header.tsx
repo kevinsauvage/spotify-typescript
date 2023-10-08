@@ -1,3 +1,5 @@
+import { logoutServerAction } from '@/lib/Spotify/auth';
+
 import Container from '../Container/Container';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import Search from '../Search/Search';
@@ -12,7 +14,7 @@ const Header: React.FC<IProperties> = () => {
       <Container>
         <div className={styles.inner}>
           <Search />
-          <LogoutButton />
+          <LogoutButton onClick={logoutServerAction} />
         </div>
       </Container>
     </header>

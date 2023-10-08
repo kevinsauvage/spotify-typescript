@@ -25,10 +25,12 @@ const handleSpotifyToken = async (
     if (!access_token) {
       nextUrl.pathname = '/login';
       response.cookies.delete('spotify_token');
+      response.cookies.delete('spotify_refresh_token');
+
       return NextResponse.redirect(nextUrl);
     }
 
-    if (expires_in) {
+    if (expires_in && access_token) {
       response.cookies.set({
         httpOnly: true,
         maxAge: expires_in,
@@ -50,7 +52,9 @@ const handleSpotifyToken = async (
 };
 
 const middleware = async (request: NextRequest) => {
-  const response = NextResponse.next();
+  const response = NextResponse.next({
+    headers: { 'x-href': request.nextUrl.href },
+  });
 
   const { nextUrl, cookies } = request;
 
@@ -58,27 +62,19 @@ const middleware = async (request: NextRequest) => {
   const spotifyRefreshToken: RequestCookie | undefined = cookies.get('spotify_refresh_token');
 
   const token: { token: string; expireTime: number } = JSON.parse(spotifyToken?.value || '{}');
-
-  console.log('🚀 ~~~~  file: middleware.tsx:60 ~~~~  middleware ~~~~  token:', token);
-
   const refreshToken: { token: string } = JSON.parse(spotifyRefreshToken?.value || '{}');
-
-  console.log(
-    '🚀 ~~~~  file: middleware.tsx:64 ~~~~  middleware ~~~~  refreshToken:',
-    refreshToken,
-  );
 
   if (
     !token?.token &&
-    (!nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/logout'))
+    !nextUrl.pathname.startsWith('/login') &&
+    !nextUrl.pathname.startsWith('/callbacks')
   ) {
-    console.log('redirect login 73');
     nextUrl.pathname = '/login';
     return NextResponse.redirect(nextUrl);
   }
 
   if (token?.token) {
-    if (nextUrl.pathname.startsWith('/login')) {
+    if (nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/callbacks')) {
       nextUrl.pathname = '/';
       return NextResponse.redirect(nextUrl);
     }
@@ -91,5 +87,5 @@ const middleware = async (request: NextRequest) => {
 export default middleware;
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|callbacks).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };

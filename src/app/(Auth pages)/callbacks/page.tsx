@@ -1,50 +1,33 @@
-'use client';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import { useCallback, useEffect, useState } from 'react';
+import CallbackCodeHandler from '@/components/CallbackCodeHandler/CallbackCodeHandler';
+import { login } from '@/lib/Spotify/auth';
 
-import { useRouter } from 'next/navigation';
-
-import ScreenLoader from '@/components/ScreenLoader/ScreenLoader';
-import { loginServerAction } from '@/serverActions/auth';
-
-const extractTokenAndExpires = (url: string) => {
+const extractCode = (url: string) => {
   const parsedUrl = new URL(url);
-
   const queryParameters = new URLSearchParams(parsedUrl.searchParams);
-
   const code = queryParameters.get('code') ?? '';
 
   return { code };
 };
 
-const Page = () => {
-  const { push } = useRouter();
-  const [isCalled, setIsCalled] = useState(false);
+const Page = async () => {
+  const headersList = headers();
+  const pathname = headersList.get('x-href');
 
-  const handleLogin = useCallback(async () => {
-    if (isCalled) return;
-    try {
-      const { href } = window.location;
+  if (!pathname) {
+    console.error('no pathname');
+    return redirect('/login');
+  }
+  const { code } = extractCode(pathname) || {};
 
-      const { code } = extractTokenAndExpires(href);
+  if (!code) {
+    console.error('no code');
+    return redirect('/login');
+  }
 
-      if (code) {
-        setIsCalled(true);
-        await loginServerAction(code);
-      } else {
-        push('/login');
-      }
-    } catch (error) {
-      console.error(error);
-      push('/login');
-    }
-  }, [isCalled, push]);
-
-  useEffect(() => {
-    handleLogin();
-  }, [handleLogin]);
-
-  return <ScreenLoader />;
+  return <CallbackCodeHandler code={code} login={login} />;
 };
 
 export default Page;

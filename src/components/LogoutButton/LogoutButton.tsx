@@ -1,11 +1,13 @@
 'use client';
 
-import { logoutServerAction } from '@/serverActions/auth';
-
 import Button from '../Button/Button';
 
-const LogoutButton: React.FC = () => (
-  <Button type="button" onClick={() => logoutServerAction()}>
+interface IProperties {
+  onClick: () => void;
+}
+
+const LogoutButton: React.FC<IProperties> = ({ onClick }) => (
+  <Button type="button" onClick={() => onClick()}>
     Logout
   </Button>
 );

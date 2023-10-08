@@ -1,5 +1,5 @@
 import { AudioFeaturesInterface } from '@/types';
-import { getMinuteFromMilliseconds, getMinuteFromSeconds } from '@/utils/date';
+import { getMinuteFromMilliseconds } from '@/utils/date';
 
 import styles from './AudioAnalysis.module.scss';
 

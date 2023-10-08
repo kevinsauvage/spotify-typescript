@@ -1,11 +1,13 @@
 'use client';
 
-import { redirectToSpotifyLogin } from '@/serverActions/auth';
-
 import styles from './LoginButton.module.scss';
 
-const LoginButton: React.FC = () => (
-  <button type="button" className={styles.link} onClick={() => redirectToSpotifyLogin()}>
+interface IProperties {
+  onClick: () => void;
+}
+
+const LoginButton: React.FC<IProperties> = ({ onClick }) => (
+  <button type="button" className={styles.link} onClick={() => onClick()}>
     Login to Spotify
   </button>
 );
