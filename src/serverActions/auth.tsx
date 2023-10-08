@@ -45,7 +45,7 @@ const exchangeCodeForTokens = async (code: string) => {
     body: new URLSearchParams({
       code,
       grant_type: 'authorization_code',
-      redirect_uri: spotifyRedirectUri,
+      redirect_uri: encodeURI(spotifyRedirectUri),
     }),
     headers: {
       Authorization: `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString(
