@@ -99,7 +99,9 @@ export const logoutServerAction = () => {
 
 export const redirectToSpotifyLogin = () => {
   const url = new URL(
-    `https://accounts.spotify.com/authorize?redirect_uri=${spotifyRedirectUri}&client_id=${spotifyClientId}&scope=${spotifyScope}&response_type=code`,
+    `https://accounts.spotify.com/authorize?redirect_uri=${encodeURI(
+      spotifyRedirectUri,
+    )}&client_id=${spotifyClientId}&scope=${spotifyScope}&response_type=code`,
   );
 
   redirect(url.href);
