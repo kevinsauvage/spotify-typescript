@@ -60,6 +60,7 @@ const exchangeCodeForTokens = async (code: string) => {
 
   const data = await response.json();
 
+  console.log('🚀 ~~~~  file: auth.tsx:65 ~~~~  exchangeCodeForTokens ~~~~  data.error:', data);
   if (data.error) throw new Error(data.error);
 
   const { access_token, refresh_token, expires_in } =
