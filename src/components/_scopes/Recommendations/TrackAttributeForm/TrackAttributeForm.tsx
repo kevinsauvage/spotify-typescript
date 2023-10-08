@@ -102,7 +102,7 @@ const TrackAttributeForm: React.FC<IProperties> = ({ genres, initialParams, seed
             />
           </Slide>
 
-          <Slide buttonText="Genre">
+          <Slide buttonText="Genres">
             <GenreSelector
               handleGenreChange={handleGenreChange}
               genres={genres}
