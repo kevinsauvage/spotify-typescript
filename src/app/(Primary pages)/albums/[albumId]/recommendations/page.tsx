@@ -12,17 +12,15 @@ const page: React.FC<PageInterface> = async ({ params, searchParams }) => {
   const album: AlbumInterface = await getAlbumById(albumId);
 
   return (
-    <div>
-      <RecommendationsPresenter
-        searchParams={searchParams}
-        trackId={album?.tracks?.items
-          ?.slice(0, 5)
-          .map((track) => track.id)
-          .join(',')}
-        title="Recommendations"
-        playlistName={`Recommendations for ${album?.name}`}
-      />
-    </div>
+    <RecommendationsPresenter
+      searchParams={searchParams}
+      trackId={album?.tracks?.items
+        ?.slice(0, 5)
+        .map((track) => track.id)
+        .join(',')}
+      title="Recommendations"
+      playlistName={`Recommendations for ${album?.name}`}
+    />
   );
 };
 

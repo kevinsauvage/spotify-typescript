@@ -15,17 +15,15 @@ const page: React.FC<PageInterface> = async ({ searchParams, params }) => {
   const { name, owner } = playlistResponse || {};
 
   return (
-    <div>
-      <RecommendationsPresenter
-        searchParams={searchParams}
-        trackId={playlistTracks?.items
-          ?.slice(0, 5)
-          .map((track) => track.track.id)
-          .join(',')}
-        title="Recommendations"
-        playlistName={`Recommendations for ${name} by ${owner?.display_name}`}
-      />
-    </div>
+    <RecommendationsPresenter
+      searchParams={searchParams}
+      trackId={playlistTracks?.items
+        ?.slice(0, 5)
+        .map((track) => track.track.id)
+        .join(',')}
+      title="Recommendations"
+      playlistName={`Recommendations for ${name} by ${owner?.display_name}`}
+    />
   );
 };
 

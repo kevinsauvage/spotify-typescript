@@ -3,6 +3,7 @@ import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import Container from '@/components/Container/Container';
 import CreatePlaylist from '@/components/CreatePlaylist/CreatePlaylist';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
+import Section from '@/components/Section/Section';
 import Title from '@/components/Title/Title';
 import { addItemsToPlaylist, createPlaylist } from '@/lib/Spotify/playlist';
 import { getAvailableGenreSeeds, getRecommendations } from '@/lib/Spotify/recommendations';
@@ -68,9 +69,11 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
         initialParams={rest}
         seedGenres={seedGenres ? seedGenres?.split(',') : []}
       />
-      <TrackTable>
-        {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
-      </TrackTable>
+      <Section>
+        <TrackTable>
+          {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
+        </TrackTable>
+      </Section>
     </Container>
   );
 };

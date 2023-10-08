@@ -12,14 +12,12 @@ const page: React.FC<PageInterface> = async ({ searchParams, params }) => {
   const { name, artists } = track || {};
 
   return (
-    <div>
-      <RecommendationsPresenter
-        searchParams={searchParams}
-        trackId={trackId}
-        title="Recommendations"
-        playlistName={`Recommendations for ${name} by ${artists?.[0]?.name}`}
-      />
-    </div>
+    <RecommendationsPresenter
+      searchParams={searchParams}
+      trackId={trackId}
+      title="Recommendations"
+      playlistName={`Recommendations for ${name} by ${artists?.[0]?.name}`}
+    />
   );
 };
 
