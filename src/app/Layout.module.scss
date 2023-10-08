@@ -22,7 +22,8 @@
   }
 
   @include respond(tablet) {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
     gap: 0;
     padding: 0;
   }
@@ -36,16 +37,24 @@
   width: 100%;
   min-width: 0; // Avoid overflow in grid
   height: 100%;
+  min-height: calc(100vh - 1.6rem);
 
   @include respond(tablet) {
+    gap: 0;
+    min-height: 100vh;
     padding-bottom: 90px;
   }
 }
 
 .children {
   position: relative;
+  flex: 1;
   height: 100%;
   overflow: hidden;
   border-radius: 0.5rem;
   background-color: var(--color-background-2);
+
+  @include respond(tablet) {
+    border-radius: 0;
+  }
 }

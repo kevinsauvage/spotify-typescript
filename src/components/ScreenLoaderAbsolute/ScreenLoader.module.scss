@@ -8,7 +8,6 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  max-height: calc(100vh - 90px);
   inset: 0;
   background: linear-gradient(271deg, #1f1f1f, #131313, #000000);
   background-size: 180% 180%;
@@ -25,10 +24,6 @@
     border-radius: 50%;
     color: var(--color-white);
     animation: shadowRolling 2s linear infinite;
-  }
-
-  @include respond(tablet) {
-    height: calc(100vh - 90px);
   }
 }
 
