@@ -7,9 +7,7 @@ import { login } from '@/lib/Spotify/auth';
 const extractCode = (url: string) => {
   const parsedUrl = new URL(url);
   const queryParameters = new URLSearchParams(parsedUrl.searchParams);
-  const code = queryParameters.get('code') ?? '';
-
-  return { code };
+  return queryParameters.get('code') ?? '';
 };
 
 const Page = async () => {
@@ -17,13 +15,13 @@ const Page = async () => {
   const pathname = headersList.get('x-href');
 
   if (!pathname) {
-    console.error('no pathname');
+    console.error('Callback page: no pathname');
     return redirect('/login');
   }
-  const { code } = extractCode(pathname) || {};
+  const code = extractCode(pathname);
 
   if (!code) {
-    console.error('no code');
+    console.error('Callback page: no code');
     return redirect('/login');
   }
 
