@@ -1,10 +1,12 @@
+import BannerArtist from '@/components/_banners/BannerArtist/BannerArtist';
 import AlbumRow from '@/components/_rows/AlbumRow/AlbumRow';
 import AlbumTable from '@/components/_scopes/Listing/AlbumTable/AlbumTable';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Container from '@/components/Container/Container';
 import Section from '@/components/Section/Section';
-import { getArtistAlbums } from '@/lib/Spotify/artist';
-import { ArtistAlbumsInterface } from '@/types';
+import { getArtist, getArtistAlbums } from '@/lib/Spotify/artist';
+import { ArtistAlbumsInterface, ArtistInterface } from '@/types';
 
 interface PageInterface {
   params: { artistId: string };
@@ -15,15 +17,15 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
   const { artistId } = params || {};
   const page = Number(searchParams.page || 1);
 
-  const albums: ArtistAlbumsInterface = await getArtistAlbums(artistId, page, 20);
-
-  console.log(
-    '🚀 ~~~~  file: page.tsx:20 ~~~~  constPage:React.FC<PageInterface>= ~~~~  albums:',
-    albums,
-  );
+  const [albums, artist]: [ArtistAlbumsInterface, ArtistInterface] = await Promise.all([
+    getArtistAlbums(artistId, page, 20),
+    getArtist(artistId),
+  ]);
 
   return (
     <Container>
+      <Breadcrumbs config={{ 1: { href: `/artists/${artistId}`, name: artist.name } }} />
+      <BannerArtist artist={artist} />
       {albums?.items?.length > 0 && (
         <Section title="Albums">
           <AlbumTable showPopularity={false}>

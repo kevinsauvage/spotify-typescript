@@ -1,11 +1,13 @@
+import BannerTrack from '@/components/_banners/BannerTrack/BannerTrack';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
 import AudioAnalysis from '@/components/_scopes/Track/AudioAnalysis/AudioAnalysis';
 import ChartComponent from '@/components/_scopes/Track/Chart/Chart';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Container from '@/components/Container/Container';
 import Section from '@/components/Section/Section';
 import Wrapper from '@/components/Wrapper/Wrapper';
-import { getArtistTopTracks } from '@/lib/Spotify/artist';
+import { getArtist, getArtistTopTracks } from '@/lib/Spotify/artist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { getAudioFeatures, getTrack } from '@/lib/Spotify/track';
 import { AudioFeaturesInterface, TrackInterface } from '@/types';
@@ -28,10 +30,15 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
     getTrack(trackId),
   ]);
 
-  const artistToTracks = await getArtistTopTracks(track?.artists?.[0]?.id);
+  const [artist, artistToTracks] = await Promise.all([
+    getArtist(track?.artists?.[0]?.id),
+    getArtistTopTracks(track?.artists?.[0]?.id),
+  ]);
 
   return (
     <Container>
+      <Breadcrumbs config={{ 1: { href: `/tracks/${trackId}`, name: track.name } }} />
+      <BannerTrack track={track} artist={artist} />
       <Wrapper>
         {artistToTracks?.tracks?.length > 0 && (
           <Section title="Artist Top Tracks">

@@ -1,12 +1,19 @@
+import BannerArtist from '@/components/_banners/BannerArtist/BannerArtist';
 import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
 import Wrapper from '@/components/Wrapper/Wrapper';
-import { getArtistAlbums, getArtistRelatedArtists, getArtistTopTracks } from '@/lib/Spotify/artist';
+import {
+  getArtist,
+  getArtistAlbums,
+  getArtistRelatedArtists,
+  getArtistTopTracks,
+} from '@/lib/Spotify/artist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import { ArtistAlbumsInterface, ArtistInterface, TrackInterface } from '@/types';
 
@@ -18,14 +25,16 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ params }) => {
   const { artistId } = params || {};
 
-  const [artistTopTracks, relatedArtists, albums]: [
+  const [artistTopTracks, relatedArtists, albums, artist]: [
     { tracks: TrackInterface[] },
     { artists: ArtistInterface[] },
     ArtistAlbumsInterface,
+    ArtistInterface,
   ] = await Promise.all([
     getArtistTopTracks(artistId),
     getArtistRelatedArtists(artistId),
     getArtistAlbums(artistId),
+    getArtist(artistId),
   ]);
 
   const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
@@ -35,6 +44,8 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
 
   return (
     <Container>
+      <Breadcrumbs config={{ 1: { href: `/artists/${artistId}`, name: artist.name } }} />
+      <BannerArtist artist={artist} />
       <Wrapper>
         {artistTopTracks?.tracks?.length > 0 && (
           <Section title="Top Tracks">

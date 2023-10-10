@@ -15,8 +15,6 @@ const handleSpotifyToken = async (
   const currentTime = Math.floor(Date.now() / 1000);
   const isExpired = currentTime - hourInecound > spotifyToken.expireTime;
 
-  console.log('🚀 ~~~~  file: middleware.tsx:18 ~~~~  isExpired:', isExpired);
-
   if (isExpired) {
     const { access_token, expires_in, refresh_token } = await refreshAccessToken(
       refreshToken.token,
@@ -61,8 +59,8 @@ const middleware = async (request: NextRequest) => {
   const spotifyToken: RequestCookie | undefined = cookies.get('spotify_token');
   const spotifyRefreshToken: RequestCookie | undefined = cookies.get('spotify_refresh_token');
 
-  const token: { token: string; expireTime: number } = JSON.parse(spotifyToken?.value || '{}');
-  const refreshToken: { token: string } = JSON.parse(spotifyRefreshToken?.value || '{}');
+  const token: { token: string; expireTime: number } = JSON.parse(spotifyToken?.value ?? '{}');
+  const refreshToken: { token: string } = JSON.parse(spotifyRefreshToken?.value ?? '{}');
 
   if (
     !token?.token &&

@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import Popularity from '@/assets/icons/popularity';
-import Container from '@/components/Container/Container';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { ArtistInterface } from '@/types';
@@ -19,42 +18,40 @@ const BannerArtist: React.FC<{
   const image = images?.at(0);
 
   return (
-    <Container>
-      <PageBannerWrapper>
-        <div className={styles.banner}>
-          {image && (
-            <Image
-              className={styles.image}
-              alt="Album cover"
-              src={image?.url}
-              width={image?.width}
-              height={image?.height}
-              priority
-            />
-          )}
+    <PageBannerWrapper>
+      <div className={styles.banner}>
+        {image && (
+          <Image
+            className={styles.image}
+            alt="Album cover"
+            src={image?.url}
+            width={image?.width}
+            height={image?.height}
+            priority
+          />
+        )}
 
-          <div>
-            <h1 className={styles.name}>{name}</h1>
-            <ItemDetailsRow>
-              <p className={styles.popularity}>
-                {popularity} <Popularity />
-              </p>
-              <ItemDetailSeparator />
-              <p className={styles.followers}>{followers?.total}</p>
-              <ItemDetailSeparator />
-              <p className={styles.genres}>{genres?.join(', ')}</p>
-            </ItemDetailsRow>
-            <div className={styles.buttons}>
-              {href && (
-                <LinkPrimary href={href} target="__blank">
-                  See on spotify
-                </LinkPrimary>
-              )}
-            </div>
+        <div>
+          <h1 className={styles.name}>{name}</h1>
+          <ItemDetailsRow>
+            <p className={styles.popularity}>
+              {popularity} <Popularity />
+            </p>
+            <ItemDetailSeparator />
+            <p className={styles.followers}>{followers?.total}</p>
+            <ItemDetailSeparator />
+            <p className={styles.genres}>{genres?.join(', ')}</p>
+          </ItemDetailsRow>
+          <div className={styles.buttons}>
+            {href && (
+              <LinkPrimary href={href} target="__blank">
+                See on spotify
+              </LinkPrimary>
+            )}
           </div>
         </div>
-      </PageBannerWrapper>
-    </Container>
+      </div>
+    </PageBannerWrapper>
   );
 };
 

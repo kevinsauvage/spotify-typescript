@@ -21,6 +21,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <SideBar />
       <main className={styles.main}>
         <Header />
+
         <div className={styles.children}>{children}</div>
       </main>
     </body>
