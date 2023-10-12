@@ -8,12 +8,10 @@
   margin-bottom: 2rem;
 
   .bannerItemImage {
-    width: 100%;
-    max-width: 100px;
-    height: 100%;
     object-fit: cover;
     border-radius: 0.5rem;
     background-position: 100%;
+    aspect-ratio: 1/1;
   }
 
   .bannerItem {
@@ -21,6 +19,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     border-radius: 0.5rem;
     background-color: var(--color-background-3);
     transition: all 0.3s ease-in-out;
@@ -30,18 +29,30 @@
     }
 
     .bannerItemTitle {
-      padding: 1rem;
+      width: 100%;
+      padding: 0.5rem;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 
-  @include respond(laptop_l) {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  }
+  @include respond(laptop_s) {
+    grid-auto-rows: 1fr;
 
-  @include respond(tablet) {
+    .bannerItemImage {
+      width: 100%;
+    }
+
+    .bannerItemTitle {
+      overflow: hidden;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     .bannerItem {
+      flex-direction: column;
+
       &:hover {
         transform: none;
       }
@@ -49,7 +60,12 @@
   }
 
   @include respond(mobile_l) {
-    grid-auto-rows: 1fr;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+
+    .bannerItem {
+      &:last-child {
+        display: none;
+      }
+    }
   }
 }
