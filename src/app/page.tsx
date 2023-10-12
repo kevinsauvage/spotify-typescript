@@ -71,6 +71,7 @@ const page: React.FC = async () => {
   ]);
 
   const get5RandomTracksIds = (tracks: TrackInterface[]) => {
+    if (!Array.isArray(tracks)) return;
     const randomTracks: TrackInterface[] = [];
     for (let index = 0; index < 5; index++) {
       const randomTrack = tracks?.[Math.floor(Math.random() * tracks?.length)];

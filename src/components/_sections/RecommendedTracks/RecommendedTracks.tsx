@@ -11,7 +11,9 @@ const RecommendedTracks: React.FC<{
   Array?.isArray(recommendations?.tracks) && (
     <Section title="Tracks You May Like">
       <Grid>
-        {recommendations?.tracks?.map((track) => <TrackCard key={track.id} track={track} />)}
+        {recommendations.tracks.map((track) => (
+          <TrackCard key={track.id} track={track} />
+        ))}
       </Grid>
     </Section>
   );

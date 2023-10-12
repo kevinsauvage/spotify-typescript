@@ -9,7 +9,7 @@ const RecentlyPlayedTracks: React.FC<{
   Array?.isArray(recentlyPlayedTracks?.items) && (
     <Section title="Recently Played">
       <TrackTable>
-        {recentlyPlayedTracks?.items?.map((track) => (
+        {recentlyPlayedTracks.items.map((track) => (
           <TrackRow key={track.track.id} track={track.track} />
         ))}
       </TrackTable>

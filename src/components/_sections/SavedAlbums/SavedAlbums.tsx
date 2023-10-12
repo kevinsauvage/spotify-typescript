@@ -5,18 +5,15 @@ import { SavedAlbumResponseInterface } from '@/types';
 
 const SavedAlbums: React.FC<{
   savedAlbums: SavedAlbumResponseInterface;
-}> = ({ savedAlbums }) => (
-  <>
-    {Array.isArray(savedAlbums?.items) && (
-      <Section title="Your Favorite Albums" href="/albums/favorite">
-        <Grid>
-          {savedAlbums?.items?.map((album) => (
-            <AlbumCard key={album.album.id} album={album.album} />
-          ))}
-        </Grid>
-      </Section>
-    )}
-  </>
-);
+}> = ({ savedAlbums }) =>
+  Array.isArray(savedAlbums?.items) && (
+    <Section title="Your Favorite Albums" href="/albums/favorite">
+      <Grid>
+        {savedAlbums.items.map((album) => (
+          <AlbumCard key={album.album.id} album={album.album} />
+        ))}
+      </Grid>
+    </Section>
+  );
 
 export default SavedAlbums;

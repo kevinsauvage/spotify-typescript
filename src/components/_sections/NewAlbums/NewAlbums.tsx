@@ -10,7 +10,9 @@ const NewAlbums: React.FC<{
     {Array?.isArray(newReleases?.albums?.items) && (
       <Section title="New Released Albums" href="/albums/new">
         <Grid>
-          {newReleases?.albums?.items?.map((album) => <AlbumCard key={album.id} album={album} />)}
+          {newReleases.albums.items.map((album) => (
+            <AlbumCard key={album.id} album={album} />
+          ))}
         </Grid>
       </Section>
     )}

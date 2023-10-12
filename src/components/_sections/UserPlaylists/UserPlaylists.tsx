@@ -5,18 +5,15 @@ import { UserPlaylistInterface } from '@/types';
 
 const UserPlaylists: React.FC<{
   followedPlaylists: UserPlaylistInterface;
-}> = ({ followedPlaylists }) => (
-  <>
-    {Array?.isArray(followedPlaylists?.items) && (
-      <Section title="Your Playlists" href="/playlists/favorite">
-        <Grid>
-          {followedPlaylists?.items?.map((playlist) => (
-            <PlaylistCard key={playlist.id} playlist={playlist} />
-          ))}
-        </Grid>
-      </Section>
-    )}
-  </>
-);
+}> = ({ followedPlaylists }) =>
+  Array?.isArray(followedPlaylists?.items) && (
+    <Section title="Your Playlists" href="/playlists/favorite">
+      <Grid>
+        {followedPlaylists.items.map((playlist) => (
+          <PlaylistCard key={playlist.id} playlist={playlist} />
+        ))}
+      </Grid>
+    </Section>
+  );
 
 export default UserPlaylists;
