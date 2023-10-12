@@ -12,7 +12,9 @@ export const Timeout = (time: number) => {
 export const getSpotifyToken = () => {
   try {
     const cookieStore = cookies();
-    const spotifyTokenString = cookieStore?.get('spotify_token')?.value;
+    if (!cookieStore) return;
+
+    const spotifyTokenString = cookieStore.get('spotify_token')?.value;
 
     return JSON.parse(spotifyTokenString ?? '{}')?.token;
   } catch (error) {
