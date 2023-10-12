@@ -45,10 +45,6 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
     getPlaylistTracks(params.playlistId, page),
     getEndpointMe(),
   ]);
-  console.log(
-    '🚀 ~~~~  file: page.tsx:35 ~~~~  constPage:React.FC<PageInterface>= ~~~~  playlist:',
-    playlist,
-  );
 
   const recommendedTracks: { tracks: TrackInterface[] } = await getRecommendations({
     limit: 10,

@@ -29,8 +29,6 @@ export const refreshAccessToken = async (refreshToken: string) => {
 
     const data = await response.json();
 
-    console.log('🚀 ~~~~  file: auth.tsx:27 ~~~~  refreshAccessToken ~~~~  data:', data);
-
     if (!data) {
       throw new Error('No data received');
     }

@@ -73,7 +73,7 @@ const page: React.FC = async () => {
   const get5RandomTracksIds = (tracks: TrackInterface[]) => {
     const randomTracks: TrackInterface[] = [];
     for (let index = 0; index < 5; index++) {
-      const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+      const randomTrack = tracks?.[Math.floor(Math.random() * tracks?.length)];
       randomTracks.push(randomTrack);
     }
     return randomTracks.map((track) => track.id).join(',');
@@ -81,7 +81,7 @@ const page: React.FC = async () => {
 
   const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
     limit: 10,
-    seedTracks: get5RandomTracksIds(userTopTracks.items),
+    seedTracks: get5RandomTracksIds(userTopTracks?.items),
   });
 
   const bannerData = [

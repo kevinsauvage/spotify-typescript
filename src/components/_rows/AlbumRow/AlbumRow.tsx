@@ -27,7 +27,7 @@ const AlbumRow: React.FC<IProperties> = ({ album }) => {
         {artists.map((artist, index) => (
           <Link key={artist.id} href={`/artists/${artist.id}`}>
             {artist.name}
-            {index < artists.length - 1 && ', '}
+            {index < artists?.length - 1 && ', '}
           </Link>
         ))}
       </td>
