@@ -34,7 +34,7 @@ const TrackCard: React.FC<{
         </div>
         <p className={styles.duration}>{getMinuteFromMilliseconds(durationMs)}</p>
       </div>
-      {Number.isNaN(popularity) ? '' : <Popularity popularity={popularity} />}
+      <Popularity popularity={popularity} />
     </div>
   );
 };

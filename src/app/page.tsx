@@ -70,13 +70,18 @@ const page: React.FC = async () => {
     getFeaturedPlaylists('US', 1, 10),
   ]);
 
+  const get5RandomTracksIds = (tracks: TrackInterface[]) => {
+    const randomTracks: TrackInterface[] = [];
+    for (let index = 0; index < 5; index++) {
+      const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+      randomTracks.push(randomTrack);
+    }
+    return randomTracks.map((track) => track.id).join(',');
+  };
+
   const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
     limit: 10,
-    seedTracks:
-      userTopTracks?.items
-        ?.slice(0, 5)
-        .map((track) => track.id)
-        .join(',') || undefined,
+    seedTracks: get5RandomTracksIds(userTopTracks.items),
   });
 
   const bannerData = [

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import Popularity from '@/assets/icons/popularity';
+import PopularityIcon from '@/assets/icons/popularity';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { ArtistInterface } from '@/types';
@@ -35,7 +35,7 @@ const BannerArtist: React.FC<{
           <h1 className={styles.name}>{name}</h1>
           <ItemDetailsRow>
             <p className={styles.popularity}>
-              {popularity} <Popularity />
+              {popularity} <PopularityIcon />
             </p>
             <ItemDetailSeparator />
             <p className={styles.followers}>{followers?.total}</p>

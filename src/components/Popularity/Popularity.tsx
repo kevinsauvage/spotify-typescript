@@ -9,10 +9,13 @@ interface IProperties {
 
 const Popularity: React.FC<IProperties> = ({ popularity, extratyles }) => {
   return (
-    <div className={`${styles.Popularity} ${extratyles}`}>
-      <span>{popularity}</span>
-      <PopularityIcon />
-    </div>
+    !Number.isNaN(popularity) &&
+    popularity !== undefined && (
+      <div className={`${styles.Popularity} ${extratyles}`}>
+        <span>{popularity}</span>
+        <PopularityIcon />
+      </div>
+    )
   );
 };
 

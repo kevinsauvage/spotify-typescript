@@ -7,16 +7,13 @@ const RecommendedTracks: React.FC<{
   recommendations: {
     tracks: TrackInterface[];
   };
-}> = ({ recommendations }) => (
-  <>
-    {Array?.isArray(recommendations?.tracks) && (
-      <Section title="Tracks You May Like">
-        <Grid>
-          {recommendations?.tracks?.map((track) => <TrackCard key={track.id} track={track} />)}
-        </Grid>
-      </Section>
-    )}
-  </>
-);
+}> = ({ recommendations }) =>
+  Array?.isArray(recommendations?.tracks) && (
+    <Section title="Tracks You May Like">
+      <Grid>
+        {recommendations?.tracks?.map((track) => <TrackCard key={track.id} track={track} />)}
+      </Grid>
+    </Section>
+  );
 
 export default RecommendedTracks;

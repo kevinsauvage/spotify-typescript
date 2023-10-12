@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Popularity from '@/assets/icons/popularity';
+import PopularityIcon from '@/assets/icons/popularity';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import { AlbumInterface } from '@/types';
@@ -54,7 +54,7 @@ const BannerAlbum: React.FC<{
             <ItemDetailSeparator />
             <p className={styles.popularity}>
               {popularity}
-              <Popularity />
+              <PopularityIcon />
             </p>
             <ItemDetailSeparator />
             {genres?.length > 0 && <p className={styles.genres}>{genres?.join(', ')}</p>}

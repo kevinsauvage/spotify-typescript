@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Calendar from '@/assets/icons/calendar';
-import Popularity from '@/assets/icons/popularity';
+import PopularityIcon from '@/assets/icons/popularity';
 import Time from '@/assets/icons/time';
 import LinkPrimary from '@/components/LinkPrimary/LinkPrimary';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
@@ -74,7 +74,7 @@ const BannerTrack: React.FC<{
             <ItemDetailSeparator />
             <p className={styles.popularity}>
               {track?.popularity}
-              <Popularity />
+              <PopularityIcon />
             </p>
           </ItemDetailsRow>
 

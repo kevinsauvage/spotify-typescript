@@ -27,8 +27,6 @@ export async function GET() {
     { id: 'albums' },
     { id: 'login' },
     { id: 'search' },
-    { id: 'top-artists' },
-    { id: 'top-tracks' },
   ];
   const body = generateSiteMap(pages);
 
