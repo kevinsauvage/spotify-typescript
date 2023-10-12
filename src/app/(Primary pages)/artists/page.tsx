@@ -1,31 +1,27 @@
-import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
-import ListingArtistsClient from '@/components/_scopes/Listing/ListingArtistsClient/ListingArtistsClient';
+import SavedArtists from '@/components/_sections/SavedArtists/SavedArtists';
+import TopArtists from '@/components/_sections/TopArtists/TopArtists';
 import Container from '@/components/Container/Container';
-import Grid from '@/components/Grid/Grid';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
-import { getEndpointFollowedArtists } from '@/lib/Spotify/user';
-import { FollowedArtistsInterface } from '@/types';
+import { getEndpointFollowedArtists, getEndpointTopArtists } from '@/lib/Spotify/user';
+import { FollowedArtistsInterface, UserTopArtistInterface } from '@/types';
 
 interface PageInterface {}
 
 const Page: React.FC<PageInterface> = async () => {
-  const savedArtists: FollowedArtistsInterface = await getEndpointFollowedArtists(15);
+  const [userTopArtists, followedArtists]: [UserTopArtistInterface, FollowedArtistsInterface] =
+    await Promise.all([
+      getEndpointTopArtists(undefined, 'short_term', 10),
+      getEndpointFollowedArtists(10),
+    ]);
 
   return (
     <Container>
       <PageBannerWrapper>
         <Title>Artists</Title>
       </PageBannerWrapper>
-      <Grid>
-        {savedArtists?.artists?.items?.map((artist) => (
-          <ArtistCard key={artist.id} artist={artist} />
-        ))}
-        <ListingArtistsClient
-          after={savedArtists?.artists?.cursors?.after}
-          handleFetch={getEndpointFollowedArtists}
-        />
-      </Grid>
+      <TopArtists userTopArtists={userTopArtists} />
+      <SavedArtists followedArtists={followedArtists} />
     </Container>
   );
 };

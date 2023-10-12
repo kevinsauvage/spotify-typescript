@@ -1,36 +1,27 @@
-import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
-import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import NewAlbums from '@/components/_sections/NewAlbums/NewAlbums';
+import SavedAlbums from '@/components/_sections/SavedAlbums/SavedAlbums';
 import Container from '@/components/Container/Container';
-import Grid from '@/components/Grid/Grid';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
+import { getNewRelease } from '@/lib/Spotify/album';
 import { getEndpointSavedAlbums } from '@/lib/Spotify/user';
-import { SavedAlbumResponseInterface } from '@/types';
+import { NewReleasesAlbums, SavedAlbumResponseInterface } from '@/types';
 
 interface PageInterface {
   searchParams: { page: string };
 }
 
-const Page: React.FC<PageInterface> = async ({ searchParams }) => {
-  const page = Number(searchParams.page || 1);
-
-  const savedAlbumns: SavedAlbumResponseInterface = await getEndpointSavedAlbums(page, 20);
+const Page: React.FC<PageInterface> = async () => {
+  const [savedAlbums, newReleases]: [SavedAlbumResponseInterface, NewReleasesAlbums] =
+    await Promise.all([getEndpointSavedAlbums(1, 10), getNewRelease('US', 1, 10)]);
 
   return (
     <Container>
       <PageBannerWrapper>
         <Title>Albums</Title>
       </PageBannerWrapper>
-      <Grid>
-        {savedAlbumns?.items?.map((album) => (
-          <AlbumCard key={album.album.id} album={album.album} />
-        ))}
-      </Grid>
-      <Pagination
-        currentPage={page}
-        totalPages={Math.ceil(savedAlbumns?.total / savedAlbumns?.limit)}
-        navigate
-      />
+      <SavedAlbums savedAlbums={savedAlbums} />
+      <NewAlbums newReleases={newReleases} />
     </Container>
   );
 };

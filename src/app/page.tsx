@@ -1,15 +1,18 @@
 import ProfilBanner from '@/components/_banners/ProfilBanner/ProfilBanner';
-import AlbumCard from '@/components/_cards/AlbumCard/AlbumCard';
-import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
-import PlaylistCard from '@/components/_cards/PlaylistCard/PlaylistCard';
-import TrackCard from '@/components/_cards/TrackCard/TrackCard';
-import TrackRow from '@/components/_rows/TrackRow/TrackRow';
-import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
+import FeaturedPlaylists from '@/components/_sections/FeaturedPlaylists/FeaturedPlaylists';
+import NewAlbums from '@/components/_sections/NewAlbums/NewAlbums';
+import RecentlyPlayedTracks from '@/components/_sections/RecentlyPlayedTracks/RecentlyPlayedTracks';
+import RecommendedTracks from '@/components/_sections/RecommendedTracks/RecommendedTracks';
+import SavedAlbums from '@/components/_sections/SavedAlbums/SavedAlbums';
+import SavedArtists from '@/components/_sections/SavedArtists/SavedArtists';
+import SavedTracks from '@/components/_sections/SavedTracks/SavedTracks';
+import TopArtists from '@/components/_sections/TopArtists/TopArtists';
+import UserPlaylists from '@/components/_sections/UserPlaylists/UserPlaylists';
+import UserTopTrack from '@/components/_sections/UserTopTrack/UserTopTrack';
 import Container from '@/components/Container/Container';
-import Grid from '@/components/Grid/Grid';
-import Section from '@/components/Section/Section';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import { getNewRelease } from '@/lib/Spotify/album';
+import { getFeaturedPlaylists } from '@/lib/Spotify/playlist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import {
   getEndpointFollowedArtists,
@@ -21,6 +24,7 @@ import {
   getEndpointTopTracks,
 } from '@/lib/Spotify/user';
 import {
+  FeaturedPlaylistInterface,
   FollowedArtistsInterface,
   NewReleasesAlbums,
   RecentlyPlayedInterface,
@@ -43,6 +47,7 @@ const page: React.FC = async () => {
     savedTracks,
     savedAlbums,
     newReleases,
+    featuredPlaylists,
   ]: [
     UserTopArtistInterface,
     UserTopTrackInterface,
@@ -52,6 +57,7 @@ const page: React.FC = async () => {
     UserSavedTracksInterface,
     SavedAlbumResponseInterface,
     NewReleasesAlbums,
+    FeaturedPlaylistInterface,
   ] = await Promise.all([
     getEndpointTopArtists(undefined, 'short_term', 10),
     getEndpointTopTracks(undefined, 'short_term', 6),
@@ -61,6 +67,7 @@ const page: React.FC = async () => {
     getEndpointSavedTracks(1, 10),
     getEndpointSavedAlbums(1, 10),
     getNewRelease('US', 1, 10),
+    getFeaturedPlaylists('US', 1, 10),
   ]);
 
   const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
@@ -124,88 +131,17 @@ const page: React.FC = async () => {
     <Container>
       <ProfilBanner bannerData={bannerData} />
       <Wrapper>
-        {Array?.isArray(userTopTracks?.items) && (
-          <Section title="Your Top Tracks" href="/top-tracks">
-            <TrackTable>
-              {userTopTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
-            </TrackTable>
-          </Section>
-        )}
-
-        {Array?.isArray(recentlyPlayedTracks?.items) && (
-          <Section title="Recently Played">
-            <TrackTable>
-              {recentlyPlayedTracks?.items?.map((track) => (
-                <TrackRow key={track.track.id} track={track.track} />
-              ))}
-            </TrackTable>
-          </Section>
-        )}
+        <UserTopTrack tracks={userTopTracks.items} />
+        <RecentlyPlayedTracks recentlyPlayedTracks={recentlyPlayedTracks} />
       </Wrapper>
-
-      {Array?.isArray(recommendations?.tracks) && (
-        <Section title="Tracks You May Like">
-          <Grid>
-            {recommendations?.tracks?.map((track) => <TrackCard key={track.id} track={track} />)}
-          </Grid>
-        </Section>
-      )}
-
-      {Array?.isArray(userTopArtists?.items) && (
-        <Section title="Your Top Artists" href="/top-artists">
-          <Grid>
-            {userTopArtists?.items.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}
-          </Grid>
-        </Section>
-      )}
-
-      {Array?.isArray(newReleases?.albums?.items) && (
-        <Section title="New Albums">
-          <Grid>
-            {newReleases?.albums?.items?.map((album) => <AlbumCard key={album.id} album={album} />)}
-          </Grid>
-        </Section>
-      )}
-
-      {Array?.isArray(followedPlaylists?.items) && (
-        <Section title="Your Playlists" href="/playlists">
-          <Grid>
-            {followedPlaylists?.items?.map((playlist) => (
-              <PlaylistCard key={playlist.id} playlist={playlist} />
-            ))}
-          </Grid>
-        </Section>
-      )}
-
-      {Array.isArray(savedTracks?.items) && (
-        <Section title="Your Favorite Tracks" href="/tracks">
-          <TrackTable>
-            {savedTracks?.items?.map((track) => (
-              <TrackRow key={track.track.id} track={track.track} />
-            ))}
-          </TrackTable>
-        </Section>
-      )}
-
-      {Array.isArray(followedArtists?.artists?.items) && (
-        <Section title="Your Favorite Artists" href="/artists">
-          <Grid>
-            {followedArtists?.artists?.items.map((artist) => (
-              <ArtistCard key={artist.id} artist={artist} />
-            ))}
-          </Grid>
-        </Section>
-      )}
-
-      {Array.isArray(savedAlbums?.items) && (
-        <Section title="your Favorite Albums" href="/albums">
-          <Grid>
-            {savedAlbums?.items?.map((album) => (
-              <AlbumCard key={album.album.id} album={album.album} />
-            ))}
-          </Grid>
-        </Section>
-      )}
+      <RecommendedTracks recommendations={recommendations} />
+      <SavedTracks savedTracks={savedTracks} />
+      <TopArtists userTopArtists={userTopArtists} />
+      <SavedArtists followedArtists={followedArtists} />
+      <FeaturedPlaylists featuredPlaylists={featuredPlaylists} />
+      <UserPlaylists followedPlaylists={followedPlaylists} />
+      <NewAlbums newReleases={newReleases} />
+      <SavedAlbums savedAlbums={savedAlbums} />
     </Container>
   );
 };

@@ -2,6 +2,7 @@ import TrackRow from '@/components/_rows/TrackRow/TrackRow';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
 import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Container from '@/components/Container/Container';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Section from '@/components/Section/Section';
@@ -22,11 +23,12 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
 
   return (
     <Container>
+      <Breadcrumbs />
       <PageBannerWrapper>
         <Title>Top Tracks</Title>
       </PageBannerWrapper>
       <Section>
-        <FiltersPeriod path="/top-tracks" period={period} />
+        <FiltersPeriod path="/tracks/top" period={period} />
         <TrackTable>
           {topTracks?.items?.map((track) => <TrackRow key={track.id} track={track} />)}
         </TrackTable>

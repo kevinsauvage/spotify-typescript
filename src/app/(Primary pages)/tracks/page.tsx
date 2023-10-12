@@ -1,34 +1,60 @@
-import TrackRow from '@/components/_rows/TrackRow/TrackRow';
-import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
-import TrackTable from '@/components/_scopes/Listing/TrackTable/TrackTable';
+import RecentlyPlayedTracks from '@/components/_sections/RecentlyPlayedTracks/RecentlyPlayedTracks';
+import RecommendedTracks from '@/components/_sections/RecommendedTracks/RecommendedTracks';
+import SavedTracks from '@/components/_sections/SavedTracks/SavedTracks';
+import UserTopTrack from '@/components/_sections/UserTopTrack/UserTopTrack';
 import Container from '@/components/Container/Container';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
-import { getEndpointSavedTracks } from '@/lib/Spotify/user';
-import { UserSavedTracksInterface } from '@/types';
+import Wrapper from '@/components/Wrapper/Wrapper';
+import { getRecommendations } from '@/lib/Spotify/recommendations';
+import {
+  getEndpointRecentTracks,
+  getEndpointSavedTracks,
+  getEndpointTopTracks,
+} from '@/lib/Spotify/user';
+import {
+  RecentlyPlayedInterface,
+  TrackInterface,
+  UserSavedTracksInterface,
+  UserTopTrackInterface,
+} from '@/types';
 
 interface PageInterface {
   params: object;
   searchParams: { page: string };
 }
 
-const Page: React.FC<PageInterface> = async ({ searchParams }) => {
-  const page = Number(searchParams.page || 1);
-  const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(page, 30);
+const Page: React.FC<PageInterface> = async () => {
+  const [userTopTracks, recentlyPlayedTracks, savedTracks]: [
+    UserTopTrackInterface,
+    RecentlyPlayedInterface,
+    UserSavedTracksInterface,
+  ] = await Promise.all([
+    getEndpointTopTracks(undefined, 'short_term', 6),
+    getEndpointRecentTracks(6),
+    getEndpointSavedTracks(1, 10),
+  ]);
+
+  const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
+    limit: 10,
+    seedTracks:
+      userTopTracks?.items
+        ?.slice(0, 5)
+        .map((track) => track.id)
+        .join(',') || undefined,
+  });
 
   return (
     <Container>
       <PageBannerWrapper>
         <Title>Tracks</Title>
       </PageBannerWrapper>
-      <TrackTable>
-        {savedTracks?.items?.map((track) => <TrackRow key={track.track.id} track={track.track} />)}
-      </TrackTable>
-      <Pagination
-        currentPage={page}
-        totalPages={Math.floor(savedTracks?.total / savedTracks?.limit)}
-        navigate
-      />
+      <Wrapper>
+        <UserTopTrack tracks={userTopTracks.items} />
+        <RecentlyPlayedTracks recentlyPlayedTracks={recentlyPlayedTracks} />
+      </Wrapper>
+      <RecommendedTracks recommendations={recommendations} />
+      <SavedTracks savedTracks={savedTracks} />
     </Container>
   );
 };

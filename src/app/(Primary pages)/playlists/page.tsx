@@ -1,38 +1,28 @@
-import Playlist from '@/components/_cards/PlaylistCard/PlaylistCard';
-import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import FeaturedPlaylists from '@/components/_sections/FeaturedPlaylists/FeaturedPlaylists';
+import UserPlaylists from '@/components/_sections/UserPlaylists/UserPlaylists';
 import Container from '@/components/Container/Container';
-import Grid from '@/components/Grid/Grid';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
+import { getFeaturedPlaylists } from '@/lib/Spotify/playlist';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
-import { UserPlaylistInterface } from '@/types';
+import { FeaturedPlaylistInterface, UserPlaylistInterface } from '@/types';
 
 interface PageInterface {
   params: object;
   searchParams: { page: string };
 }
 
-const Page: React.FC<PageInterface> = async ({ searchParams }) => {
-  const page = Number(searchParams.page || 1);
-
-  const followedPlaylists: UserPlaylistInterface = await getEndpointMePlaylists(page, 20);
+const Page: React.FC<PageInterface> = async () => {
+  const [followedPlaylists, featuredPlaylists]: [UserPlaylistInterface, FeaturedPlaylistInterface] =
+    await Promise.all([getEndpointMePlaylists(1, 10), getFeaturedPlaylists('US', 1, 10)]);
 
   return (
     <Container>
       <PageBannerWrapper>
         <Title>Playlists</Title>
       </PageBannerWrapper>
-      <Grid>
-        {Array.isArray(followedPlaylists?.items) &&
-          followedPlaylists?.items?.map((playlist) => (
-            <Playlist key={playlist.id} playlist={playlist} />
-          ))}
-      </Grid>
-      <Pagination
-        currentPage={page}
-        totalPages={Math.floor(followedPlaylists?.total / followedPlaylists?.limit)}
-        navigate
-      />
+      <FeaturedPlaylists featuredPlaylists={featuredPlaylists} />
+      <UserPlaylists followedPlaylists={followedPlaylists} />
     </Container>
   );
 };

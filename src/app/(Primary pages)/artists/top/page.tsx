@@ -1,6 +1,7 @@
 import ArtistCard from '@/components/_cards/ArtistCard/ArtistCard';
 import FiltersPeriod from '@/components/_scopes/Listing/FiltersPeriod/FiltersPeriod';
 import Pagination from '@/components/_scopes/Listing/Pagination/Pagination';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Container from '@/components/Container/Container';
 import Grid from '@/components/Grid/Grid';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
@@ -21,11 +22,12 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
 
   return (
     <Container>
+      <Breadcrumbs />
       <PageBannerWrapper>
         <Title>Top Artists</Title>
       </PageBannerWrapper>
       <Section>
-        <FiltersPeriod path="/top-artists" period={period} />
+        <FiltersPeriod path="/artists/top" period={period} />
         <Grid>
           {Array.isArray(topArtists.items) &&
             topArtists?.items?.map((artist) => <ArtistCard key={artist.id} artist={artist} />)}

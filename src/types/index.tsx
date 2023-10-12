@@ -305,3 +305,13 @@ export interface AlbumTracksInterface {
   next: string;
   previous: string;
 }
+
+export interface FeaturedPlaylistInterface {
+  message: string;
+  playlists: {
+    items: PlaylistInterface[];
+    limit: number;
+    offset: number;
+    total: number;
+  };
+}

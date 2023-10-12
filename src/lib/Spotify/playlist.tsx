@@ -70,3 +70,13 @@ export const removeFromPlaylist = async (
 
   return response;
 };
+
+export const getFeaturedPlaylists = async (
+  country: string = 'US',
+  page: number = 1,
+  limit: number = 10,
+) => {
+  const offset = (page - 1) * limit;
+  const url = `${enpointBaseUrl}/browse/featured-playlists?country=${country}&limit=${defaultLimit}&offset=${offset}`;
+  return fetchHelper(url);
+};
