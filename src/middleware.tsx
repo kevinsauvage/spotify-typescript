@@ -64,15 +64,15 @@ const middleware = async (request: NextRequest) => {
 
   if (
     !token?.token &&
-    !nextUrl.pathname.startsWith('/login') &&
-    !nextUrl.pathname.startsWith('/callbacks')
+    !nextUrl?.pathname?.startsWith('/login') &&
+    !nextUrl?.pathname?.startsWith('/callbacks')
   ) {
     nextUrl.pathname = '/login';
     return NextResponse.redirect(nextUrl);
   }
 
   if (token?.token) {
-    if (nextUrl.pathname.startsWith('/login') || nextUrl.pathname.startsWith('/callbacks')) {
+    if (nextUrl?.pathname?.startsWith('/login') || nextUrl?.pathname?.startsWith('/callbacks')) {
       nextUrl.pathname = '/';
       return NextResponse.redirect(nextUrl);
     }
