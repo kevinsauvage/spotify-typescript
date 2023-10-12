@@ -45,7 +45,6 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
     getPlaylistTracks(params.playlistId, page),
     getEndpointMe(),
   ]);
-
   const recommendedTracks: { tracks: TrackInterface[] } = await getRecommendations({
     limit: 10,
     seedArtists: '',
@@ -83,10 +82,12 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
             <TrackTable>
               {recommendedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
             </TrackTable>
-            <AddToPlaylist
-              addItemsToPlaylist={addItemsToPlaylist}
-              tracks={recommendedTracks.tracks}
-            />
+            {playlist.owner.id === user.id && (
+              <AddToPlaylist
+                addItemsToPlaylist={addItemsToPlaylist}
+                tracks={recommendedTracks.tracks}
+              />
+            )}
           </Section>
         )}
       </Wrapper>
