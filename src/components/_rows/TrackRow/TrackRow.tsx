@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import PopularityIcon from '@/assets/icons/popularity';
 import Time from '@/assets/icons/time';
-import TrackConfig from '@/components/TrackConfig/TrackConfig';
+import TrackDelete from '@/components/TrackDelete/TrackDelete';
 import { removeFromPlaylist } from '@/lib/Spotify/playlist';
 import { TrackInterface } from '@/types';
 import { getMinuteFromMilliseconds } from '@/utils/date';
@@ -13,7 +13,8 @@ import styles from './TrackRow.module.scss';
 const TrackRow: React.FC<{
   track: TrackInterface;
   playlistId?: string;
-}> = ({ track, playlistId }) => {
+  showDelete?: boolean;
+}> = ({ track, playlistId, showDelete }) => {
   const { name, artists, album, duration_ms: durationMs, id, uri, popularity } = track || {};
 
   const { images } = album || {};
@@ -59,9 +60,9 @@ const TrackRow: React.FC<{
           {getMinuteFromMilliseconds(durationMs)} <Time />
         </div>
       </td>
-      {playlistId && (
+      {playlistId && showDelete && (
         <td>
-          <TrackConfig playlistId={playlistId} uri={uri} removeFromPlaylist={removeFromPlaylist} />
+          <TrackDelete playlistId={playlistId} uri={uri} removeFromPlaylist={removeFromPlaylist} />
         </td>
       )}
     </tr>

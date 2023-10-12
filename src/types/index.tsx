@@ -103,6 +103,7 @@ export interface PlaylistResponseInterface {
 
 export interface UserDataInterface {
   display_name: string;
+  id: string;
   followers: {
     total: number;
   };

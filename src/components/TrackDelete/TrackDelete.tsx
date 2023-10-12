@@ -8,7 +8,7 @@ import Trash from '@/assets/icons/trash';
 
 import ScreenLoader from '../ScreenLoaderAbsolute/ScreenLoader';
 
-import styles from './TrackConfig.module.scss';
+import styles from './TrackDelete.module.scss';
 interface IProperties {
   playlistId: string;
   uri: string;
@@ -18,7 +18,7 @@ interface IProperties {
     pathname: string,
   ) => Promise<{ snapshot_id: string }>;
 }
-const TrackConfig: React.FC<IProperties> = ({ playlistId, uri, removeFromPlaylist }) => {
+const TrackDelete: React.FC<IProperties> = ({ playlistId, uri, removeFromPlaylist }) => {
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
 
@@ -33,7 +33,7 @@ const TrackConfig: React.FC<IProperties> = ({ playlistId, uri, removeFromPlaylis
   }, [removeFromPlaylist, playlistId, uri, pathname]);
 
   return (
-    <div className={styles.TrackConfig}>
+    <div className={styles.TrackDelete}>
       {isLoading && <ScreenLoader />}
       <button onClick={handleRemoveFromPlaylist} disabled={isLoading}>
         {<Trash />}
@@ -42,4 +42,4 @@ const TrackConfig: React.FC<IProperties> = ({ playlistId, uri, removeFromPlaylis
   );
 };
 
-export default TrackConfig;
+export default TrackDelete;

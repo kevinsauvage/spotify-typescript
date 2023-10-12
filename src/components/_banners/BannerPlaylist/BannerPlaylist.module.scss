@@ -21,12 +21,20 @@
     word-break: break-all;
   }
 
+  .description {
+    margin-bottom: 1rem;
+    color: var(--color-text-2);
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
   .public,
   .description,
   .collaborative,
   .followers,
   .tracks {
     color: var(--color-text-3);
+    text-transform: capitalize;
   }
 
   .links {
