@@ -1,9 +1,6 @@
 /* eslint-disable unicorn/prefer-module */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compiler: {
-    removeConsole: true,
-  },
   experimental: {
     serverActions: true,
   },

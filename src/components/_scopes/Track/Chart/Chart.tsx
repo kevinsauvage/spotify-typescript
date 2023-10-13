@@ -34,6 +34,17 @@ const ChartComponent: React.FunctionComponent<IChartProperties> = ({ audioFeatur
     'rgba(0, 128, 0, 0.6)', // Green
   ];
 
+  // Define custom labels for the x-axis
+  const customLabels = [
+    'Acousticness',
+    'Danceability',
+    'Energy',
+    'Valence',
+    'Instrumentalness',
+    'Liveness',
+    'Speechiness',
+  ];
+
   // Prepare the data for the chart
   const data = {
     datasets: [
@@ -48,18 +59,10 @@ const ChartComponent: React.FunctionComponent<IChartProperties> = ({ audioFeatur
           audioFeatures?.liveness ?? 0,
           audioFeatures?.speechiness ?? 0,
         ],
-        label: 'Audio Features',
+        label: '',
       },
     ],
-    labels: [
-      'Acousticness',
-      'Danceability',
-      'Energy',
-      'Valence',
-      'Instrumentalness',
-      'Liveness',
-      'Speechiness',
-    ],
+    labels: customLabels,
   };
 
   return (
@@ -72,7 +75,7 @@ const ChartComponent: React.FunctionComponent<IChartProperties> = ({ audioFeatur
             mode: 'index',
           },
           plugins: {
-            title: {
+            legend: {
               display: false,
             },
             tooltip: {
@@ -90,7 +93,7 @@ const ChartComponent: React.FunctionComponent<IChartProperties> = ({ audioFeatur
             x: {
               beginAtZero: true,
               ticks: {
-                callback: (value) => value.toString(), // Convert ticks to strings
+                callback: (value, index) => customLabels[index], // Use customLabels for x-axis labels
               },
               title: {
                 display: false,
