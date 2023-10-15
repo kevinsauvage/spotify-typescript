@@ -38,7 +38,7 @@ const BannerArtist: React.FC<{
               {popularity} <PopularityIcon />
             </p>
             <ItemDetailSeparator />
-            <p className={styles.followers}>{followers?.total}</p>
+            <p className={styles.followers}>{followers?.total} followers</p>
             <ItemDetailSeparator />
             <p className={styles.genres}>{genres?.join(', ')}</p>
           </ItemDetailsRow>

@@ -47,7 +47,7 @@ const BannerPlaylist: React.FC<{
             {collaborative && <p className={styles.collaborative}>Collaborative</p>}
             {collaborative && <ItemDetailSeparator />}
 
-            <p className={styles.followers}>{followers?.total}</p>
+            <p className={styles.followers}>{followers?.total} followers</p>
             <ItemDetailSeparator />
             <p className={styles.tracks}>{tracks?.total} tracks</p>
           </ItemDetailsRow>
