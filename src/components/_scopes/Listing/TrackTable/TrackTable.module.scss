@@ -97,10 +97,12 @@
   }
 
   @include respond(tablet) {
-    min-width: 300px;
+    min-width: 350px;
   }
 
   @include respond(mobile_l) {
+    min-width: 300px;
+
     thead {
       display: none;
     }
