@@ -7,7 +7,7 @@ const SavedTracks: React.FC<{
   savedTracks: UserSavedTracksInterface;
 }> = ({ savedTracks }) =>
   Array.isArray(savedTracks?.items) && (
-    <Section title="Saved Tracks" href="/tracks/favorite">
+    <Section title="Saved Tracks" href="/tracks/saved">
       <TrackTable>
         {savedTracks.items.map((track) => (
           <TrackRow key={track.track.id} track={track.track} />

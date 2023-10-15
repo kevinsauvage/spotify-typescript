@@ -7,7 +7,7 @@ const SavedAlbums: React.FC<{
   savedAlbums: SavedAlbumResponseInterface;
 }> = ({ savedAlbums }) =>
   Array.isArray(savedAlbums?.items) && (
-    <Section title="Saved Albums" href="/albums/favorite">
+    <Section title="Saved Albums" href="/albums/saved">
       <Grid>
         {savedAlbums.items.map((album) => (
           <AlbumCard key={album.album.id} album={album.album} />

@@ -7,7 +7,7 @@ const SavedPlaylists: React.FC<{
   followedPlaylists: UserPlaylistInterface;
 }> = ({ followedPlaylists }) =>
   Array?.isArray(followedPlaylists?.items) && (
-    <Section title="Saved Playlists" href="/playlists/favorite">
+    <Section title="Saved Playlists" href="/playlists/saved">
       <Grid>
         {followedPlaylists.items.map((playlist) => (
           <PlaylistCard key={playlist.id} playlist={playlist} />
