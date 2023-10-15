@@ -316,3 +316,38 @@ export interface FeaturedPlaylistInterface {
     total: number;
   };
 }
+
+export type BrowzeCategory = {
+  href: string;
+  icons: {
+    height: number;
+    url: string;
+    width: number;
+  }[];
+  id: string;
+  name: string;
+};
+
+export type BrowzeCategoriesResponse = {
+  categories: {
+    href: string;
+    items: BrowzeCategory[];
+    limit: number;
+    next: string;
+    offset: number;
+    previous: string;
+    total: number;
+  };
+};
+
+export type BrowzeCategoriesPlaylistsResponse = {
+  playlists: {
+    href: string;
+    items: PlaylistInterface[];
+    limit: number;
+    next: string;
+    offset: number;
+    previous: string;
+    total: number;
+  };
+};

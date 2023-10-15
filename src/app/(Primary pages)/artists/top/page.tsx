@@ -34,7 +34,7 @@ const Page: React.FC<PageInterface> = async ({ searchParams }) => {
         </Grid>
         <Pagination
           currentPage={page}
-          totalPages={Math.floor(topArtists?.total / topArtists?.limit)}
+          totalPages={Math.ceil(topArtists?.total / topArtists?.limit)}
           navigate
         />
       </Section>

@@ -7,9 +7,7 @@ import { getNewRelease } from '@/lib/Spotify/album';
 import { getEndpointSavedAlbums } from '@/lib/Spotify/user';
 import { NewReleasesAlbums, SavedAlbumResponseInterface } from '@/types';
 
-interface PageInterface {
-  searchParams: { page: string };
-}
+interface PageInterface {}
 
 const Page: React.FC<PageInterface> = async () => {
   const [savedAlbums, newReleases]: [SavedAlbumResponseInterface, NewReleasesAlbums] =

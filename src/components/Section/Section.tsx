@@ -12,7 +12,7 @@ interface IProperties {
 const Section: React.FC<IProperties> = ({ title, children, href, buttonText }) => {
   return (
     <div className={styles.Section}>
-      {title && (
+      {(title || href) && (
         <div className={styles.header}>
           {title && <p className={styles.title}>{title}</p>}
           {href && <Link href={href}>{buttonText ?? 'See all'}</Link>}

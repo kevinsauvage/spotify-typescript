@@ -35,7 +35,7 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
           </AlbumTable>
           <Pagination
             currentPage={page}
-            totalPages={Math.floor(albums?.total / albums?.limit)}
+            totalPages={Math.ceil(albums?.total / albums?.limit)}
             navigate
           />
         </Section>

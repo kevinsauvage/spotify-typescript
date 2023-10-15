@@ -23,16 +23,20 @@ const Breadcrumbs: React.FC<IBreadcrumbsProperties> = ({ config }) => {
 
   return (
     <div className={styles.Breadcrumbs}>
-      {breadcrumbs.map((breadcrumb, index) => (
-        <div key={breadcrumb} className={`${styles.crumb} ${isLast(index) && styles.active}`}>
-          {config?.[index]?.href ? (
-            <Link href={config?.[index]?.href ?? ''}>{config?.[index]?.name}</Link>
-          ) : (
-            <Link href={`/${breadcrumb}`}>{breadcrumb}</Link>
-          )}
-          {!isLast(index) && <span className={styles.separator}>/</span>}
-        </div>
-      ))}
+      {breadcrumbs.map((breadcrumb, index) => {
+        const path = `/${breadcrumbs.slice(0, index + 1).join('/')}`; // Construct dynamic href
+
+        return (
+          <div key={breadcrumb} className={`${styles.crumb} ${isLast(index) && styles.active}`}>
+            {config?.[index]?.href ? (
+              <Link href={config?.[index]?.href ?? ''}>{config?.[index]?.name}</Link>
+            ) : (
+              <Link href={path}>{breadcrumb}</Link>
+            )}
+            {!isLast(index) && <span className={styles.separator}>/</span>}
+          </div>
+        );
+      })}
     </div>
   );
 };

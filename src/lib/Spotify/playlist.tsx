@@ -80,3 +80,29 @@ export const getFeaturedPlaylists = async (
   const url = `${enpointBaseUrl}/browse/featured-playlists?country=${country}&limit=${limit}&offset=${offset}`;
   return fetchHelper(url);
 };
+
+export const getBrowseCategories = async (
+  country: string = 'US',
+  page: number = 1,
+  limit: number = 10,
+) => {
+  const offset = (page - 1) * limit;
+  const url = `${enpointBaseUrl}/browse/categories?country=${country}&limit=${limit}&offset=${offset}`;
+  return fetchHelper(url);
+};
+
+export const getBrowseCategory = async (categoryId: string, country: string = 'US') => {
+  const url = `${enpointBaseUrl}/browse/categories/${categoryId}?country=${country}`;
+  return fetchHelper(url);
+};
+
+export const getBrowseCategoryPlaylists = async (
+  categoryId: string,
+  country: string = 'US',
+  page: number = 1,
+  limit: number = 10,
+) => {
+  const offset = (page - 1) * limit;
+  const url = `${enpointBaseUrl}/browse/categories/${categoryId}/playlists?country=${country}&limit=${limit}&offset=${offset}`;
+  return fetchHelper(url);
+};

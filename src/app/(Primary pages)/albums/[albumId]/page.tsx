@@ -39,7 +39,7 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
           </Section>
         )}
       </Wrapper>
-      <Pagination currentPage={page} totalPages={Math.floor(total / limit)} navigate />
+      <Pagination currentPage={page} totalPages={Math.ceil(total / limit)} navigate />
     </Container>
   );
 };

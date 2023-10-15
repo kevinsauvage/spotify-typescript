@@ -1,11 +1,16 @@
+import BrowzeCategories from '@/components/_sections/BrowzeCategories/BrowzeCategories';
 import FeaturedPlaylists from '@/components/_sections/FeaturedPlaylists/FeaturedPlaylists';
 import UserPlaylists from '@/components/_sections/SavedPlaylists/SavedPlaylists';
 import Container from '@/components/Container/Container';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
-import { getFeaturedPlaylists } from '@/lib/Spotify/playlist';
+import { getBrowseCategories, getFeaturedPlaylists } from '@/lib/Spotify/playlist';
 import { getEndpointMePlaylists } from '@/lib/Spotify/user';
-import { FeaturedPlaylistInterface, UserPlaylistInterface } from '@/types';
+import {
+  BrowzeCategoriesResponse,
+  FeaturedPlaylistInterface,
+  UserPlaylistInterface,
+} from '@/types';
 
 interface PageInterface {
   params: object;
@@ -13,15 +18,28 @@ interface PageInterface {
 }
 
 const Page: React.FC<PageInterface> = async () => {
-  const [followedPlaylists, featuredPlaylists]: [UserPlaylistInterface, FeaturedPlaylistInterface] =
-    await Promise.all([getEndpointMePlaylists(1, 10), getFeaturedPlaylists('US', 1, 10)]);
+  const [followedPlaylists, featuredPlaylists, browseCategories]: [
+    UserPlaylistInterface,
+    FeaturedPlaylistInterface,
+    BrowzeCategoriesResponse,
+  ] = await Promise.all([
+    getEndpointMePlaylists(1, 10),
+    getFeaturedPlaylists('US', 1, 10),
+    getBrowseCategories('US', 1, 20),
+  ]);
 
   return (
     <Container>
       <PageBannerWrapper>
         <Title>Playlists</Title>
       </PageBannerWrapper>
+      <BrowzeCategories
+        browseCategories={browseCategories?.categories?.items}
+        href="/playlists/categories"
+        title="Categories"
+      />
       <FeaturedPlaylists featuredPlaylists={featuredPlaylists} />
+
       <UserPlaylists followedPlaylists={followedPlaylists} />
     </Container>
   );

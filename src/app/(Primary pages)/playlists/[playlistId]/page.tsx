@@ -73,7 +73,7 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
           </TrackTable>
           <Pagination
             currentPage={page}
-            totalPages={Math.floor(playlistTracks?.total / playlistTracks?.limit)}
+            totalPages={Math.ceil(playlistTracks?.total / playlistTracks?.limit)}
             navigate
           />
         </Section>

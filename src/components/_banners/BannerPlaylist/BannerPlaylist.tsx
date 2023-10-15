@@ -40,13 +40,14 @@ const BannerPlaylist: React.FC<{
         )}
         <div>
           <h1 className={styles.name}>{name}</h1>
-          <p className={styles.description}>{description}</p>
+          {description && (
+            <p className={styles.description} dangerouslySetInnerHTML={{ __html: description }} />
+          )}
           <ItemDetailsRow>
             <p className={styles.public}>{isPublic ? 'Public' : 'Private'}</p>
             <ItemDetailSeparator />
             {collaborative && <p className={styles.collaborative}>Collaborative</p>}
             {collaborative && <ItemDetailSeparator />}
-
             <p className={styles.followers}>{followers?.total} followers</p>
             <ItemDetailSeparator />
             <p className={styles.tracks}>{tracks?.total} tracks</p>
