@@ -49,11 +49,11 @@ const Page: React.FC<PageInterface> = async () => {
       <PageBannerWrapper>
         <Title>Tracks</Title>
       </PageBannerWrapper>
+      <RecommendedTracks recommendations={recommendations} title="Tracks You May Like" />
       <Wrapper>
         <UserTopTrack tracks={userTopTracks.items} />
         <RecentlyPlayedTracks recentlyPlayedTracks={recentlyPlayedTracks} />
       </Wrapper>
-      <RecommendedTracks recommendations={recommendations} />
       <SavedTracks savedTracks={savedTracks} />
     </Container>
   );

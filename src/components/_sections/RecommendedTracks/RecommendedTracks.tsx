@@ -4,12 +4,13 @@ import Section from '@/components/Section/Section';
 import { TrackInterface } from '@/types';
 
 const RecommendedTracks: React.FC<{
+  title?: string;
   recommendations: {
     tracks: TrackInterface[];
   };
-}> = ({ recommendations }) =>
+}> = ({ recommendations, title }) =>
   Array?.isArray(recommendations?.tracks) && (
-    <Section title="Tracks You May Like">
+    <Section title={title}>
       <Grid>
         {recommendations.tracks.map((track) => (
           <TrackCard key={track.id} track={track} />

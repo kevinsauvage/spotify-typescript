@@ -140,7 +140,7 @@ const page: React.FC = async () => {
         <UserTopTrack tracks={userTopTracks.items} />
         <RecentlyPlayedTracks recentlyPlayedTracks={recentlyPlayedTracks} />
       </Wrapper>
-      <RecommendedTracks recommendations={recommendations} />
+      <RecommendedTracks recommendations={recommendations} title="Tracks You May Like" />
       <SavedTracks savedTracks={savedTracks} />
       <TopArtists userTopArtists={userTopArtists} />
       <SavedArtists followedArtists={followedArtists} />
