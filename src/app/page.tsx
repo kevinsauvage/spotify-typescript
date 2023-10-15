@@ -4,44 +4,27 @@ import FeaturedPlaylists from '@/components/_sections/FeaturedPlaylists/Featured
 import NewAlbums from '@/components/_sections/NewAlbums/NewAlbums';
 import RecentlyPlayedTracks from '@/components/_sections/RecentlyPlayedTracks/RecentlyPlayedTracks';
 import RecommendedTracks from '@/components/_sections/RecommendedTracks/RecommendedTracks';
-import SavedAlbums from '@/components/_sections/SavedAlbums/SavedAlbums';
-import SavedArtists from '@/components/_sections/SavedArtists/SavedArtists';
-import UserPlaylists from '@/components/_sections/SavedPlaylists/SavedPlaylists';
-import SavedTracks from '@/components/_sections/SavedTracks/SavedTracks';
 import TopArtists from '@/components/_sections/TopArtists/TopArtists';
 import UserTopTrack from '@/components/_sections/TopTracks/TopTracks';
 import Container from '@/components/Container/Container';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import { getNewRelease } from '@/lib/Spotify/album';
-import {
-  getBrowseCategories,
-  getBrowseCategoryPlaylists,
-  getFeaturedPlaylists,
-} from '@/lib/Spotify/playlist';
+import { getBrowseCategories, getFeaturedPlaylists } from '@/lib/Spotify/playlist';
 import { getRecommendations } from '@/lib/Spotify/recommendations';
 import {
-  getEndpointFollowedArtists,
-  getEndpointMePlaylists,
   getEndpointRecentTracks,
-  getEndpointSavedAlbums,
-  getEndpointSavedTracks,
   getEndpointTopArtists,
   getEndpointTopTracks,
 } from '@/lib/Spotify/user';
 import {
   BrowzeCategoriesResponse,
   FeaturedPlaylistInterface,
-  FollowedArtistsInterface,
   NewReleasesAlbums,
   RecentlyPlayedInterface,
-  SavedAlbumResponseInterface,
   TrackInterface,
-  UserPlaylistInterface,
   UserTopArtistInterface,
   UserTopTrackInterface,
 } from '@/types';
-
-import { UserSavedTracksInterface } from '../types/index';
 
 const page: React.FC = async () => {
   const [
