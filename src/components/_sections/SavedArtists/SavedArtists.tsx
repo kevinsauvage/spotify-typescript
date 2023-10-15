@@ -7,7 +7,7 @@ const SavedArtists: React.FC<{
   followedArtists: FollowedArtistsInterface;
 }> = ({ followedArtists }) =>
   Array.isArray(followedArtists?.artists?.items) && (
-    <Section title="Your Favorite Artists" href="/artists/favorite">
+    <Section title="Saved Artists" href="/artists/favorite">
       <Grid>
         {followedArtists?.artists?.items.map((artist) => (
           <ArtistCard key={artist.id} artist={artist} />

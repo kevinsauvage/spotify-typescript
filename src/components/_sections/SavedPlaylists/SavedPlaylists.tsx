@@ -3,11 +3,11 @@ import Grid from '@/components/Grid/Grid';
 import Section from '@/components/Section/Section';
 import { UserPlaylistInterface } from '@/types';
 
-const UserPlaylists: React.FC<{
+const SavedPlaylists: React.FC<{
   followedPlaylists: UserPlaylistInterface;
 }> = ({ followedPlaylists }) =>
   Array?.isArray(followedPlaylists?.items) && (
-    <Section title="Your Playlists" href="/playlists/favorite">
+    <Section title="Saved Playlists" href="/playlists/favorite">
       <Grid>
         {followedPlaylists.items.map((playlist) => (
           <PlaylistCard key={playlist.id} playlist={playlist} />
@@ -16,4 +16,4 @@ const UserPlaylists: React.FC<{
     </Section>
   );
 
-export default UserPlaylists;
+export default SavedPlaylists;

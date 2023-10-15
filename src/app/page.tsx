@@ -5,10 +5,10 @@ import RecentlyPlayedTracks from '@/components/_sections/RecentlyPlayedTracks/Re
 import RecommendedTracks from '@/components/_sections/RecommendedTracks/RecommendedTracks';
 import SavedAlbums from '@/components/_sections/SavedAlbums/SavedAlbums';
 import SavedArtists from '@/components/_sections/SavedArtists/SavedArtists';
+import UserPlaylists from '@/components/_sections/SavedPlaylists/SavedPlaylists';
 import SavedTracks from '@/components/_sections/SavedTracks/SavedTracks';
 import TopArtists from '@/components/_sections/TopArtists/TopArtists';
-import UserPlaylists from '@/components/_sections/UserPlaylists/UserPlaylists';
-import UserTopTrack from '@/components/_sections/UserTopTrack/UserTopTrack';
+import UserTopTrack from '@/components/_sections/TopTracks/TopTracks';
 import Container from '@/components/Container/Container';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import { getNewRelease } from '@/lib/Spotify/album';

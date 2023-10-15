@@ -20,8 +20,8 @@ const Page: React.FC<PageInterface> = async () => {
       <PageBannerWrapper>
         <Title>Albums</Title>
       </PageBannerWrapper>
-      <SavedAlbums savedAlbums={savedAlbums} />
       <NewAlbums newReleases={newReleases} />
+      <SavedAlbums savedAlbums={savedAlbums} />
     </Container>
   );
 };

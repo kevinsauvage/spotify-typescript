@@ -7,7 +7,7 @@ const TopArtists: React.FC<{
   userTopArtists: UserTopArtistInterface;
 }> = ({ userTopArtists }) =>
   Array?.isArray(userTopArtists?.items) && (
-    <Section title="Your Top Artists" href="/artists/top">
+    <Section title="Top Artists" href="/artists/top">
       <Grid>
         {userTopArtists.items.map((artist) => (
           <ArtistCard key={artist.id} artist={artist} />

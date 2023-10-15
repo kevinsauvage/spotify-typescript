@@ -77,6 +77,6 @@ export const getFeaturedPlaylists = async (
   limit: number = 10,
 ) => {
   const offset = (page - 1) * limit;
-  const url = `${enpointBaseUrl}/browse/featured-playlists?country=${country}&limit=${defaultLimit}&offset=${offset}`;
+  const url = `${enpointBaseUrl}/browse/featured-playlists?country=${country}&limit=${limit}&offset=${offset}`;
   return fetchHelper(url);
 };

@@ -1,5 +1,5 @@
 import FeaturedPlaylists from '@/components/_sections/FeaturedPlaylists/FeaturedPlaylists';
-import UserPlaylists from '@/components/_sections/UserPlaylists/UserPlaylists';
+import UserPlaylists from '@/components/_sections/SavedPlaylists/SavedPlaylists';
 import Container from '@/components/Container/Container';
 import PageBannerWrapper from '@/components/PageBannerWrapper/PageBannerWrapper';
 import Title from '@/components/Title/Title';
