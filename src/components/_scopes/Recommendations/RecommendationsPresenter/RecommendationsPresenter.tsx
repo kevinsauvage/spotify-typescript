@@ -37,6 +37,7 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
   const otherParameters = createSearchParameters(rest);
 
   const recommencedTracks: { tracks: TrackInterface[] } = await getRecommendations({
+    limit: 50,
     otherParams: otherParameters,
     seedArtists: artistId ?? seedArtists,
     seedGenres,
@@ -48,15 +49,6 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
 
   return (
     <Container>
-      <CreatePlaylist
-        tracks={recommencedTracks?.tracks}
-        name={playlistName}
-        isPublic={true}
-        description=""
-        user={user}
-        createPlaylist={createPlaylist}
-        addItemsToPlaylist={addItemsToPlaylist}
-      />
       <TrackAttributeForm
         genres={availableGenreSeeds?.genres}
         initialParams={rest}
@@ -66,6 +58,15 @@ const RecommendationsPresenter: React.FC<IProperties> = async ({
         <TrackTable>
           {recommencedTracks?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
         </TrackTable>
+        <CreatePlaylist
+          tracks={recommencedTracks?.tracks}
+          name={playlistName}
+          isPublic={true}
+          description=""
+          user={user}
+          createPlaylist={createPlaylist}
+          addItemsToPlaylist={addItemsToPlaylist}
+        />
       </Section>
     </Container>
   );
