@@ -1,5 +1,7 @@
 @import '../styles/responsive';
 
+@import '../styles/mixins';
+
 .body {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -9,17 +11,7 @@
   font-size: 16px;
   background-color: var(--color-background-1);
 
-  &::-webkit-scrollbar {
-    width: 0.8rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.216);
-  }
+  @include scrollbar;
 
   @include respond(tablet) {
     display: flex;
