@@ -32,11 +32,11 @@ const Page: React.FC<PageInterface> = async () => {
   ] = await Promise.all([
     getEndpointTopTracks(undefined, 'short_term', 6),
     getEndpointRecentTracks(6),
-    getEndpointSavedTracks(1, 10),
+    getEndpointSavedTracks(1, 12),
   ]);
 
   const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
-    limit: 10,
+    limit: 12,
     seedTracks:
       userTopTracks?.items
         ?.slice(0, 5)

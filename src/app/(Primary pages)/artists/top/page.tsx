@@ -10,6 +10,8 @@ import Title from '@/components/Title/Title';
 import { getEndpointTopArtists } from '@/lib/Spotify/user';
 import { UserTopArtistInterface } from '@/types';
 
+const LIMIT = 24;
+
 interface PageInterface {
   params: object;
   searchParams: { period: string; page: string };
@@ -18,7 +20,7 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const period = searchParams?.period || undefined;
   const page = Number(searchParams.page || 1);
-  const topArtists: UserTopArtistInterface = await getEndpointTopArtists(page, period, 30);
+  const topArtists: UserTopArtistInterface = await getEndpointTopArtists(page, period, LIMIT);
 
   return (
     <Container>

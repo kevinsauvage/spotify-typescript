@@ -18,7 +18,7 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
   const page = Number(searchParams.page || 1);
 
   const [albums, artist]: [ArtistAlbumsInterface, ArtistInterface] = await Promise.all([
-    getArtistAlbums(artistId, page, 20),
+    getArtistAlbums(artistId, page, 12),
     getArtist(artistId),
   ]);
 

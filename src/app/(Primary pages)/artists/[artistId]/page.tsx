@@ -33,7 +33,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
   ] = await Promise.all([
     getArtistTopTracks(artistId),
     getArtistRelatedArtists(artistId),
-    getArtistAlbums(artistId),
+    getArtistAlbums(artistId, 1, 12),
     getArtist(artistId),
   ]);
 
@@ -82,7 +82,7 @@ const Page: React.FC<PageInterface> = async ({ params }) => {
       {relatedArtists?.artists?.length > 0 && (
         <Section title="Related Artists">
           <Grid>
-            {relatedArtists.artists.slice(0, 10).map((relatedArtist) => (
+            {relatedArtists.artists.slice(0, 12).map((relatedArtist) => (
               <ArtistCard key={relatedArtist.id} artist={relatedArtist} />
             ))}
           </Grid>

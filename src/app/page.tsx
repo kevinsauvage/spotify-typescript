@@ -59,12 +59,12 @@ const page: React.FC = async () => {
     FeaturedPlaylistInterface,
     BrowzeCategoriesResponse,
   ] = await Promise.all([
-    getEndpointTopArtists(undefined, 'short_term', 10),
+    getEndpointTopArtists(undefined, 'short_term', 12),
     getEndpointTopTracks(undefined, 'short_term', 6),
     getEndpointRecentTracks(6),
-    getNewRelease('US', 1, 10),
-    getFeaturedPlaylists('US', 1, 10),
-    getBrowseCategories('US', 1, 10),
+    getNewRelease('US', 1, 12),
+    getFeaturedPlaylists('US', 1, 12),
+    getBrowseCategories('US', 1, 12),
   ]);
 
   const get5RandomTracksIds = (tracks: TrackInterface[]) => {
@@ -78,7 +78,7 @@ const page: React.FC = async () => {
   };
 
   const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
-    limit: 10,
+    limit: 12,
     seedTracks: get5RandomTracksIds(userTopTracks?.items),
   });
 

@@ -11,8 +11,8 @@ interface PageInterface {}
 const Page: React.FC<PageInterface> = async () => {
   const [userTopArtists, followedArtists]: [UserTopArtistInterface, FollowedArtistsInterface] =
     await Promise.all([
-      getEndpointTopArtists(undefined, 'short_term', 10),
-      getEndpointFollowedArtists(10),
+      getEndpointTopArtists(undefined, 'short_term', 12),
+      getEndpointFollowedArtists(12),
     ]);
 
   return (

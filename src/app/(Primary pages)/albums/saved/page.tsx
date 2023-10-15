@@ -8,6 +8,7 @@ import Title from '@/components/Title/Title';
 import { getEndpointSavedAlbums } from '@/lib/Spotify/user';
 import { SavedAlbumResponseInterface } from '@/types';
 
+const LIMIT = 24;
 interface PageInterface {
   searchParams: { page: string };
 }
@@ -15,7 +16,7 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const page = Number(searchParams.page || 1);
 
-  const savedAlbumns: SavedAlbumResponseInterface = await getEndpointSavedAlbums(page, 20);
+  const savedAlbumns: SavedAlbumResponseInterface = await getEndpointSavedAlbums(page, LIMIT);
 
   return (
     <Container>

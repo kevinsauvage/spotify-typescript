@@ -11,7 +11,7 @@ interface PageInterface {}
 
 const Page: React.FC<PageInterface> = async () => {
   const [savedAlbums, newReleases]: [SavedAlbumResponseInterface, NewReleasesAlbums] =
-    await Promise.all([getEndpointSavedAlbums(1, 10), getNewRelease('US', 1, 10)]);
+    await Promise.all([getEndpointSavedAlbums(1, 12), getNewRelease('US', 1, 12)]);
 
   return (
     <Container>

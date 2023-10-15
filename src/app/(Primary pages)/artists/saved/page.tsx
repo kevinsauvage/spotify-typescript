@@ -8,10 +8,12 @@ import Title from '@/components/Title/Title';
 import { getEndpointFollowedArtists } from '@/lib/Spotify/user';
 import { FollowedArtistsInterface } from '@/types';
 
+const LIMIT = 24;
+
 interface PageInterface {}
 
 const Page: React.FC<PageInterface> = async () => {
-  const savedArtists: FollowedArtistsInterface = await getEndpointFollowedArtists(15);
+  const savedArtists: FollowedArtistsInterface = await getEndpointFollowedArtists(LIMIT);
 
   return (
     <Container>

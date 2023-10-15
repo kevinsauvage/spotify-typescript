@@ -23,9 +23,9 @@ const Page: React.FC<PageInterface> = async () => {
     FeaturedPlaylistInterface,
     BrowzeCategoriesResponse,
   ] = await Promise.all([
-    getEndpointMePlaylists(1, 10),
-    getFeaturedPlaylists('US', 1, 10),
-    getBrowseCategories('US', 1, 20),
+    getEndpointMePlaylists(1, 12),
+    getFeaturedPlaylists('US', 1, 12),
+    getBrowseCategories('US', 1, 24),
   ]);
 
   return (

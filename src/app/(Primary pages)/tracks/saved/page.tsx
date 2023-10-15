@@ -8,6 +8,8 @@ import Title from '@/components/Title/Title';
 import { getEndpointSavedTracks } from '@/lib/Spotify/user';
 import { UserSavedTracksInterface } from '@/types';
 
+const LIMIT = 24;
+
 interface PageInterface {
   params: object;
   searchParams: { page: string };
@@ -15,7 +17,7 @@ interface PageInterface {
 
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const page = Number(searchParams.page || 1);
-  const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(page, 30);
+  const savedTracks: UserSavedTracksInterface = await getEndpointSavedTracks(page, LIMIT);
 
   return (
     <Container>

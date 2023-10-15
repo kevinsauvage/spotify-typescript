@@ -8,6 +8,8 @@ import Title from '@/components/Title/Title';
 import { getNewRelease } from '@/lib/Spotify/album';
 import { NewReleasesAlbums } from '@/types';
 
+const LIMIT = 24;
+
 interface PageInterface {
   searchParams: { page: string };
 }
@@ -15,7 +17,7 @@ interface PageInterface {
 const Page: React.FC<PageInterface> = async ({ searchParams }) => {
   const page = Number(searchParams.page || 1);
 
-  const newReleased: NewReleasesAlbums = await getNewRelease('US', page, 20);
+  const newReleased: NewReleasesAlbums = await getNewRelease('US', page, LIMIT);
 
   const albums = newReleased?.albums;
 
