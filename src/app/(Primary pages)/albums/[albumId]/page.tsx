@@ -7,8 +7,7 @@ import Container from '@/components/Container/Container';
 import Section from '@/components/Section/Section';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import { getAlbumById, getAlbumTracks } from '@/lib/Spotify/album';
-import { getRecommendations } from '@/lib/Spotify/recommendations';
-import { AlbumInterface, AlbumTracksInterface, TrackInterface } from '@/types';
+import { AlbumInterface, AlbumTracksInterface } from '@/types';
 
 interface PageInterface {
   params: { albumId: string };
@@ -26,19 +25,6 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
 
   const { items, total, limit } = albumTracks || {};
 
-  const seedTracks = items
-    ? [...items]
-        ?.sort((track) => track.popularity)
-        .slice(0, 5)
-        .map((track) => track.id)
-        .join(',')
-    : undefined;
-
-  const recommendations: { tracks: TrackInterface[] } = await getRecommendations({
-    limit: album?.tracks?.items?.length,
-    seedTracks,
-  });
-
   return (
     <Container>
       <Breadcrumbs config={{ 1: { href: `/albums/${albumId}`, name: album.name } }} />
@@ -49,13 +35,6 @@ const Page: React.FC<PageInterface> = async ({ params, searchParams }) => {
           <Section title={'Album Tracks'}>
             <TrackTable showPopularity={false}>
               {items?.map((track) => <TrackRow key={track.id} track={{ ...track, album }} />)}
-            </TrackTable>
-          </Section>
-        )}
-        {recommendations?.tracks?.length > 0 && (
-          <Section title={'Recommended Tracks'}>
-            <TrackTable>
-              {recommendations?.tracks?.map((track) => <TrackRow key={track.id} track={track} />)}
             </TrackTable>
           </Section>
         )}
