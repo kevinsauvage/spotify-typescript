@@ -1,70 +1,84 @@
 @import '../../../styles/responsive';
 
 .banner {
-  display: grid;
-  grid-auto-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.8rem;
   margin-bottom: 2rem;
 
-  .bannerItemImage {
-    object-fit: cover;
-    border-radius: 0.5rem;
-    background-position: 100%;
-    aspect-ratio: 1/1;
+  h1 {
+    margin-bottom: 2rem;
   }
 
-  .bannerItem {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 0.5rem;
-    background-color: var(--color-background-3);
-    transition: all 0.3s ease-in-out;
+  .items {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.8rem;
 
-    &:hover {
-      transform: scale(1.05);
-    }
-
-    .bannerItemTitle {
+    .bannerItem {
+      position: relative;
+      display: flex;
+      align-items: center;
       width: 100%;
-      padding: 0.5rem;
-      font-weight: 600;
-      font-size: 0.9rem;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      background-color: var(--color-background-3);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .bannerItemImage {
+        object-fit: cover;
+        border-radius: 0.5rem;
+        background-position: 100%;
+        aspect-ratio: 1/1;
+      }
+
+      .bannerItemTitle {
+        width: 100%;
+        padding: 0.5rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
     }
   }
 
   @include respond(laptop_s) {
-    grid-auto-rows: 1fr;
-
-    .bannerItemImage {
-      width: 100%;
-    }
-
-    .bannerItemTitle {
-      overflow: hidden;
-      font-size: 0.8rem;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
     .bannerItem {
       flex-direction: column;
+      aspect-ratio: 1/1;
 
       &:hover {
         transform: none;
+      }
+
+      .bannerItemImage {
+        width: 100%;
+        height: 100%;
+      }
+
+      .bannerItemTitle {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        background-color: rgba(var(--rgb-color-background-1), 0.8);
       }
     }
   }
 
   @include respond(mobile_l) {
-    grid-template-columns: 1fr 1fr;
+    .items {
+      grid-template-columns: 1fr 1fr;
 
-    .bannerItem {
-      &:last-child {
-        display: none;
+      .bannerItem {
+        &:last-child {
+          display: none;
+        }
       }
     }
   }
