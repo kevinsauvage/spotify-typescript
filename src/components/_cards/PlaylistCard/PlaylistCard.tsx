@@ -10,7 +10,7 @@ const PlaylistCard: React.FC<{
 }> = ({ playlist }) => {
   const { name, images, id, tracks } = playlist || {};
 
-  const image = (images?.length && images?.at(1)) || images?.at(0) || images?.pop();
+  const image = images?.length && (images?.at(1) || images?.at(0) || images?.pop());
 
   return (
     <div className={styles.playlist}>
