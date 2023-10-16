@@ -15,6 +15,7 @@ interface PageInterface {
 }
 
 const limit = 30;
+const country = 'US';
 
 const Page: React.FC<PageInterface> = async ({ searchParams, params }) => {
   const page = Number(searchParams?.page || 1);
@@ -24,8 +25,8 @@ const Page: React.FC<PageInterface> = async ({ searchParams, params }) => {
     BrowzeCategoriesPlaylistsResponse,
     BrowzeCategory,
   ] = await Promise.all([
-    getBrowseCategoryPlaylists('party', 'US', page, limit),
-    getBrowseCategory(categoryId, 'US'),
+    getBrowseCategoryPlaylists(categoryId, country, page, limit),
+    getBrowseCategory(categoryId, country),
   ]);
 
   return (
@@ -43,9 +44,9 @@ const Page: React.FC<PageInterface> = async ({ searchParams, params }) => {
       </PageBannerWrapper>
       <Section>
         <Grid>
-          {browseCategoryPlaylist?.playlists?.items.map((playlist) => (
-            <PlaylistCard key={playlist.id} playlist={playlist} />
-          ))}
+          {browseCategoryPlaylist?.playlists?.items.map(
+            (playlist) => playlist?.id && <PlaylistCard key={playlist?.id} playlist={playlist} />,
+          )}
         </Grid>
       </Section>
       <Pagination
